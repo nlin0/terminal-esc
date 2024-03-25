@@ -1,0 +1,14 @@
+{
+  "slot1" : {
+    "empty": true,
+    "item": "none"
+  },
+  "slot2" : {
+    "empty": true,
+    "item": "none"
+  },
+  "slot3" : {
+    "empty": true,
+    "item": "none"
+  }
+}
