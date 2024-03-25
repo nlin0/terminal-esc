@@ -20,7 +20,7 @@ let beginning () =
      nudges your eyes open, and as you adjust to the light, a peculiar sight \
      greets you. There, at the foot of your modest bed, stands a chicken. Not \
      just any chicken, but one that seems to regard you with an intensity \
-     uncharacteristic of its kind.";
+     uncharacteristic of its kind. \n";
   print_endline Constants.chicken;
   let rec prompt () =
     print_endline
