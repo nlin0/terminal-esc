@@ -7,6 +7,8 @@ There is a couple of packages we would need you to install first before we can j
 Inside the parent directory of everything (it should look something like **\_** terminal-esc%), we should first type in the followings:
 
 - opam install yojson
-- opam install Utils
 
-# I NEEDA COME BACK HERE!!!
+To start your escapade, type in the following into the terminal:
+"dune exec ./bin/main.exe".
+
+That's all..... Goodluck man...we hope to see you on the other side......
