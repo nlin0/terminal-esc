@@ -1,5 +1,6 @@
 (library
  (inline_tests)
  (name terminal_esc)
+ (libraries yojson)
  (preprocess
   (pps ppx_inline_test)))
