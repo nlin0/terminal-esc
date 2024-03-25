@@ -1,17 +1,16 @@
 open Yojson
 
-(* The utilities.ml will have simple functions that can be used across all of our ml files. For example loading a json file *)
+(* The utilities.ml will have simple functions that can be used across all of
+   our ml files. For example loading a json file *)
 
-
-let to_alst json = 
+let to_alst json =
   match json with
   | `Assoc assoc_list -> assoc_list
   | _ -> []
 
-
 (* load json file *)
-let load_json filepath = 
-  let json = Yojson.Basic.from_file filepath in 
+let load_json filepath =
+  let json = Yojson.Basic.from_file filepath in
   to_alst json
 
 (* function for retriving the value of key *)

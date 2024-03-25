@@ -1,6 +1,7 @@
 (library
  (inline_tests)
  (name terminal_esc)
+ (modules util rpg)
  (libraries yojson)
  (preprocess
   (pps ppx_inline_test)))
