@@ -1,4 +1,0 @@
-(lang dune 3.14)
-(name terminal_esc)
-(sections (lib .) (bin ../../bin) (doc ../../doc/terminal_esc))
-(files (lib (META dune-package opam)) (bin (terminal_esc)) (doc (README.md)))
