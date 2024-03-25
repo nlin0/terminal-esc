@@ -1,0 +1,6 @@
+# dune init project --inline-tests terminal_esc
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /Users/nicolelin/.cache/dune/db
+# Workspace root: /Users/nicolelin/cs3110/final-project/terminal_esc
+# Auto-detected concurrency: 10
