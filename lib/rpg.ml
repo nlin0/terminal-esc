@@ -1,4 +1,4 @@
-(* open Yojson open Utils *)
+open Yojson
 
 (* NOTE: DELETE THE DUNE FILE IN THE ROOT AFTER WE ARE DONE TESTING *)
 
@@ -13,14 +13,10 @@
 open Constants
 
 let beginning () =
-  print_endline
-    "In the quiet village of Eldoria, where the morning mist hugs the \
-     cobblestone paths and the sun whispers through the leaves of ancient \
-     trees, you awaken to an unusual day. The warmth of the sun's rays gently \
-     nudges your eyes open, and as you adjust to the light, a peculiar sight \
-     greets you. There, at the foot of your modest bed, stands a chicken. Not \
-     just any chicken, but one that seems to regard you with an intensity \
-     uncharacteristic of its kind. \n";
+  let json = Yojson.Basic.from_file "./text_dat/beginning.json" in
+  let open Yojson.Basic.Util in
+  let body = json |> member "body" |> to_string in
+  print_endline body;
   print_endline Constants.chicken;
   let rec prompt () =
     print_endline
