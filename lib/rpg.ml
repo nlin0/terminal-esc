@@ -29,7 +29,7 @@ let beginning () =
        mysterious feathered visitor?";
     print_endline
       "Press the space bar then Enter to roll the dice. Roll less than 5 to \
-       pet, or 5 and above to make a lethal move.";
+       pet, or 5 and above to make a lethal move.\n";
     let input = read_line () in
     if input = " " then
       match Random.int 10 + 1 with

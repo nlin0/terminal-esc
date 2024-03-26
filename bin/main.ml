@@ -7,15 +7,18 @@ let () =
   print_endline
     "You are trapped in the depths of your system's terminal. Your job is to \
      escape, but it will not be easy. The labryinth that is your system's \
-     terminal is filled with scary bugs, viruses and dangerous traps. \
-     Throughout these tunnels you will find weapons and goods to arm yourself. \
-     However, even armed, you are not safe from the choices you make.";
-  print_endline "\nAre you ready to escape?";
+     terminal is filled with scary monsters, strange people, and dangerous \
+     traps. Throughout your journey you will find weapons and goods to arm \
+     yourself. However, even armed, you are not safe from the choices you \
+     make.";
+  print_endline "\nAre you ready to escape? (yes/no)\n";
   match String.lowercase_ascii (read_line ()) with
   | "yes" -> Terminal_esc.Rpg.beginning ()
   | "no" ->
       print_endline
-        "You decide to not escape your system's terminal. You survive for 3 \
+        "\n\
+         You decide to not escape your system's terminal. You survive for 3 \
          days and starve to death since there is no food in your computer. \
          GAME OVER"
+        exit 0
   | _ -> exit 0
