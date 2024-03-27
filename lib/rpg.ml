@@ -1,4 +1,5 @@
 open Yojson
+open Constants
 
 (* NOTE: DELETE THE DUNE FILE IN THE ROOT AFTER WE ARE DONE TESTING *)
 
@@ -10,7 +11,19 @@ open Yojson
 
    (* use dune utop to test... this prints above the utop interface for some
    reason though ;-; *) *)
-open Constants
+let beginning1 () =
+  print_endline Constants.happy_chicken;
+  print_endline
+    "\n\
+     The chicken clucks contendtedly, rewarding you with a shimmering golden \
+     egg. You've gained 1 Gold Egg!\n"
+
+let beginning2 () =
+  print_endline Constants.dead_chicken;
+  print_endline
+    "\n\
+     The lifeless chicken now serves a new purpose: a solemn gain. You've \
+     gained 1 Chicken Breast!\n"
 
 let beginning () =
   let json = Yojson.Basic.from_file "./text_dat/beginning.json" in
@@ -24,19 +37,20 @@ let beginning () =
        What strange fate has intertwined your destiny with that of this \
        mysterious feathered visitor?";
     print_endline
-      "Press the space bar then Enter to roll the dice. Roll less than 5 to \
-       pet, or 5 and above to make a lethal move.\n";
+      "Press 1 then Enter to pet the chicken. Alternatively, enter 2 to make a \
+       lethal move.\n";
     let input = read_line () in
-    if input = " " then
-      match Random.int 10 + 1 with
-      | n when n < 5 ->
-          print_endline "You decide to pet. A wise and kind choice."
-      | _ ->
-          print_endline
-            "You make a lethal move. The consequences of this action will \
-             unfold in time."
-    else (
-      print_endline "Please press the space bar then Enter to roll the dice.";
-      prompt ())
+    match input with
+    | "1" ->
+        print_endline "You decide to pet. A wise and kind choice.\n";
+        beginning1 ()
+    | "2" ->
+        print_endline
+          "You make a lethal move. The consequences of this action will unfold \
+           in time.\n";
+        beginning2 ()
+    | _ ->
+        print_endline "That's not an option! Please rethink your choice.\n";
+        prompt ()
   in
   prompt ()
