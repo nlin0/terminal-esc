@@ -7,7 +7,7 @@ let () =
   print_endline
     "You are trapped in the depths of your system's terminal. Your job is to \
      escape, but it will not be easy. The labryinth that is your system's \
-     terminal is filled with strange bugs, strange creatures, and dangerous \
+     terminal is filled with scary bugs, strange creatures, and dangerous \
      traps. Throughout your journey you will find weapons and goods to arm \
      yourself. However, even armed, you are not safe from the choices you \
      make.";
