@@ -15,7 +15,7 @@ let beginning1 () =
   print_endline Constants.happy_chicken;
   print_endline
     "\n\
-     The chicken clucks contendtedly, rewarding you with a shimmering golden \
+     The chicken clucks contentedly, rewarding you with a shimmering golden \
      egg. You've gained 1 Gold Egg!\n"
 
 let beginning2 () =
