@@ -1,4 +1,4 @@
 (executable
  (public_name terminal_esc)
  (name main)
- (libraries terminal_esc yojson))
+ (libraries terminal_esc))
