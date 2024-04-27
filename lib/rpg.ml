@@ -1,10 +1,10 @@
-open Yojson
 open Constants
 
 (* NOTE: DELETE THE DUNE FILE IN THE ROOT AFTER WE ARE DONE TESTING *)
 
 (* load nested json *)
 let room1 = Utils.load_json "text_dat/room1.json"
+
 (* build rng function to random option choices... *)
 
 (* first option on all playthroughs *)

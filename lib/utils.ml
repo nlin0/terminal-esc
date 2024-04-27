@@ -2,6 +2,10 @@ open Yojson
 
 (** The Utils module includes simple functions that can be used across all of
     our ml files. *)
+
+type json = Yojson.Basic.t
+
+(** [clear_screen ()] clears the terminal screen. *)
 let clear_screen () = ignore (Sys.command "clear")
 
 let remove_quotes str =
@@ -10,6 +14,8 @@ let remove_quotes str =
     String.sub str 1 (len - 2)
   else str
 
+(** [replace_newlines str] is a helper function that replaces "\n" sequences
+    with newline characters in [str]. *)
 let replace_newlines str =
   let len = String.length str in
   let rec replace index acc =
@@ -23,6 +29,8 @@ let replace_newlines str =
   in
   replace 0 ""
 
+(** [convert_str str] is a helper function that removes quotes and replaces "\n"
+    sequences with newline characters in [str]. *)
 let convert_str str =
   let str_no_quotes = remove_quotes str in
   replace_newlines str_no_quotes
@@ -32,7 +40,6 @@ let to_alst json =
   | `Assoc assoc_list -> assoc_list
   | _ -> []
 
-(** [load_json filepath] loads the json file and converts to json *)
 let load_json filepath =
   let json = Yojson.Basic.from_file filepath in
   to_alst json
@@ -43,20 +50,14 @@ let get_val key alst =
   (* we can add options or exceptions.. idk if its needed tho *)
   List.assoc key alst
 
-(** [print_msg key alst] prints out the value associated with [key] from the
-    association list [alst] *)
 let print_msg key alst =
   let to_print = convert_str (Yojson.Basic.to_string (get_val key alst)) in
   print_endline to_print
 
-(** [get_nested key alst] grabs the child association list in the parent [alst]
-    at [key] *)
 let get_nested key alst =
   let nested_json = get_val key alst in
   to_alst nested_json
 
-(** [print_nested_msg parent_key child_key alst] prints out the [child_key] of
-    the child association list at [parent_key] in [alst] *)
 let print_nested_msg parent_key child_key alst =
   let child_json = get_nested parent_key alst in
   print_msg child_key child_json

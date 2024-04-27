@@ -1,5 +1,4 @@
 open Terminal_esc
-open Constants
 open Utils
 open Rpg
 
@@ -13,10 +12,10 @@ let introduction () =
 
   match String.lowercase_ascii (read_line ()) with
   | "yes" ->
-      Utils.clear_screen ();
+      clear_screen ();
       Terminal_esc.Rpg.start ()
   | "no" ->
-      Utils.clear_screen ();
+      clear_screen ();
       print_msg "no" first_opt;
       exit 0
   | _ -> exit 0
