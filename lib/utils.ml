@@ -1,9 +1,9 @@
 open Yojson
 
-type t = (string * int) list
-
 (** The Utils module includes simple functions that can be used across all of
     our ml files. *)
+let clear_screen () = ignore (Sys.command "clear")
+
 let remove_quotes str =
   let len = String.length str in
   if len >= 2 && str.[0] = '"' && str.[len - 1] = '"' then

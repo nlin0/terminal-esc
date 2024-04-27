@@ -14,12 +14,15 @@ let rec chicken_option () =
   let input = read_line () in
   match input with
   | "1" ->
+      Utils.clear_screen ();
       Constants.happy_chicken ();
       Utils.print_nested_msg "kill_pet_chicken" "1" room1
   | "2" ->
+      Utils.clear_screen ();
       Constants.dead_chicken ();
       Utils.print_nested_msg "kill_pet_chicken" "2" room1
   | _ ->
+      Utils.clear_screen ();
       print_endline "That's not an option! Please rethink your choice.\n";
       chicken_option ()
 
