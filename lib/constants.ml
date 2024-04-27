@@ -1,5 +1,5 @@
 (** Constants stores the npcs and text arts for the game *)
-let logo =
+let logo () =
   print_endline
     "\n\
      ▄▄▄█████▓▓█████  ██▀███   ███▄ ▄███▓ ██▓ ███▄    █  ▄▄▄       ██▓       \n\
@@ -23,11 +23,11 @@ let logo =
     \         ░  ░      ░  ░ ░            ░  ░            ░  ░               \n\
     \                      ░                                                 "
 
-let chicken =
+let chicken () =
   print_endline ("   \\\\ \n" ^ "   (o>\n" ^ "\\_//)\n" ^ " \\_/_)\n" ^ "  _|_")
 
-let happy_chicken =
+let happy_chicken () =
   print_endline ("   \\\\ \n" ^ "   (^>\n" ^ "\\_//)\n" ^ " \\_/_)\n" ^ "o _|_")
 
-let dead_chicken =
+let dead_chicken () =
   print_endline ("   \\\\ \n" ^ "   (x>\n" ^ "\\_//)\n" ^ " \\_/_)\n" ^ "  _|_")

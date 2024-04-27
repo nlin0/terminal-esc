@@ -1,0 +1,8 @@
+{
+  "intro": "\nAnd so it begins...\nIn the quiet village of Eldoria, where the morning mist hugs the cobblestone paths and the sun whispers through the leaves of ancient trees, you awaken to an unusual day. The warmth of the sun's rays gently nudges your eyes open, and as you adjust to the light, a peculiar sight greets you. There, at the foot of your modest bed, stands a chicken. Not just any chicken, but one that seems to regard you with an intensity uncharacteristic of its kind.\n",
+  "kill_pet_chicken": {
+    "prompt": "\nWhat strange fate has intertwined your destiny with that of this \nmysterious feathered visitor? \n\n>> Press 1 then Enter to pet the chicken. \nAlternatively, enter 2 to make a lethal move. \n",
+    "1": "You decide to pet. A wise and kind choice.\n The chicken clucks contentedly, rewarding you with a shimmering golden egg. \n\n> You've gained 1 Gold Egg!",
+    "2": "You make a lethal move. The consequences of this action will unfold in time.\nThe lifeless chicken now serves a new purpose: a solemn gain. \n\n> You've gained 1 Chicken Breast!"
+  }
+}
