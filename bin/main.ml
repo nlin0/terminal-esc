@@ -1,24 +1,28 @@
-open Terminal_esc.Constants
-open Terminal_esc.Rpg
+open Terminal_esc
+open Utils
+open Rpg
 
-let () =
-  print_endline Terminal_esc.Constants.logo;
-  print_endline "Welcome to Terminal Escape.";
-  print_endline
-    "You are trapped in the depths of your system's terminal. Your job is to \
-     escape, but it will not be easy. The labryinth that is your system's \
-     terminal is filled with scary bugs, strange creatures, and dangerous \
-     traps. Throughout your journey you will find weapons and goods to arm \
-     yourself. However, even armed, you are not safe from the choices you \
-     make.";
-  print_endline "\nAre you ready to escape? (yes/no)\n";
+(* load nested json *)
+let intro = load_json "text_dat/intro.json"
+
+let introduction () =
+  (* print intro message from nested 'start' json *)
+  let first_opt = get_nested "option1" intro in
+  print_msg "prompt" first_opt;
+
   match String.lowercase_ascii (read_line ()) with
-  | "yes" -> Terminal_esc.Rpg.beginning ()
+  | "yes" ->
+      clear_screen ();
+      Terminal_esc.Rpg.start ()
   | "no" ->
-      print_endline
-        "\n\
-         You decide to not escape your system's terminal. You survive for 3 \
-         days and starve to death since there is no food in your computer. \
-         GAME OVER";
+      clear_screen ();
+      print_msg "no" first_opt;
       exit 0
   | _ -> exit 0
+
+let () =
+  let start_msgs = get_nested "start" intro in
+  (* grab 'start' json from nested json*)
+  Constants.logo ();
+  print_msg "greet_msg" start_msgs;
+  introduction ()
