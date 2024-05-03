@@ -5,7 +5,7 @@ open Utils
 let constants = load_json "text_dat/constants.json"
 
 type inventory_item = {
-  mutable health_points : int;
+  mutable health_dmg_max : int;
   mutable empty : bool;
   mutable item : string;
 }
@@ -20,9 +20,9 @@ let get_item_slot inventory num = Array.get inventory num
 let create_inventory () =
   let prev =
     Array.init size (fun _ ->
-        { health_points = 0; empty = true; item = "none" })
+        { health_dmg_max = 0; empty = true; item = "none" })
   in
-  let new_item = { health_points = 83; empty = false; item = "health-bar" } in
+  let new_item = { health_dmg_max = 100; empty = false; item = "health-bar" } in
   Array.set prev 0 new_item;
   prev
 
@@ -35,16 +35,20 @@ let get_next_empty inventory =
   if !empty = size then empty := -1;
   !empty
 
+let item_slot_name inventory num = (Array.get inventory num).item
+let item_slot_dmg inventory num = (Array.get inventory num).health_dmg_max
+let item_slot_empty inventory num = (Array.get inventory num).empty
+
 (* todo: account for when empty = false... can't add *)
 let add_item inventory new_item =
   let next_slot = get_next_empty inventory in
   match next_slot with
-  | -1 -> print_string "Full, Unsuccessful"
+  | -1 -> "Full, Unsuccessful"
   | _ ->
       Array.set inventory next_slot new_item;
-      print_endline "Successful!"
+      "Successful!"
 
-let get_health inventory = (Array.get inventory 0).health_points
+let get_health inventory = (Array.get inventory 0).health_dmg_max
 
 let print_health inventory =
   let health_text = get_nested "health-bar" constants in
