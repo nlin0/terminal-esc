@@ -22,8 +22,8 @@ let create_inventory () =
     Array.init size (fun _ ->
         { health_points = 0; empty = true; item = "none" })
   in
-  let new_item = { health_points = 100; empty = false; item = "health-bar" } in
-  Array.set prev 1 new_item;
+  let new_item = { health_points = 83; empty = false; item = "health-bar" } in
+  Array.set prev 0 new_item;
   prev
 
 let get_next_empty inventory =
@@ -48,10 +48,12 @@ let get_health inventory = (Array.get inventory 0).health_points
 
 let print_health inventory =
   let health_text = get_nested "health-bar" constants in
-  print_msg "health-bar-bot" health_text;
+  print_msg "health-bar-top" health_text;
   let rec print_boxes number str =
     if number = 0 then "" else str ^ print_boxes (number - 1) str
   in
-  print_endline (print_boxes (get_health inventory / 5) "00");
-  print_endline (Array.get inventory 0).item;
+  print_string ("|" ^ print_boxes (get_health inventory / 5) "▋");
+  print_string (print_boxes (20 - (get_health inventory / 5)) " ");
+  print_endline ("︳" ^ "Health: " ^ string_of_int (get_health inventory));
+  print_string " ";
   print_msg "health-bar-bot" health_text
