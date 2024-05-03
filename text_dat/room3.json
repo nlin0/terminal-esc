@@ -1,0 +1,10 @@
+{
+  "smile_whale": "           __)\\_  \n      (\\_.-'    a`-.\n jgs  (/~~````(/~^^`",
+  "intro": 
+  "\n You landed into the kingdom of sea filled with dangerous sea creatures who want to eat you up. It is your job to find the treasure chest providing you with the necessary materials to beat other people.",
+    "seaweed_decision": {
+    "prompt": "\nWhat strange fate has intertwined your destiny with that of this \nmysterious feathered visitor? \n\n>> Press 1 then Enter to pet the chicken. \nAlternatively, enter 2 to make a lethal move. Enter [i] to view your inventory.\n",
+    "1": "You decide to pet. A wise and kind choice.\n The chicken clucks contentedly, rewarding you with a shimmering golden egg. \n\n> You've gained 1 Gold Egg!\n",
+    "2": "You make a lethal move. The consequences of this action will unfold in time.\nThe lifeless chicken now serves a new purpose: a solemn gain. \n\n> You've gained 1 Chicken Breast! Enter [i] to view your inventory.\n"
+  }
+}
