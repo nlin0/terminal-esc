@@ -48,6 +48,18 @@ let add_item inventory new_item =
       Array.set inventory next_slot new_item;
       "Successful!"
 
+let remove_item inventory item_name =
+  let rec find_and_remove index =
+    if index >= Array.length inventory then "Item not found, unsuccessful"
+    else if (not inventory.(index).empty) && inventory.(index).item = item_name
+    then begin
+      inventory.(index).empty <- true;
+      "Successful"
+    end
+    else find_and_remove (index + 1)
+  in
+  find_and_remove 0
+
 let get_health inventory = (Array.get inventory 0).health_dmg_max
 
 let print_health inventory =
