@@ -5,7 +5,6 @@ open Inventory
 
 (* load nested json *)
 let intro = load_json "text_dat/intro.json"
-let inventory = Inventory.create_inventory ()
 
 let introduction () =
   (* print intro message from nested 'start' json *)
@@ -20,7 +19,6 @@ let introduction () =
       clear_screen ();
       print_msg "no" first_opt;
       exit 0
-  | "h" -> Inventory.print_health inventory
   | _ -> exit 0
 
 let () =
