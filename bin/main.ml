@@ -1,6 +1,7 @@
 open Terminal_esc
 open Utils
 open Rpg
+open Inventory
 
 (* load nested json *)
 let intro = load_json "text_dat/intro.json"
