@@ -15,7 +15,16 @@ let create_inventory () =
   Array.init size (fun _ -> {empty = true; item = "none"})
 
 (* todo: account for when empty = false... can't add *)
-let add_item inventory slot new_item =
-  inventory.(slot).item <- new_item
+
+
+(* let first_empty slot_lst = 
+  match lst with 
+  | [] -> failwith "inventory full"
+  | h :: t ->  *)
+
+
+
+let add_item inventory slot_num new_item =
+  inventory.(slot_num).item <- new_item
 
 
