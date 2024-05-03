@@ -57,16 +57,3 @@ let print_health inventory =
   print_endline ("︳" ^ "Health: " ^ string_of_int (get_health inventory));
   print_string " ";
   print_msg "health-bar-bot" health_text
-
-
-(* let first_empty slot_lst = 
-  match lst with 
-  | [] -> failwith "inventory full"
-  | h :: t ->  *)
-
-
-
-let add_item inventory slot_num new_item =
-  inventory.(slot_num).item <- new_item
-
-
