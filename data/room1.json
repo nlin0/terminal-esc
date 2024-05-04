@@ -1,8 +1,8 @@
 {
   "intro": "\nAnd so it begins...\nIn the quiet village of Eldoria, where the morning mist hugs the cobblestone\npaths and the sun whispers through the leaves of ancient trees, you awaken to an\nunusual day. The warmth of the sun's rays gently nudges your eyes open, and as\nyou adjust to the light, a peculiar sight greets you. There, at the foot of your\nmodest bed, stands a chicken. Not just any chicken, but one that seems to regard\nyou with an intensity uncharacteristic of its kind.\n",
   "kill_pet_chicken": {
-    "prompt": "\nWhat strange fate has intertwined your destiny with that of this \nmysterious feathered visitor? \n\n>> Press 1 then Enter to pet the chicken. \nAlternatively, enter 2 to make a lethal move. Enter [i] to view your inventory.\n",
-    "1": "You decide to pet. A wise and kind choice.\n The chicken clucks contentedly, rewarding you with a shimmering golden egg. \n\n> You've gained 1 Gold Egg!\n",
-    "2": "You make a lethal move. The consequences of this action will unfold in time.\nThe lifeless chicken now serves a new purpose: a solemn gain. \n\n> You've gained 1 Chicken Breast! Enter [i] to view your inventory.\n"
+    "prompt": "\nWhat strange fate has intertwined your destiny with that of this \nmysterious feathered visitor? \n\n>> Press 1 then Enter to pet the chicken. \nAlternatively, enter 2 to make a lethal move.\n",
+    "1": "You decide to pet. A wise and kind choice.\n The chicken clucks contentedly, rewarding you with a shimmering golden egg. \n\n> You've gained 1 Gold Egg! Enter i to view your inventory.\n",
+    "2": "You make a lethal move. The consequences of this action will unfold in time.\nThe lifeless chicken now serves a new purpose: a solemn gain. \n\n> You've gained 1 Chicken Breast! Enter i to view your inventory.\n"
   }
 }

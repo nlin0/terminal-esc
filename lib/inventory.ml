@@ -3,6 +3,8 @@
 open Utils
 
 let constants = load_json "../data/constants.json"
+(*let constants = load_json
+  "/Users/jollyzheng/Desktop/terminal-esc/data/constants.json"*)
 
 type inventory_item = {
   mutable health_dmg_max : int;
@@ -28,12 +30,13 @@ let create_inventory () =
 
 let get_next_empty inventory =
   let size = Array.length inventory in
-  let empty = ref size in
-  for slot = size - 1 downto 0 do
-    if not inventory.(slot).empty then empty := slot
-  done;
-  if !empty = size then empty := -1;
-  !empty
+  (* Initialize with -1 to indicate no empty slots found *)
+  let rec find_empty_slot slot =
+    if slot >= size then -1
+    else if inventory.(slot).empty then slot
+    else find_empty_slot (slot + 1)
+  in
+  find_empty_slot 0
 
 let item_slot_name inventory num = (Array.get inventory num).item
 let item_slot_dmg inventory num = (Array.get inventory num).health_dmg_max
@@ -75,6 +78,30 @@ let print_health inventory =
   print_msg "health-bar-bot" health_text
 
 (* inventory should be a list of mutable arrays *)
+let print_inventory inventory =
+  let non_empty_slots = ref 0 in
+  Array.iter
+    (fun item -> if not item.empty then non_empty_slots := !non_empty_slots + 1)
+    inventory;
+
+  if !non_empty_slots = 0 then begin
+    print_endline "╔════════════════════════════════════════╗";
+    print_endline "║   Your inventory is empty right now.   ║";
+    print_endline "╚════════════════════════════════════════╝"
+  end
+  else begin
+    print_endline "╔════════════════════════════════════════╗";
+    print_endline "║               Inventory                ║";
+    print_endline "╠════════════════════════════════════════╣\n";
+    Array.iteri
+      (fun i item ->
+        if not item.empty then begin
+          Printf.printf "║  Slot %-2d: %-10sHealth Damage: %-4d\n" (i + 1)
+            item.item item.health_dmg_max
+        end)
+      inventory;
+    print_endline "\n╚════════════════════════════════════════╝"
+  end
 
 (** [create_inventory] is an empty inventory with 5 slots*)
 
