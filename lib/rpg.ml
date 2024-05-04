@@ -93,10 +93,7 @@ let rec inventory_tutorial () =
 let rec calling_inventory input =
   let rec part () =
     match input with
-    | "i 1" ->
-        (* first item is health bar *)
-        Inventory.print_health inventory;
-        Utils.print_msg "Health Bar" item_doc
+    | "i 1" -> Inventory.print_health inventory
     | "i 2" -> print_item (get_item_slot inventory 2)
     | "i 3" -> print_item (get_item_slot inventory 3)
     | "i 4" -> print_item (get_item_slot inventory 4)
