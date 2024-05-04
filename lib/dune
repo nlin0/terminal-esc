@@ -1,7 +1,7 @@
 (library
  (inline_tests)
  (name terminal_esc)
- (modules constants utils rpg inventory)
+ (modules utils rpg inventory constants)
  (libraries yojson)
  (preprocess
   (pps ppx_inline_test)))

@@ -4,6 +4,7 @@
 type json
 (** json is a JSON file containing JSON values *)
 
+
 val clear_screen : unit -> unit
 (** [clear_screen ()] clears the terminal screen. *)
 
