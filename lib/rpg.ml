@@ -27,15 +27,15 @@ let rec chicken_option () =
         Utils.print_nested_msg "kill_pet_chicken" "2" room1
     | "i" ->
         Inventory.print_inventory inventory;
-        print_endline "Okay! Now pick your move!";
+        print_endline ">> Okay! Now pick your move!\n";
         part ()
     | "h" ->
         Inventory.print_health inventory;
-        print_endline "Okay! Now pick your move!";
+        print_endline ">> Okay! Now pick your move!\n";
         part ()
     | _ ->
         Utils.clear_screen ();
-        print_endline "That's not an option! Please rethink your choice.\n";
+        print_endline ">> That's not an option! Please rethink your choice.\n";
         chicken_option ()
   in
   part ()
@@ -54,12 +54,13 @@ let rec inventory_option inventory =
     | "i 5" -> print_item (Inventory.item_slot_name inventory 5)
     | "h" ->
         Inventory.print_health inventory;
-        print_endline "Cool, but not right now. Why don't you try again?\n";
+        print_endline
+          ">> That's not how you do it silly! It's okay, try again.\n";
         part ()
     | _ ->
         Utils.clear_screen ();
-        print_endline "That's not how you do it silly! It's okay, try again.\n";
-        part ()
+        print_endline
+          ">> That's not how you do it silly! It's okay, try again.\n"
   in
   part ()
 
@@ -73,12 +74,12 @@ let rec inventory_tutorial () =
         inventory_option inventory
     | "h" ->
         Inventory.print_health inventory;
-        print_endline "Cool, but not right now. Why don't you try again?\n";
+        print_endline ">> Cool, but not right now. Why don't you try again?\n";
         part ()
     | _ ->
         Utils.clear_screen ();
-        print_endline "That's not how you do it silly! It's okay, try again.\n";
-        part ()
+        print_endline
+          ">> That's not how you do it silly! It's okay, try again.\n"
   in
   part ()
 

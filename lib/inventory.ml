@@ -2,7 +2,7 @@
 
 open Utils
 
-let constants = load_json "../data/constants.json"
+let constants = load_json "data/constants.json"
 (*let constants = load_json
   "/Users/jollyzheng/Desktop/terminal-esc/data/constants.json"*)
 
@@ -95,3 +95,19 @@ let print_inventory inventory =
         padded_item_name)
     inventory;
   print_endline "╚════════════════════════════════════════╝"
+
+(** [create_inventory] is an empty inventory with 5 slots*)
+
+let rec check_item inventory target =
+  match inventory with
+  | [||] -> false (* Base case: if the inventory is empty, return false *)
+  | items ->
+      (* Check if any item's 'item' field matches the target *)
+      let rec check = function
+        | [] -> false
+        | item :: rest -> if item.item = target then true else check rest
+      in
+      check (Array.to_list items)
+
+(* checks to see if key is in inventory *)
+let check_key inventory = check_item inventory "key"

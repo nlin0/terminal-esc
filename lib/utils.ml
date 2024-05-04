@@ -70,9 +70,9 @@ let () = Random.self_init ()
 let random_weapon() = 
   let rand = Random.float 1.0 in
   if rand < 0.1 then "Legendary Sword"
-  else if rand < 0.3 then "Magic Wand"
-  else if rand < 0.5 then "Stone Sword"
-  else "Wooden Sword"
+  else if rand < 0.25 then "Ice Wand"
+  else if rand < 0.45 then "Wooden Sword"
+  else "Stone Sword"
 
 let random_item() = 
   let rand = Random.float 1.0 in
