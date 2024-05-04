@@ -3,6 +3,8 @@
 open Utils
 
 let constants = load_json "../data/constants.json"
+(*let constants = load_json
+  "/Users/jollyzheng/Desktop/terminal-esc/data/constants.json"*)
 
 type inventory_item = {
   mutable health_dmg_max : int;
@@ -28,12 +30,13 @@ let create_inventory () =
 
 let get_next_empty inventory =
   let size = Array.length inventory in
-  let empty = ref size in
-  for slot = size - 1 downto 0 do
-    if not inventory.(slot).empty then empty := slot
-  done;
-  if !empty = size then empty := -1;
-  !empty
+  (* Initialize with -1 to indicate no empty slots found *)
+  let rec find_empty_slot slot =
+    if slot >= size then -1
+    else if inventory.(slot).empty then slot
+    else find_empty_slot (slot + 1)
+  in
+  find_empty_slot 0
 
 let item_slot_name inventory num = (Array.get inventory num).item
 let item_slot_dmg inventory num = (Array.get inventory num).health_dmg_max
