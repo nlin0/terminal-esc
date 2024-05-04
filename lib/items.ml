@@ -17,13 +17,13 @@ let chicken_breast : inventory_item = {
 }
 
 let print_item item =
-  print_endline item.item;
+  print_endline "\n"^item.item;
   if item.health_dmg_max > 0 then
-  print_string "+"^(string_of_int item.health_dmg_max)
-  else if item.health_dmg_max > 0 then
-    print_string "-"^(string_of_int item.health_dmg_max)
+  print_string "\nHealth: "^"+"^(string_of_int item.health_dmg_max)
+  else if item.health_dmg_max < 0 then
+    print_string (string_of_int item.health_dmg_max)
   else
-    print_string "?"
+    print_string "\n?"
   Utils.print_msg item.item item_doc;
   
   
