@@ -1,4 +1,4 @@
-(* stores all the qualities of the items *)
+(** Items is the module that stores all the qualities of the items *)
 
 open Utils
 open Inventory
@@ -12,10 +12,13 @@ let chicken_breast : inventory_item =
   { health_dmg_max = 15; empty = false; item = "Chicken Breast" }
 
 let print_item item =
-  print_endline item.item;
-  if item.health_dmg_max > 0 then
-    print_endline ("\nHealth: +" ^ string_of_int item.health_dmg_max)
-  else if item.health_dmg_max < 0 then
-    print_endline ("\nHealth: " ^ string_of_int item.health_dmg_max)
-  else print_endline "\n?";
-  Utils.print_msg item.item item_doc
+  if not item.empty then print_endline "This slot is empty."
+  else begin
+    print_endline item.item;
+    if item.health_dmg_max > 0 then
+      print_endline ("\nHealth: +" ^ string_of_int item.health_dmg_max)
+    else if item.health_dmg_max < 0 then
+      print_endline ("\nHealth: " ^ string_of_int item.health_dmg_max)
+    else print_endline "\n?";
+    Utils.print_msg item.item item_doc
+  end
