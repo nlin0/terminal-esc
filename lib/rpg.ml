@@ -40,7 +40,10 @@ let rec chicken_option () =
   in
   part ()
 
-let rec inventory_option inventory =
+(* [inventory_option_tutorial] is run only once after players complete
+   [inventory_tutorial] to teach players how to select and learn more about
+   specific items. *)
+let rec inventory_option_tutorial inventory =
   Utils.print_nested_msg "inventory_tutorial" "i" room1;
   let rec part () =
     let input = read_line () in
@@ -65,6 +68,8 @@ let rec inventory_option inventory =
   in
   part ()
 
+(* [inventory_tutorial] is only run once after room1 (chicken_option) to teach
+   players how to open their inventory. *)
 let rec inventory_tutorial () =
   Utils.print_nested_msg "inventory_tutorial" "prompt" room1;
   let rec part () =
@@ -72,7 +77,7 @@ let rec inventory_tutorial () =
     match input with
     | "i" ->
         Inventory.print_inventory inventory;
-        inventory_option inventory
+        inventory_option_tutorial inventory
     | "h" ->
         Inventory.print_health inventory;
         print_endline ">> Cool, but not right now. Why don't you try again?\n";
@@ -83,6 +88,34 @@ let rec inventory_tutorial () =
           ">> That's not how you do it silly! It's okay, try again.\n"
   in
   part ()
+
+(* [calling_inventory] is the function for calling specific inventory items. *)
+let rec calling_inventory input =
+  let rec part () =
+    match input with
+    | "i 1" ->
+        (* first item is health bar *)
+        Inventory.print_health inventory;
+        Utils.print_msg "Health Bar" item_doc
+    | "i 2" -> print_item (get_item_slot inventory 2)
+    | "i 3" -> print_item (get_item_slot inventory 3)
+    | "i 4" -> print_item (get_item_slot inventory 4)
+    | "i 5" -> print_item (get_item_slot inventory 5)
+    | "h" ->
+        Inventory.print_health inventory;
+        print_endline
+          ">> That's not how you do it silly! It's okay, try again.\n";
+        part ()
+    | _ ->
+        Utils.clear_screen ();
+        print_endline
+          ">> That's not how you do it silly! It's okay, try again.\n"
+  in
+  part ()
+
+let rec selecting_inventory input =
+  match input with
+  | _ -> failwith "TODO"
 
 let start () =
   Utils.print_msg "intro" room1;

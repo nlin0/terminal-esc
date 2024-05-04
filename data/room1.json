@@ -6,7 +6,7 @@
     "2": "You make a lethal move. The consequences of this action will unfold in time.\nThe lifeless chicken now serves a new purpose: a solemn gain. \n\n> You've gained 1 Chicken Breast!\n"
   },
   "inventory_tutorial": {
-    "prompt": "\nAs you embark on your journey, any items you acquire will be stored in your inventory. You can access it when you have time by pressing 'i'.\n>> Why don't you try it now?",
+    "prompt": "\nAs you embark on your journey, any items you acquire will be stored in your inventory. You can access it by pressing 'i'.\n>> Why don't you try it now?",
     "i": "\nWell done! To learn more about each item, simply input 'i' followed by the slot number, like 'i 1'.\n >> Why not take a moment to learn about the first item in your inventory?"
   }
 }
