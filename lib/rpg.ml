@@ -26,15 +26,15 @@ let rec chicken_option () =
         Utils.print_nested_msg "kill_pet_chicken" "2" room1
     | "i" ->
         Inventory.print_inventory inventory;
-        print_endline "Okay! Now pick your move!";
+        print_endline ">> Okay! Now pick your move!\n";
         part ()
     | "h" ->
         Inventory.print_health inventory;
-        print_endline "Okay! Now pick your move!\n";
+        print_endline ">> Okay! Now pick your move!\n";
         part ()
     | _ ->
         Utils.clear_screen ();
-        print_endline "That's not an option! Please rethink your choice.\n";
+        print_endline ">> That's not an option! Please rethink your choice.\n";
         chicken_option ()
   in
   part ()
@@ -46,11 +46,13 @@ let rec inventory_tutorial () =
     | "i" -> Inventory.print_inventory inventory
     | "h" ->
         Inventory.print_health inventory;
-        print_endline "That's not how you do it silly! It's okay, try again.\n";
+        print_endline
+          ">> That's not how you do it silly! It's okay, try again.\n";
         part ()
     | _ ->
         Utils.clear_screen ();
-        print_endline "That's not how you do it silly! It's okay, try again.\n"
+        print_endline
+          ">> That's not how you do it silly! It's okay, try again.\n"
   in
   part ()
 
