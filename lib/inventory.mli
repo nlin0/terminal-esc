@@ -7,8 +7,9 @@ type inventory_item = {
 }
 (** The type of inventory items *)
 
-val size : int
-(** The size of the inventory *)
+type t
+
+val inventory : inventory_item array ref
 
 val get_item_slot : inventory_item array -> int -> inventory_item
 (** [get_item_slot inventory num] retrieves the item at the given slot in the
@@ -45,3 +46,6 @@ val get_health : inventory_item array -> int
 
 val print_health : inventory_item array -> unit
 (** [print_health inventory] prints the health status of the inventory *)
+
+val check_item : string -> bool
+val check_key : unit -> bool

@@ -10,13 +10,15 @@ type inventory_item = {
   mutable item : string;
 }
 
+type t = inventory_item array ref
+
 (** [size] is the inventory size *)
 let size = 5
 
 let get_item_slot inventory num = Array.get inventory num
+let inventory = ref [||]
 
-(** [create_inventory] is an empty inventory with 3 slots*)
-
+(** [create_inventory] is an empty inventory with 5 slots*)
 let create_inventory () =
   let prev =
     Array.init size (fun _ ->
@@ -24,7 +26,7 @@ let create_inventory () =
   in
   let new_item = { health_dmg_max = 100; empty = false; item = "health-bar" } in
   Array.set prev 0 new_item;
-  prev
+  inventory := prev
 
 let get_next_empty inventory =
   let size = Array.length inventory in
@@ -73,3 +75,20 @@ let print_health inventory =
   print_endline ("︳" ^ "Health: " ^ string_of_int (get_health inventory));
   print_string " ";
   print_msg "health-bar-bot" health_text
+
+(* inventory should be a list of mutable arrays *)
+let rec check_item target =
+  match !inventory with
+  | [||] -> false (* Base case: if the inventory is empty, return false *)
+  | items ->
+      (* Check if any item's 'item' field matches the target *)
+      let rec check = function
+        | [] -> false
+        | item :: rest -> if item.item = target then true else check rest
+      in
+      check (Array.to_list items)
+
+(* checks to see if key is in inventory *)
+let check_key () = check_item "key"
+
+
