@@ -1,6 +1,6 @@
 {
   "start": {
-    "greet_msg": "You are trapped in the depths of your system's terminal. Your job is to \nescape, but it will not be easy. The labryinth that is your system's \nterminal is filled with scary bugs, strange creatures, and dangerous \ntraps. Throughout your journey you will find weapons and goods to arm \nyourself. However, even armed, you are not safe from the choices you \nmake."
+    "greet_msg": "You are trapped in the depths of your system's terminal filled with different\nenvironemtns and terrains. Your job is to escape, but it will not be easy. The\nlabryinth that is your system's terminal is filled with scary bugs, strange\ncreatures, and dangerous traps. Throughout your journey you will find weapons\nand goods to arm yourself. However, even armed, you are not safe from the\nchoices you make.\n"
   },
   "option1": {
     "prompt": "\n\n>> Are you ready to escape? (yes/no)\n",

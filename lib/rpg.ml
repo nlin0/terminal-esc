@@ -25,7 +25,7 @@ let rec chicken_option () =
         Utils.print_nested_msg "kill_pet_chicken" "2" room1
     | "h" ->
         Inventory.print_health inventory;
-        print_endline "Okay! Now pick your move!";
+        print_endline "Okay! Now pick your move!\n";
         part ()
     | _ ->
         Utils.clear_screen ();

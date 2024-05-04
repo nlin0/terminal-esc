@@ -75,3 +75,19 @@ let print_health inventory =
   print_msg "health-bar-bot" health_text
 
 (* inventory should be a list of mutable arrays *)
+
+(** [create_inventory] is an empty inventory with 5 slots*)
+
+let rec check_item inventory target =
+  match inventory with
+  | [||] -> false (* Base case: if the inventory is empty, return false *)
+  | items ->
+      (* Check if any item's 'item' field matches the target *)
+      let rec check = function
+        | [] -> false
+        | item :: rest -> if item.item = target then true else check rest
+      in
+      check (Array.to_list items)
+
+(* checks to see if key is in inventory *)
+let check_key inventory = check_item inventory "key"
