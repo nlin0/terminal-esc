@@ -1,4 +1,5 @@
 open Constants
+open Inventory
 
 (* NOTE: DELETE THE DUNE FILE IN THE ROOT AFTER WE ARE DONE TESTING *)
 
@@ -23,6 +24,10 @@ let rec chicken_option () =
         Utils.clear_screen ();
         Constants.dead_chicken ();
         Utils.print_nested_msg "kill_pet_chicken" "2" room1
+    | "i" ->
+        Inventory.print_inventory inventory;
+        print_endline "Okay! Now pick your move!";
+        part ()
     | "h" ->
         Inventory.print_health inventory;
         print_endline "Okay! Now pick your move!";
@@ -34,6 +39,22 @@ let rec chicken_option () =
   in
   part ()
 
+let rec inventory_tutorial () =
+  let rec part () =
+    let input = read_line () in
+    match input with
+    | "i" -> Inventory.print_inventory inventory
+    | "h" ->
+        Inventory.print_health inventory;
+        print_endline "That's not how you do it silly! It's okay, try again.\n";
+        part ()
+    | _ ->
+        Utils.clear_screen ();
+        print_endline "That's not how you do it silly! It's okay, try again.\n"
+  in
+  part ()
+
 let start () =
   Utils.print_msg "intro" room1;
-  chicken_option ()
+  chicken_option ();
+  inventory_tutorial ()

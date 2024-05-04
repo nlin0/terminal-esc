@@ -73,3 +73,27 @@ let print_health inventory =
   print_endline ("︳" ^ "Health: " ^ string_of_int (get_health inventory));
   print_string " ";
   print_msg "health-bar-bot" health_text
+
+let print_inventory inventory =
+  let non_empty_slots = ref 0 in
+  Array.iter
+    (fun item -> if not item.empty then non_empty_slots := !non_empty_slots + 1)
+    inventory;
+
+  if !non_empty_slots = 0 then begin
+    print_endline "║   Your inventory is empty right now.   ║";
+    print_endline "╚════════════════════════════════════════╝"
+  end
+  else begin
+    print_endline "╔════════════════════════════════════════╗";
+    print_endline "║               Inventory                ║";
+    print_endline "╠════════════════════════════════════════╣\n";
+    Array.iteri
+      (fun i item ->
+        if not item.empty then begin
+          Printf.printf "║  Slot %-2d: %-10sHealth Damage: %-4d\n" (i + 1)
+            item.item item.health_dmg_max
+        end)
+      inventory;
+    print_endline "\n╚════════════════════════════════════════╝"
+  end
