@@ -1,4 +1,5 @@
 open Yojson
+open Random
 
 (** The Utils module includes simple functions that can be used across all of
     our ml files. *)
@@ -61,3 +62,23 @@ let get_nested key alst =
 let print_nested_msg parent_key child_key alst =
   let child_json = get_nested parent_key alst in
   print_msg child_key child_json
+
+
+(* RNG Functions *)
+let () = Random.self_init ()
+
+let random_weapon() = 
+  let rand = Random.float 1.0 in
+  if rand < 0.1 then "Legendary Sword"
+  else if rand < 0.3 then "Magic Wand"
+  else if rand < 0.5 then "Stone Sword"
+  else "Wooden Sword"
+
+let random_item() = 
+  let rand = Random.float 1.0 in
+  if rand < 0.3 then random_weapon()(* 30% chance for weapon*)
+  else if rand < 0.6 then "meat"  (* 60% chance for food *)
+  else "key" (* else get key instead *)
+
+
+

@@ -76,3 +76,5 @@ let print_health inventory =
   print_endline ("︳" ^ "Health: " ^ string_of_int (get_health inventory));
   print_string " ";
   print_msg "health-bar-bot" health_text
+
+(* inventory should be a list of mutable arrays *)
