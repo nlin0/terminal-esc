@@ -2,7 +2,7 @@
 
 open Utils
 
-let constants = load_json "../data/constants.json"
+let constants = load_json "data/constants.json"
 (*let constants = load_json
   "/Users/jollyzheng/Desktop/terminal-esc/data/constants.json"*)
 
