@@ -1,7 +1,10 @@
 open Utils
 (** Constants stores the npcs and text arts for the game *)
 
-let text_art = load_json "text_dat/constants.json"
+type art = Yojson.Basic.t
+
+let text_art = load_json "../data/constants.json"
+
 let logo () = print_msg "logo" text_art
 
 let chicken () =

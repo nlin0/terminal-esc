@@ -1,5 +1,7 @@
 (test
  (name test_terminal_esc)
- (libraries ounit2 terminal_esc qcheck)
+ (deps
+  (glob_files *.json))
+ (libraries yojson ounit2 qcheck terminal_esc)
  (instrumentation
   (backend bisect_ppx)))

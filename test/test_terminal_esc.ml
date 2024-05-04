@@ -23,7 +23,7 @@ let inventory_test =
            assert_equal (Inventory.item_slot_dmg nothing_inventory 1) 50 );
          ( "get just health" >:: fun _ ->
            assert_equal (Inventory.get_health nothing_inventory) 100 );
-         ( "check adding each and next empty slot" >:: fun _ ->
+         ( "check adding each and next\n   empty slot" >:: fun _ ->
            assert_equal
              (Inventory.add_item nothing_inventory
                 { health_dmg_max = 50; empty = false; item = "sword" })
@@ -72,5 +72,12 @@ let prop_inventory_test =
     (QCheck2.Test.make ~count:100 ~name:"rando dmg size" create_other_invent
        item_test)
 
-let all = "whole test suite" >::: [ inventory_test; prop_inventory_test ]
-let () = run_test_tt_main all
+let tests =
+  "Tests for Set"
+  >::: [
+         inventory_test;
+         prop_inventory_test;
+         ("a trivial test" >:: fun _ -> assert_equal 8 8);
+       ]
+
+let () = run_test_tt_main tests

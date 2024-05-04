@@ -2,7 +2,7 @@
 
 open Utils
 
-let constants = load_json "text_dat/constants.json"
+let constants = load_json "../data/constants.json"
 
 type inventory_item = {
   mutable health_dmg_max : int;
