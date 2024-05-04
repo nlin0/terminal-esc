@@ -20,11 +20,26 @@ let rec chicken_option () =
     | "1" ->
         Utils.clear_screen ();
         Constants.happy_chicken ();
-        Utils.print_nested_msg "kill_pet_chicken" "1" room1
+        let golden_egg =
+          { health_dmg_max = 0; empty = false; item = "golden-egg" }
+        in
+        if Inventory.get_next_empty inventory = -1 then
+          print_endline "Unsuccessful, seems like your chest is full!"
+        else (
+          ignore (Inventory.add_item inventory golden_egg);
+          Utils.print_nested_msg "kill_pet_chicken" "1" room1)
     | "2" ->
         Utils.clear_screen ();
         Constants.dead_chicken ();
-        Utils.print_nested_msg "kill_pet_chicken" "2" room1
+
+        let dead_chicken =
+          { health_dmg_max = 0; empty = false; item = "dead-chicken" }
+        in
+        if Inventory.get_next_empty inventory = -1 then
+          print_endline "Unsuccessful, seems like your chest is full!"
+        else (
+          ignore (Inventory.add_item inventory dead_chicken);
+          Utils.print_nested_msg "kill_pet_chicken" "2" room1)
     | "i" ->
         Inventory.print_inventory inventory;
         print_endline ">> Okay! Now pick your move!\n";
