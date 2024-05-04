@@ -49,6 +49,7 @@ let rec inventory_option inventory =
         (* first item is health bar *)
         Inventory.print_health inventory;
         Utils.print_msg "Health Bar" Items.item_doc
+    | "i 2" -> print_item (Inventory.item_slot_name inventory 2)
     | "i 3" -> print_item (Inventory.item_slot_name inventory 3)
     | "i 4" -> print_item (Inventory.item_slot_name inventory 4)
     | "i 5" -> print_item (Inventory.item_slot_name inventory 5)
