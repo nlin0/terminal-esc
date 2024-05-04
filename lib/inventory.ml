@@ -10,8 +10,6 @@ type inventory_item = {
   mutable item : string;
 }
 
-type t = inventory_item array ref
-
 (** [size] is the inventory size *)
 let size = 5
 
@@ -90,5 +88,3 @@ let rec check_item target =
 
 (* checks to see if key is in inventory *)
 let check_key () = check_item "key"
-
-
