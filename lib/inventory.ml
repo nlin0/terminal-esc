@@ -81,6 +81,7 @@ let print_inventory inventory =
     inventory;
 
   if !non_empty_slots = 0 then begin
+    print_endline "╔════════════════════════════════════════╗";
     print_endline "║   Your inventory is empty right now.   ║";
     print_endline "╚════════════════════════════════════════╝"
   end
