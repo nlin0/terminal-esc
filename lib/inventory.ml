@@ -2,7 +2,7 @@
 
 open Utils
 
-let constants = load_json "data/constants.json"
+let constants = load_json "../data/constants.json"
 (*let constants = load_json
   "/Users/jollyzheng/Desktop/terminal-esc/data/constants.json"*)
 
@@ -102,8 +102,7 @@ let print_inventory inventory =
       inventory;
     print_endline "\n╚════════════════════════════════════════╝"
   end
-
-(** [create_inventory] is an empty inventory with 5 slots*)
+  
 
 let rec check_item inventory target =
   match inventory with

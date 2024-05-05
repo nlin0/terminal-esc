@@ -3,7 +3,7 @@ open Utils
 
 type art = Yojson.Basic.t
 
-let text_art = load_json "data/constants.json"
+let text_art = load_json "../data/constants.json"
 let logo () = print_msg "logo" text_art
 
 let chicken () =
@@ -21,4 +21,4 @@ let smile_whale () =
     ("           __)\\_  \n" ^ "      (\\_.-'    a`-.\n"
    ^ " jgs  (/~~````(/~^^`")
 
-let chest () = print_endline " _____\n\n  /__o__\\n\n  \_____/\n\n  "
+let chest () = print_endline "_____\n\n/__o__\\n\n\_____/\n\n"

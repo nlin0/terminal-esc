@@ -80,6 +80,7 @@ let tests =
          inventory_test;
          (*prop_inventory_test; ("a trivial test" >:: fun _ -> assert_equal 8
            8);*)
+         ("a trivial test" >:: fun _ -> assert_equal 8 8);
        ]
 
 let () = run_test_tt_main tests
