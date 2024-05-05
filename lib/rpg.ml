@@ -51,11 +51,20 @@ let rec inventory_option_tutorial inventory =
     | "i 1" ->
         (* first item is health bar *)
         Inventory.print_health inventory;
-        Utils.print_msg "Health Bar" item_doc
-    | "i 2" -> print_item (get_item_slot inventory 2)
-    | "i 3" -> print_item (get_item_slot inventory 3)
-    | "i 4" -> print_item (get_item_slot inventory 4)
-    | "i 5" -> print_item (get_item_slot inventory 5)
+        Utils.print_msg "Health Bar" item_doc;
+        Utils.print_nested_msg "inventory_tutorial" "conc" room1
+    | "i 2" ->
+        print_item (get_item_slot inventory 2);
+        part ()
+    | "i 3" ->
+        print_item (get_item_slot inventory 3);
+        part ()
+    | "i 4" ->
+        print_item (get_item_slot inventory 4);
+        part ()
+    | "i 5" ->
+        print_item (get_item_slot inventory 5);
+        part ()
     | "h" ->
         Inventory.print_health inventory;
         print_endline
@@ -89,19 +98,45 @@ let rec inventory_tutorial () =
   in
   part ()
 
+(* [selecting_inventory] is the function for selecting to use a specific item *)
+let rec selecting_inventory item =
+  let rec part () =
+    let input = read_line () in
+    match input with
+    | "y" -> failwith "TODO"
+    | "n" -> failwith "TODO"
+    | _ ->
+        Utils.clear_screen ();
+        print_endline
+          ">> That's not an option silly! Why don't you try again.\n"
+  in
+  part ()
+
 (* [calling_inventory] is the function for calling specific inventory items. *)
 let rec calling_inventory input =
   let rec part () =
     match input with
     | "i 1" -> Inventory.print_health inventory
-    | "i 2" -> print_item (get_item_slot inventory 2)
-    | "i 3" -> print_item (get_item_slot inventory 3)
-    | "i 4" -> print_item (get_item_slot inventory 4)
-    | "i 5" -> print_item (get_item_slot inventory 5)
+    | "i 2" ->
+        print_item (get_item_slot inventory 2);
+        print_endline "\n>> Would you like to use this item? (y/n)\n";
+        selecting_inventory (get_item_slot inventory 2)
+    | "i 3" ->
+        print_item (get_item_slot inventory 3);
+        print_endline "\n>> Would you like to use this item? (y/n)\n";
+        selecting_inventory (get_item_slot inventory 3)
+    | "i 4" ->
+        print_item (get_item_slot inventory 4);
+        print_endline "\n>> Would you like to use this item? (y/n)\n";
+        selecting_inventory (get_item_slot inventory 4)
+    | "i 5" ->
+        print_item (get_item_slot inventory 5);
+        print_endline "\n>> Would you like to use this item? (y/n)\n";
+        selecting_inventory (get_item_slot inventory 5)
     | "h" ->
         Inventory.print_health inventory;
         print_endline
-          ">> That's not how you do it silly! It's okay, try again.\n";
+          ">> That's not how you do it silly! It's okay, try again. \n";
         part ()
     | _ ->
         Utils.clear_screen ();
@@ -109,10 +144,6 @@ let rec calling_inventory input =
           ">> That's not how you do it silly! It's okay, try again.\n"
   in
   part ()
-
-let rec selecting_inventory input =
-  match input with
-  | _ -> failwith "TODO"
 
 let start () =
   Utils.print_msg "intro" room1;
