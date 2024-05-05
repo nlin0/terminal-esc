@@ -21,4 +21,4 @@ let smile_whale () =
     ("           __)\\_  \n" ^ "      (\\_.-'    a`-.\n"
    ^ " jgs  (/~~````(/~^^`")
 
-let chest () = print_endline "_____\n\n/__o__\\n\n\_____/\n\n"
+let chest () = print_msg "chest" text_art

@@ -15,7 +15,7 @@ let add_slot_test _ =
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "bow" })
-    "Successful!";
+    "You've gained a new item!";
   assert_equal (Inventory.get_next_empty inventory) 2;
   assert_equal false (Inventory.item_slot_empty inventory 1);
   assert_equal (Inventory.item_slot_name inventory 1) "bow";
@@ -27,22 +27,22 @@ let add_item_test _ =
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "sword" })
-    "Successful!";
+    "You've gained a new item!";
   assert_equal (Inventory.get_next_empty inventory) 3;
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "knife" })
-    "Successful!";
+    "You've gained a new item!";
   assert_equal (Inventory.get_next_empty inventory) 4;
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "gun" })
-    "Successful!";
+    "You've gained a new item!";
   assert_equal (Inventory.get_next_empty inventory) (-1);
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "bow" })
-    "Full, Unsuccessful"
+    "You're Inventory is Full."
 
 let test_remove _ =
   assert_equal (Inventory.remove_item inventory "bow") "Successful";

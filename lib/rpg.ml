@@ -1,4 +1,3 @@
-open Constants
 open Inventory
 open Items
 
@@ -24,7 +23,7 @@ let rec chicken_option () =
           { health_dmg_max = 0; empty = false; item = "golden-egg" }
         in
         if Inventory.get_next_empty inventory = -1 then
-          print_endline "Unsuccessful, seems like your chest is full!"
+          print_endline "Unsuccessful, seems like your inventory is full!"
         else (
           ignore (Inventory.add_item inventory golden_egg);
           Utils.print_nested_msg "kill_pet_chicken" "1" room1)
@@ -36,7 +35,7 @@ let rec chicken_option () =
           { health_dmg_max = 0; empty = false; item = "dead-chicken" }
         in
         if Inventory.get_next_empty inventory = -1 then
-          print_endline "Unsuccessful, seems like your chest is full!"
+          print_endline "Unsuccessful, seems like your inventory is full!"
         else (
           ignore (Inventory.add_item inventory dead_chicken);
           Utils.print_nested_msg "kill_pet_chicken" "2" room1)

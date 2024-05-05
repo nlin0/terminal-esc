@@ -28,6 +28,10 @@ let create_inventory () =
   Array.set prev 0 new_item;
   prev
 
+let create_item health_dmg item = 
+  {health_dmg_max = health_dmg; empty = false; item = item}
+
+
 let get_next_empty inventory =
   let size = Array.length inventory in
   (* Initialize with -1 to indicate no empty slots found *)
@@ -46,10 +50,10 @@ let item_slot_empty inventory num = (Array.get inventory num).empty
 let add_item inventory new_item =
   let next_slot = get_next_empty inventory in
   match next_slot with
-  | -1 -> "Full, Unsuccessful"
+  | -1 -> "You're Inventory is Full."
   | _ ->
       Array.set inventory next_slot new_item;
-      "Successful!"
+      "You've gained a new item!"
 
 let remove_item inventory item_name =
   let rec find_and_remove index =
