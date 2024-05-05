@@ -2,9 +2,10 @@
 
 open Utils
 
-let constants = load_json "data/constants.json"
-(*let constants = load_json
-  "/Users/jollyzheng/Desktop/terminal-esc/data/constants.json"*)
+(*let constants = load_json "data/constants.json"*)
+
+let constants =
+  load_json "/Users/jollyzheng/Desktop/terminal-esc/data/constants.json"
 
 type inventory_item = {
   mutable health_dmg_max : int;
@@ -56,7 +57,8 @@ let remove_item inventory item_name =
     if index >= Array.length inventory then "Item not found, unsuccessful"
     else if (not inventory.(index).empty) && inventory.(index).item = item_name
     then begin
-      inventory.(index).empty <- true;
+      Array.set inventory index
+        { health_dmg_max = 0; empty = true; item = "none" };
       "Successful"
     end
     else find_and_remove (index + 1)
