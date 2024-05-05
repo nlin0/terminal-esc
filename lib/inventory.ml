@@ -99,8 +99,10 @@ let print_inventory inventory =
 
 (** [create_inventory] is an empty inventory with 5 slots*)
 
-let check_item inventory target =
-  List.exists (fun item -> item.item = target) inventory
+let rec check_item inventory target =
+  match inventory with
+  | [] -> false (* Base case: if the inventory is empty, return false *)
+  | slot :: rest -> if slot.item = target then true else check_item rest target
 
 (* checks to see if key is in inventory *)
 let check_key inventory = check_item inventory "key"
