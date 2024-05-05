@@ -56,7 +56,8 @@ let remove_item inventory item_name =
     if index >= Array.length inventory then "Item not found, unsuccessful"
     else if (not inventory.(index).empty) && inventory.(index).item = item_name
     then begin
-      inventory.(index).empty <- true;
+      Array.set inventory index
+        { health_dmg_max = 0; empty = true; item = "none" };
       "Successful"
     end
     else find_and_remove (index + 1)
@@ -77,32 +78,26 @@ let print_health inventory =
   print_string " ";
   print_msg "health-bar-bot" health_text
 
-(* inventory should be a list of mutable arrays *)
 let print_inventory inventory =
-  let non_empty_slots = ref 0 in
-  Array.iter
-    (fun item -> if not item.empty then non_empty_slots := !non_empty_slots + 1)
+  let max_item_length = 20 in
+  (* Added padding so there is a maximum length for item names *)
+  print_endline "╔════════════════════════════════════════╗";
+  print_endline "║                Inventory               ║";
+  print_endline "╠════════════════════════════════════════╣";
+  Array.iteri
+    (fun i item ->
+      let padded_item_name =
+        if not item.empty then
+          let len_diff = max_item_length - String.length item.item in
+          item.item ^ String.make (max 0 len_diff) ' '
+        else "Empty"
+      in
+      Printf.printf "║  Slot %d: %-*s ║\n" (i + 1) max_item_length
+        padded_item_name)
     inventory;
+  print_endline "╚════════════════════════════════════════╝"
 
-  if !non_empty_slots = 0 then begin
-    print_endline "╔════════════════════════════════════════╗";
-    print_endline "║   Your inventory is empty right now.   ║";
-    print_endline "╚════════════════════════════════════════╝"
-  end
-  else begin
-    print_endline "╔════════════════════════════════════════╗";
-    print_endline "║               Inventory                ║";
-    print_endline "╠════════════════════════════════════════╣\n";
-    Array.iteri
-      (fun i item ->
-        if not item.empty then begin
-          Printf.printf "║  Slot %-2d: %-10sHealth Damage: %-4d\n" (i + 1)
-            item.item item.health_dmg_max
-        end)
-      inventory;
-    print_endline "\n╚════════════════════════════════════════╝"
-  end
-  
+(** [create_inventory] is an empty inventory with 5 slots*)
 
 let rec check_item inventory target =
   match inventory with
