@@ -4,6 +4,8 @@
 type json
 (** json is a JSON file containing JSON values *)
 
+(** [remove_quotes str] removes leading and trailing quotes from [str]. *)
+val remove_quotes : string -> string
 
 val clear_screen : unit -> unit
 (** [clear_screen ()] clears the terminal screen. *)
