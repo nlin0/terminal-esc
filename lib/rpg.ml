@@ -5,7 +5,7 @@ open Items
 (* NOTE: DELETE THE DUNE FILE IN THE ROOT AFTER WE ARE DONE TESTING *)
 
 (* load nested json *)
-let room1 = Utils.load_json "../data/room1.json"
+let room1 = Utils.load_json "data/room1.json"
 
 (* build rng function to random option choices... *)
 let inventory = Inventory.create_inventory ()
@@ -164,3 +164,5 @@ let start () =
   Utils.print_msg "intro" room1;
   chicken_option ();
   inventory_tutorial ()
+
+

@@ -1,4 +1,5 @@
 {
+  "chest_fail" : "No key? No problem! You rummage through your inventory like a treasure-hunting pirate, hoping to find something to crack open that chest. But the chest is stubborn. With a sigh of defeat, you give up and leave the chest as is.",
   "chest_descr": {
     "1": "As you rise from the fall and brush off the dirt, your curiosity piqued, you notice a flash of light catching your eye. You pause, your attention drawn to a metal-framed box nestled amidst the foliage nearby. Its presence seems almost deliberately hidden.\n",
     "2": "You suddenly realize you’ve been going in circles. As you try to retrace your steps, you stumble upon a moss-covered chest half-buried beneath fallen leaves.\n",
