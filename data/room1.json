@@ -8,6 +8,6 @@
   "inventory_tutorial": {
     "prompt": "\nAs you embark on your journey, any items you acquire will be stored in your inventory. You can access it by pressing 'i'.\n>> Why don't you try it now?",
     "i": "\nWell done! To learn more about each item, simply input 'i' followed by the slot number, like 'i 1'.\n >> Why not take a moment to learn about the first item in your inventory?",
-    "conc": "\nNice job! In the future, you can open the inventory with 'i', and select items for use with 'i #'."
+    "conc": "\nNice job! In the future, you can open the inventory with 'i', and select items for use with 'i #'.\n Now, to continue on with your journey...\n"
   }
 }
