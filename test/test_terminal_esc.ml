@@ -95,17 +95,25 @@ let remove_quotes_test _ =
   assert_equal "\"hello" (remove_quotes "\"hello");
   assert_equal "hello\"" (remove_quotes "hello\"")
 
+let test_json = load_json "test_json"
+let test2_json = load_json "test2_json"
+
+let get_nested_test _ =
+  let nested = get_nested "test2" test_json in
+  assert_equal nested test2_json
+
 let utils_test =
   "tests for Utils module"
-  >::: [ "utils quotes test" >:: remove_quotes_test (* Add more tests here *) ]
+  >::: [
+         "utils quotes test" >:: remove_quotes_test;
+         "utils json load and nested test" >:: get_nested_test;
+       ]
 
 let tests =
   "Tests for Set"
   >::: [
          inventory_test;
          utils_test;
-         (*prop_inventory_test; ("a trivial test" >:: fun _ -> assert_equal 8
-           8);*)
          ("a trivial test" >:: fun _ -> assert_equal 8 8);
        ]
 

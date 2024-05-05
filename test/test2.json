@@ -1,0 +1,9 @@
+{
+  "key1": "value1",
+  "key2": 42,
+  "test2" : {
+    "name": "John",
+    "age": 30,
+    "pet": "cat"
+  }
+}

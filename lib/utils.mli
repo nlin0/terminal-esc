@@ -4,11 +4,13 @@
 type json
 (** json is a JSON file containing JSON values *)
 
-(** [remove_quotes str] removes leading and trailing quotes from [str]. *)
 val remove_quotes : string -> string
+(** [remove_quotes str] removes leading and trailing quotes from [str]. *)
 
 val clear_screen : unit -> unit
 (** [clear_screen ()] clears the terminal screen. *)
+
+val to_alst : [> `Assoc of 'a list ] -> 'a list
 
 val load_json : string -> (string * json) list
 (** [load_json filepath] loads a JSON file and converts it to an association
