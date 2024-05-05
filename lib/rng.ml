@@ -68,21 +68,19 @@ let random_chest_item () =
   | rand when rand < 0.60 -> "meat"
   | _ -> "nothing"
 
+(* todo: change functionality after key can be acquired *)
 let open_chest inventory =
-  let has_key = Inventory.check_key inventory in
-  if not has_key then print_msg "chest_fail" chest_msgs
-  else
-    match random_chest_item () with
-    | "weapon" ->
-        let new_weapon = random_weapon () in
-        obtain_weapon inventory new_weapon
-    | "meat" ->
-        let rand_hp = random_int 10 45 in
-        let () = print_msg "chest_meat" chest_msgs in
-        obtain_item inventory rand_hp "Meat"
-    | _ ->
-        let () = print_msg "chest_empty" chest_msgs in
-        ()
+  match random_chest_item () with
+  | "weapon" ->
+      let new_weapon = random_weapon () in
+      obtain_weapon inventory new_weapon
+  | "meat" ->
+      let rand_hp = random_int 10 45 in
+      let () = print_msg "chest_meat" chest_msgs in
+      obtain_item inventory rand_hp "Meat"
+  | _ ->
+      let () = print_msg "chest_empty" chest_msgs in
+      ()
 
 let chest_prompt inventory =
   Utils.clear_screen ();

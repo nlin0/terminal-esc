@@ -187,7 +187,7 @@ let rec calling_inventory input curr_fun =
 let encounter_chest () =
   Rng.chest_prompt inventory;
 
-  print_endline "end.."
+  print_endline "end of chest scenario.."
 
 let encounter_trap () = print_endline "Trap event has not been implemneted"
 let encounter_battle () = print_endline "Battle event has not been implemneted"

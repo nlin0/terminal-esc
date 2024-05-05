@@ -6,11 +6,11 @@
     "3": "Seeking refuge from your terminal’s scorching sun, you follow the sound of rushing water to a serene waterfall hidden deep within the wilderness. Amidst the mist, you notice a chest wedged between the rocks.\n",
     "4": "You navigate the winding tunnels of your terminal, filled with different terrains and environments. Amidst the stalactites and stalagmites, you stumble upon a hidden alcove housing a chest adorned with ancient runes.\n"
   },
-  "chest_prompt": "You stumbled across a chest, if you have a key, you may be able to open it to see what treasures it holds…\n\n >> 1: Open the chest\n>> 2: Ignore the chest",
+  "chest_prompt": "You stumbled across a chest, if you have a key, you may be able to open it to see what treasures it holds…\n>> 1: Open the chest\n>> 2: Ignore the chest",
   "chest_weapon": {
-    "legendary": "You open the chest. \nThere is a flash of bright light, and you think you hear angels singing in the background. Or you might be going crazy. Inside the chest, you see a brilliant curved blade. \n\n You have gained The Legendary Sword! \n",
-    "wand": "You open the chest. \nYou feel a cold gust of wind as you lift open the lid, sending a chill down your spine. An ice blue stick lies in the chest in a pile of some special kind of unmeltable snow. \n\n You have gained an Ice Wand!\n",
-    "wooden": "You open the chest. \nYou cough as the dust spills out. Inside, you see a wooden blade.  \n\n You have gained a Wooden Sword!\n",
+    "legendary": "You open the chest. \nThere is a flash of bright light, and you think you hear angels singing in the background. Or you might be going crazy. Inside the chest, you see a brilliant curved blade. \n\nYou have gained The Legendary Sword! \n",
+    "wand": "You open the chest. \nYou feel a cold gust of wind as you lift open the lid, sending a chill down your spine. An ice blue stick lies in the chest in a pile of some special kind of unmeltable snow. \n\nYou have gained an Ice Wand!\n",
+    "wooden": "You open the chest. \nYou cough as the dust spills out. Inside, you see a wooden blade.  \n\nYou have gained a Wooden Sword!\n",
     "stone": "You open the chest. \nThe lid creaks loudly as you peek inside.  \n\n You have gained a Stone Sword!\n"
   },
   "chest_meat": "As you open the chest, a savory aroma wafts out, revealing a bounty of perfectly cooked meat nestled within. The slice glistens invitingly, promising a satisfying meal to replenish your strength on your journey.",
