@@ -4,7 +4,7 @@ open Rpg
 open Inventory
 
 (* load nested json *)
-let intro = load_json (Constants.run_json "data/intro.json")
+let intro = load_json (Constants.run_json "intro")
 
 let introduction () =
   (* print intro message from nested 'start' json *)
