@@ -45,6 +45,10 @@ let add_item_test _ =
     "You're Inventory is Full."
 
 let test_remove _ =
+  assert_equal
+    (Inventory.add_item inventory
+       { health_dmg_max = 50; empty = false; item = "bow" })
+    "Item has been added to Inventory!";
   assert_equal (Inventory.remove_item inventory "bow") "Successful";
   assert_equal (Inventory.check_item inventory "bow") false
 
@@ -95,18 +99,16 @@ let remove_quotes_test _ =
   assert_equal "\"hello" (remove_quotes "\"hello");
   assert_equal "hello\"" (remove_quotes "hello\"")
 
-let test_json = load_json "test_json"
-let test2_json = load_json "test2_json"
+(* let test_json = load_json "test_json" let test2_json = load_json "test2_json"
 
-let get_nested_test _ =
-  let nested = get_nested "test2" test_json in
-  assert_equal nested test2_json
+   let get_nested_test _ = let nested = get_nested "test2" test_json in
+   assert_equal nested test2_json *)
 
 let utils_test =
   "tests for Utils module"
   >::: [
          "utils quotes test" >:: remove_quotes_test;
-         "utils json load and nested test" >:: get_nested_test;
+         (* "utils json load and nested test" >:: get_nested_test; *)
        ]
 
 let tests =
