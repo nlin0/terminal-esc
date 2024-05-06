@@ -1,8 +1,15 @@
+open Constants
 open Inventory
 open Items
+open Rng
 
+(* NOTE: DELETE THE DUNE FILE IN THE ROOT AFTER WE ARE DONE TESTING *)
 (* ---------- JSON AND INVENTORY ---------- *)
-let room1 = Utils.load_json (Constants.run_json "room1")
+
+(* load nested json *)
+let tut = Utils.load_json "data/tutorial.json"
+
+(* build rng function to random option choices... *)
 let inventory = Inventory.create_inventory ()
 
 (* ---------- TUTORIAL PLAYTHROUGH ---------- *)
@@ -17,7 +24,7 @@ let golden_egg_choice () =
     print_endline "Unsuccessful, seems like your inventory is full!"
   else (
     ignore (Inventory.add_item inventory golden_egg);
-    Utils.print_nested_msg "kill_pet_chicken" "1" room1)
+    Utils.print_nested_msg "kill_pet_chicken" "1" tut)
 
 let dead_chicken_choice () =
   Utils.clear_screen ();
@@ -30,7 +37,7 @@ let dead_chicken_choice () =
     print_endline "Unsuccessful, seems like your inventory is full!"
   else (
     ignore (Inventory.add_item inventory dead_chicken);
-    Utils.print_nested_msg "kill_pet_chicken" "2" room1)
+    Utils.print_nested_msg "kill_pet_chicken" "2" tut)
 
 let invalid_choice1 () =
   Utils.clear_screen ();
@@ -42,7 +49,7 @@ let print_inventory_choice () =
 
 let rec chicken_option () =
   Constants.chicken ();
-  Utils.print_nested_msg "kill_pet_chicken" "prompt" room1;
+  Utils.print_nested_msg "kill_pet_chicken" "prompt" tut;
 
   let rec part () =
     let input = read_line () in
@@ -68,36 +75,31 @@ let print_health_choice () =
   Inventory.print_inventory inventory;
   Inventory.print_health inventory;
   Utils.print_msg "Health Bar" item_doc;
-  Utils.print_nested_msg "inventory_tutorial" "conc" room1
+  Utils.print_nested_msg "inventory_tutorial" "conc" tut
 
 let clear_and_print_inventory () =
   Utils.clear_screen ();
   Inventory.print_inventory inventory
 
-(** [inventory_option_tutorial] is run only once after players complete
-    [inventory_tutorial] to teach players how to select and learn more about
-    specific items. *)
+(* [inventory_option_tutorial] is run only once after players complete
+   [inventory_tutorial] to teach players how to select and learn more about
+   specific items. *)
 let rec inventory_option_tutorial inventory =
-  Utils.print_nested_msg "inventory_tutorial" "i" room1;
-
+  Utils.print_nested_msg "inventory_tutorial" "i" tut;
   let rec part () =
     let input = read_line () in
     match input with
     | "i 1" -> print_health_choice ()
     | "i 2" ->
-        clear_and_print_inventory ();
         print_item (get_item_slot inventory 2);
         part ()
     | "i 3" ->
-        clear_and_print_inventory ();
         print_item (get_item_slot inventory 3);
         part ()
     | "i 4" ->
-        clear_and_print_inventory ();
         print_item (get_item_slot inventory 4);
         part ()
     | "i 5" ->
-        clear_and_print_inventory ();
         print_item (get_item_slot inventory 5);
         part ()
     | "h" ->
@@ -106,15 +108,16 @@ let rec inventory_option_tutorial inventory =
           ">> That's not how you do it silly! It's okay, try again.\n";
         part ()
     | _ ->
+        Utils.clear_screen ();
         print_endline
           ">> That's not how you do it silly! It's okay, try again.\n"
   in
   part ()
 
-(** [inventory_tutorial] is only run once after room1 (chicken_option) to teach
-    players how to open their inventory. *)
+(* [inventory_tutorial] is only run once after room1 (chicken_option) to teach
+   players how to open their inventory. *)
 let rec inventory_tutorial () =
-  Utils.print_nested_msg "inventory_tutorial" "prompt" room1;
+  Utils.print_nested_msg "inventory_tutorial" "prompt" tut;
   let rec part () =
     let input = read_line () in
     match input with
@@ -132,7 +135,7 @@ let rec inventory_tutorial () =
   in
   part ()
 
-(** [selecting_inventory] is the function for selecting to use a specific item *)
+(* [selecting_inventory] is the function for selecting to use a specific item *)
 let rec selecting_inventory item curr_fun =
   let rec part () =
     let input = read_line () in
@@ -147,7 +150,7 @@ let rec selecting_inventory item curr_fun =
   in
   part ()
 
-(** [calling_inventory] is the function for calling specific inventory items. *)
+(* [calling_inventory] is the function for calling specific inventory items. *)
 let rec calling_inventory input curr_fun =
   let rec part () =
     match input with
@@ -253,7 +256,7 @@ let rec random_event () =
 
 (* ---------- START GAME ---------- *)
 let start () =
-  Utils.print_msg "intro" room1;
+  Utils.print_msg "intro" tut;
   chicken_option ();
   inventory_tutorial ();
   random_event ()

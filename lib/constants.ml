@@ -14,6 +14,7 @@ let run_json file_name =
 let text_art = load_json (run_json "constants")
 let logo () = print_msg "logo" text_art
 
+(* tutorial *)
 let chicken () =
   print_endline ("   \\\\ \n" ^ "   (o>\n" ^ "\\_//)\n" ^ " \\_/_)\n" ^ "  _|_")
 
@@ -23,7 +24,17 @@ let happy_chicken () =
 let dead_chicken () =
   print_endline ("   \\\\ \n" ^ "   (x>\n" ^ "\\_//)\n" ^ " \\_/_)\n" ^ "  _|_")
 
-(*room 3*)
+(* scene 1 *)
+
+let dolphin () =
+  print_endline "                   __) \\_  ";
+  print_endline "       ( \\ _ . - '       o ` - .";
+  print_endline "       ( / ~ ~ ` ` ` `( / ~^^`"
+
+let waves () =
+  print_endline "    ._      ._      ._      ._";
+  print_endline "_.-._)`\\_.-._)`\\_.-._)`\\_.-._)`\\_.-_"
+
 let smile_whale () =
   print_endline
     ("           __)\\_  \n" ^ "      (\\_.-'    a`-.\n"
