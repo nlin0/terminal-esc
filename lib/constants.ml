@@ -9,7 +9,7 @@ let run_json file_name =
   (* "data/" ^ file_name ^ ".json" *)
 
   (* for testing, uncomment to test *)
-  "/Users/nicolelin/cs3110/terminal_esc/data/" ^ file_name ^ ".json"
+  "/Users/nicolelin/cs3110/terminal_esc./data/" ^ file_name ^ ".json"
 
 let text_art = load_json (run_json "constants")
 let logo () = print_msg "logo" text_art
