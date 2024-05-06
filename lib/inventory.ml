@@ -52,7 +52,7 @@ let add_item inventory new_item =
   | -1 -> "You're Inventory is Full."
   | _ ->
       Array.set inventory next_slot new_item;
-      "You've gained a new item!"
+      "Item has been added to Inventory!"
 
 let remove_item inventory item_name =
   let rec find_and_remove index =
