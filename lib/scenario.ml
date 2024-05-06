@@ -37,4 +37,4 @@ let play_scenario s =
     | s4 -> scene4 ()
     | _ -> random_scenario ()
   end
-  else begin random_scenario () end
+  else random_scenario ()
