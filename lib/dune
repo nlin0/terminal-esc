@@ -1,7 +1,7 @@
 (library
  (inline_tests)
  (name terminal_esc)
- (modules utils rpg rng inventory constants items)
+ (modules utils rpg rng inventory constants items scenario)
  (libraries yojson)
  (preprocess
   (pps ppx_inline_test)))

@@ -1,11 +1,12 @@
 open Constants
 open Inventory
 open Items
+open Rng
 
 (* NOTE: DELETE THE DUNE FILE IN THE ROOT AFTER WE ARE DONE TESTING *)
 
 (* load nested json *)
-let room1 = Utils.load_json "data/room1.json"
+let tut = Utils.load_json "data/tutorial.json"
 
 (* build rng function to random option choices... *)
 let inventory = Inventory.create_inventory ()
@@ -13,7 +14,7 @@ let inventory = Inventory.create_inventory ()
 (* first option on all playthroughs *)
 let rec chicken_option () =
   Constants.chicken ();
-  Utils.print_nested_msg "kill_pet_chicken" "prompt" room1;
+  Utils.print_nested_msg "kill_pet_chicken" "prompt" tut;
   let rec part () =
     let input = read_line () in
     match input with
@@ -27,7 +28,7 @@ let rec chicken_option () =
           print_endline "Unsuccessful, seems like your chest is full!"
         else (
           ignore (Inventory.add_item inventory golden_egg);
-          Utils.print_nested_msg "kill_pet_chicken" "1" room1)
+          Utils.print_nested_msg "kill_pet_chicken" "1" tut)
     | "2" ->
         Utils.clear_screen ();
         Constants.dead_chicken ();
@@ -39,7 +40,7 @@ let rec chicken_option () =
           print_endline "Unsuccessful, seems like your chest is full!"
         else (
           ignore (Inventory.add_item inventory dead_chicken);
-          Utils.print_nested_msg "kill_pet_chicken" "2" room1)
+          Utils.print_nested_msg "kill_pet_chicken" "2" tut)
     | "i" ->
         Inventory.print_inventory inventory;
         print_endline ">> Okay! Now pick your move!\n";
@@ -59,7 +60,7 @@ let rec chicken_option () =
    [inventory_tutorial] to teach players how to select and learn more about
    specific items. *)
 let rec inventory_option_tutorial inventory =
-  Utils.print_nested_msg "inventory_tutorial" "i" room1;
+  Utils.print_nested_msg "inventory_tutorial" "i" tut;
   let rec part () =
     let input = read_line () in
     match input with
@@ -67,7 +68,7 @@ let rec inventory_option_tutorial inventory =
         (* first item is health bar *)
         Inventory.print_health inventory;
         Utils.print_msg "Health Bar" item_doc;
-        Utils.print_nested_msg "inventory_tutorial" "conc" room1
+        Utils.print_nested_msg "inventory_tutorial" "conc" tut
     | "i 2" ->
         print_item (get_item_slot inventory 2);
         part ()
@@ -95,7 +96,7 @@ let rec inventory_option_tutorial inventory =
 (* [inventory_tutorial] is only run once after room1 (chicken_option) to teach
    players how to open their inventory. *)
 let rec inventory_tutorial () =
-  Utils.print_nested_msg "inventory_tutorial" "prompt" room1;
+  Utils.print_nested_msg "inventory_tutorial" "prompt" tut;
   let rec part () =
     let input = read_line () in
     match input with
@@ -162,6 +163,7 @@ let rec calling_inventory input curr_fun =
   part ()
 
 let start () =
-  Utils.print_msg "intro" room1;
+  Utils.print_msg "intro" tut;
   chicken_option ();
-  inventory_tutorial ()
+  inventory_tutorial ();
+  random_event ()
