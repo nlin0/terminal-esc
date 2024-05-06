@@ -2,7 +2,7 @@ open Inventory
 open Items
 
 (* ---------- JSON AND INVENTORY ---------- *)
-let room1 = Utils.load_json (Constants.run_json "data/room1.json")
+let room1 = Utils.load_json (Constants.run_json "room1")
 let inventory = Inventory.create_inventory ()
 
 (* ---------- TUTORIAL PLAYTHROUGH ---------- *)

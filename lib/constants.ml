@@ -11,7 +11,7 @@ let run_json file_name =
 (* for testing, uncomment to test *)
 (* "../data/" ^ file_name ^ ".json" *)
 
-let text_art = load_json "data/constants.json"
+let text_art = load_json (run_json "constants")
 let logo () = print_msg "logo" text_art
 
 let chicken () =
