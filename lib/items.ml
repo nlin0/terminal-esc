@@ -3,7 +3,7 @@
 open Utils
 open Inventory
 
-let item_doc = Utils.load_json "data/items.json"
+let item_doc = load_json (Constants.run_json "items")
 
 let gold_egg : inventory_item =
   { health_dmg_max = 0; empty = false; item = "Gold Egg" }

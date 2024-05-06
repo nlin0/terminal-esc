@@ -3,6 +3,14 @@ open Utils
 
 type art = Yojson.Basic.t
 
+(* json path for running dune exec or testing. change accordingly *)
+let run_json file_name =
+  (* for running dune exec. Uncomment to use dune exec *)
+  "data/" ^ file_name ^ ".json"
+
+(* for testing, uncomment to test *)
+(* "../data/" ^ file_name ^ ".json" *)
+
 let text_art = load_json "data/constants.json"
 let logo () = print_msg "logo" text_art
 

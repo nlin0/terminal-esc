@@ -5,7 +5,7 @@ open Inventory
 let () = Random.self_init ()
 
 (* ---------- JSON TEXT FILES ---------- *)
-let chest_msgs = load_json "data/chest.json"
+let chest_msgs = load_json (Constants.run_json "data/chest.json")
 
 (* ---------- RANDOM ITEMS ---------- *)
 

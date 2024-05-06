@@ -2,6 +2,8 @@
 
 type art
 
+val run_json : string -> string
+
 val logo : unit -> unit
 (** [logo ()] prints the game logo using the loaded text art *)
 

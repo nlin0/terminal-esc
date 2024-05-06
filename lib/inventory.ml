@@ -2,7 +2,7 @@
 
 open Utils
 
-let constants = load_json "data/constants.json"
+let constants = load_json (Constants.run_json "constants")
 (*let constants = load_json
   "/Users/jollyzheng/Desktop/terminal-esc/data/constants.json"*)
 
@@ -28,9 +28,8 @@ let create_inventory () =
   Array.set prev 0 new_item;
   prev
 
-let create_item health_dmg item = 
-  {health_dmg_max = health_dmg; empty = false; item = item}
-
+let create_item health_dmg item =
+  { health_dmg_max = health_dmg; empty = false; item }
 
 let get_next_empty inventory =
   let size = Array.length inventory in
