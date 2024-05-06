@@ -1,7 +1,8 @@
 (** Constants stores the npcs and text arts for the game *)
 
-
 type art
+
+val run_json : string -> string
 
 val logo : unit -> unit
 (** [logo ()] prints the game logo using the loaded text art *)
@@ -17,3 +18,5 @@ val dead_chicken : unit -> unit
 
 val smile_whale : unit -> unit
 (** [smile_whale ()] prints a smile whale text art *)
+
+val chest : unit -> unit

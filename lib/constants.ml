@@ -3,7 +3,15 @@ open Utils
 
 type art = Yojson.Basic.t
 
-let text_art = load_json "data/constants.json"
+(* json path for running dune exec or testing. change accordingly *)
+let run_json file_name =
+  (* for running dune exec. Uncomment to use dune exec *)
+  (* "data/" ^ file_name ^ ".json" *)
+
+  (* for testing, uncomment to test *)
+  "/Users/nicolelin/cs3110/terminal_esc/data/" ^ file_name ^ ".json"
+
+let text_art = load_json (run_json "constants")
 let logo () = print_msg "logo" text_art
 
 (* tutorial *)
@@ -32,4 +40,4 @@ let smile_whale () =
     ("           __)\\_  \n" ^ "      (\\_.-'    a`-.\n"
    ^ " jgs  (/~~````(/~^^`")
 
-let chest () = print_endline "_____\n\n/__o__\\n\n\_____/\n\n"
+let chest () = print_msg "chest" text_art

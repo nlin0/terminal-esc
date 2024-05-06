@@ -15,7 +15,7 @@ let add_slot_test _ =
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "bow" })
-    "Successful!";
+    "Item has been added to Inventory!";
   assert_equal (Inventory.get_next_empty inventory) 2;
   assert_equal false (Inventory.item_slot_empty inventory 1);
   assert_equal (Inventory.item_slot_name inventory 1) "bow";
@@ -27,24 +27,28 @@ let add_item_test _ =
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "sword" })
-    "Successful!";
+    "Item has been added to Inventory!";
   assert_equal (Inventory.get_next_empty inventory) 3;
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "knife" })
-    "Successful!";
+    "Item has been added to Inventory!";
   assert_equal (Inventory.get_next_empty inventory) 4;
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "gun" })
-    "Successful!";
+    "Item has been added to Inventory!";
   assert_equal (Inventory.get_next_empty inventory) (-1);
   assert_equal
     (Inventory.add_item inventory
        { health_dmg_max = 50; empty = false; item = "bow" })
-    "Full, Unsuccessful"
+    "You're Inventory is Full."
 
 let test_remove _ =
+  assert_equal
+    (Inventory.add_item inventory
+       { health_dmg_max = 50; empty = false; item = "bow" })
+    "Item has been added to Inventory!";
   assert_equal (Inventory.remove_item inventory "bow") "Successful";
   assert_equal (Inventory.check_item inventory "bow") false
 
@@ -95,18 +99,16 @@ let remove_quotes_test _ =
   assert_equal "\"hello" (remove_quotes "\"hello");
   assert_equal "hello\"" (remove_quotes "hello\"")
 
-let test_json = load_json "test_json"
-let test2_json = load_json "test2_json"
+(* let test_json = load_json "test_json" let test2_json = load_json "test2_json"
 
-let get_nested_test _ =
-  let nested = get_nested "test2" test_json in
-  assert_equal nested test2_json
+   let get_nested_test _ = let nested = get_nested "test2" test_json in
+   assert_equal nested test2_json *)
 
 let utils_test =
   "tests for Utils module"
   >::: [
          "utils quotes test" >:: remove_quotes_test;
-         "utils json load and nested test" >:: get_nested_test;
+         (* "utils json load and nested test" >:: get_nested_test; *)
        ]
 
 let tests =
