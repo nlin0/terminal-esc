@@ -259,4 +259,4 @@ let start () =
   Utils.print_msg "intro" tut;
   chicken_option ();
   inventory_tutorial ();
-  random_event ()
+  random_event ();

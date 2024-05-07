@@ -1,29 +1,16 @@
 (* RNG Functions *)
 open Utils
 open Inventory
-open Scenario
+(* open Scenario *)
 
 let () = Random.self_init ()
 
 (* ---------- SCENARIOS ---------- *)
-let random_scenario () =
-  let rand = Random.float 1.0 in
-  if rand >= 0. && rand < 0.25 then play_scenario scenario_array.(0)
-    (* 25% s1 *)
-  else if rand >= 0.25 && rand < 0.5 then play_scenario scenario_array.(1)
-    (* 25% s2 *)
-  else if rand >= 0.5 && rand < 0.75 then play_scenario scenario_array.(2)
-    (* 25% s3 *)
-  else if rand >= 0.75 && rand <= 1. then play_scenario scenario_array.(3)
-(* 25% s4 *)
-
-(* ---------- RANDOMIZED EVENTS ---------- *)
-let random_event () =
-  let rand = Random.float 1.0 in
-  if rand >= 0. && rand < 0.1 then failwith "TODO" (* 10% trap *)
-  else if rand >= 0.1 && rand < 0.4 then failwith "TODO" (* 30% chest *)
-  else if rand >= 0.4 && rand <= 1. then random_scenario ()
-(* 60% scenario *)
+(* let random_scenario () = let rand = Random.float 1.0 in if rand >= 0. && rand
+   < 0.25 then play_scenario scenario_array.(0) (* 25% s1 *) else if rand >=
+   0.25 && rand < 0.5 then play_scenario scenario_array.(1) (* 25% s2 *) else if
+   rand >= 0.5 && rand < 0.75 then play_scenario scenario_array.(2) (* 25% s3 *)
+   else if rand >= 0.75 && rand <= 1. then play_scenario scenario_array.(3) *)
 
 (* ---------- JSON TEXT FILES ---------- *)
 let chest_msgs = load_json (Constants.run_json "chest")
@@ -126,3 +113,9 @@ let chest_prompt inventory =
            okay, we all make mistakes. Try again."
   in
   prompt_choice ()
+
+(* ---------- RANDOMIZED EVENTS ---------- *)
+(* let random_event inventory = let rand = Random.float 1.0 in if rand < 0.9
+   then chest_prompt inventory (* all % chest for now *) else if rand < 0.1 then
+   print_endline "you got trap... not implemented yet" (* 10% trap *) else if
+   rand < 0.05 then print_endline "you got scenario, not implemented yet" *)

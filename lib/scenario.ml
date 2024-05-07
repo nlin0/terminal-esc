@@ -1,7 +1,9 @@
 (* organize the scenarios *)
-open Constants
+
+(* open Constants
 open Utils
 open Rng
+
 
 (* scenarios have a mutable field to mark whether they've occurred or not *)
 type scenario = { mutable occur : bool }
@@ -37,4 +39,4 @@ let play_scenario s =
     | s4 -> scene4 ()
     | _ -> random_scenario ()
   end
-  else random_scenario ()
+  else random_scenario () in ()  *)
