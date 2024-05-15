@@ -3,6 +3,7 @@ open Terminal_esc
 open Inventory
 open Utils
 open Rng
+open Battle
 
 (* ---------- INVENTORY TESTS ---------- *)
 
@@ -43,7 +44,7 @@ let create_item3 _ =
   let _ = Inventory.add_item inventory11 (Inventory.create_item 0 "nothing") in
   assert_equal
     (Inventory.get_item_slot inventory11 1)
-    { health_dmg_max = 0; empty = false; item = "egg" }
+    { health_dmg_max = 0; empty = false; item = "nothing" }
 
 let item_slot_test_non_health _ =
   let inventory10 = Inventory.create_inventory () in
@@ -66,7 +67,7 @@ let add_item_test1 _ =
     (Inventory.add_item inventory3
        { health_dmg_max = -25; empty = false; item = "bow" })
     "Item has been added to Inventory!";
-  assert_equal (Inventory.get_next_empty inventory3) 2;
+  assert_equal (Inventory.get_next_empty inventory3) 3;
   assert_equal false (Inventory.item_slot_empty inventory3 1);
   assert_equal (Inventory.item_slot_name inventory3 1) "bow";
   assert_equal (Inventory.item_slot_dmg inventory3 1) (-25)
@@ -79,10 +80,10 @@ let add_item_test2 _ =
     (Inventory.add_item inventory4
        { health_dmg_max = -28; empty = false; item = "sword" })
     "Item has been added to Inventory!";
-  assert_equal (Inventory.get_next_empty inventory4) 3;
-  assert_equal false (Inventory.item_slot_empty inventory4 2);
-  assert_equal (Inventory.item_slot_name inventory4 2) "sword";
-  assert_equal (Inventory.item_slot_dmg inventory4 2) (-28)
+  assert_equal (Inventory.get_next_empty inventory4) 4;
+  assert_equal false (Inventory.item_slot_empty inventory4 3);
+  assert_equal (Inventory.item_slot_name inventory4 3) "sword";
+  assert_equal (Inventory.item_slot_dmg inventory4 3) (-28)
 
 let add_item_test3 _ =
   let inventory5 = Inventory.create_inventory () in
@@ -93,33 +94,17 @@ let add_item_test3 _ =
     (Inventory.add_item inventory5
        { health_dmg_max = -10; empty = false; item = "knife" })
     "Item has been added to Inventory!";
-  assert_equal (Inventory.get_next_empty inventory5) 4;
-  assert_equal false (Inventory.item_slot_empty inventory5 3);
-  assert_equal (Inventory.item_slot_name inventory5 3) "knife";
-  assert_equal (Inventory.item_slot_dmg inventory5 3) (-10)
+  assert_equal (Inventory.get_next_empty inventory5) (-1);
+  assert_equal false (Inventory.item_slot_empty inventory5 4);
+  assert_equal (Inventory.item_slot_name inventory5 4) "knife";
+  assert_equal (Inventory.item_slot_dmg inventory5 4) (-10)
 
 let add_item_test4 _ =
-  let inventory6 = Inventory.create_inventory () in
-
-  let _ = Inventory.add_item inventory6 (Inventory.create_item (-25) "bow") in
-  let _ = Inventory.add_item inventory6 (Inventory.create_item (-28) "sword") in
-  let _ = Inventory.add_item inventory6 (Inventory.create_item (-10) "knife") in
-  assert_equal
-    (Inventory.add_item inventory6
-       { health_dmg_max = -90; empty = false; item = "gun" })
-    "Item has been added to Inventory!";
-  assert_equal (Inventory.get_next_empty inventory6) (-1);
-  assert_equal false (Inventory.item_slot_empty inventory6 4);
-  assert_equal (Inventory.item_slot_name inventory6 4) "gun";
-  assert_equal (Inventory.item_slot_dmg inventory6 4) (-90)
-
-let add_item_test5 _ =
   let inventory7 = Inventory.create_inventory () in
 
   let _ = Inventory.add_item inventory7 (Inventory.create_item (-25) "bow") in
   let _ = Inventory.add_item inventory7 (Inventory.create_item (-28) "sword") in
   let _ = Inventory.add_item inventory7 (Inventory.create_item (-10) "knife") in
-  let _ = Inventory.add_item inventory7 (Inventory.create_item (-90) "gun") in
   assert_equal
     (Inventory.add_item inventory7
        { health_dmg_max = 80; empty = false; item = "machine" })
@@ -130,7 +115,6 @@ let check_next_empty_valid _ =
 
   let _ = Inventory.add_item inventory (Inventory.create_item (-25) "bow") in
   let _ = Inventory.add_item inventory (Inventory.create_item (-28) "sword") in
-  let _ = Inventory.add_item inventory (Inventory.create_item (-10) "knife") in
 
   assert_equal (Inventory.get_next_empty inventory) 4
 
@@ -166,6 +150,7 @@ let check_key_invalid _ =
   let inventory = Inventory.create_inventory () in
 
   let _ = Inventory.add_item inventory (Inventory.create_item (-25) "bow") in
+  let _ = Inventory.remove_item inventory "key" in
   assert_equal (Inventory.check_key inventory) false
 
 let test_remove _ =
@@ -175,7 +160,7 @@ let test_remove _ =
        { health_dmg_max = 50; empty = false; item = "bow" })
     "Item has been added to Inventory!";
   assert_equal (Inventory.check_item inventory8 "bow") true;
-  assert_equal (Inventory.get_next_empty inventory8) 2;
+  assert_equal (Inventory.get_next_empty inventory8) 3;
   assert_equal (Inventory.remove_item inventory8 "bow") "Successful";
   assert_equal (Inventory.check_item inventory8 "bow") false
 
@@ -200,9 +185,8 @@ let inventory_test =
          "check add item, check item, damage, slot, slots1" >:: add_item_test1;
          "check add item, check item, damage, slot, slots2" >:: add_item_test2;
          "check add item, check item, damage, slot, slots3" >:: add_item_test3;
-         "check add item, check item, damage, slot, slots4" >:: add_item_test4;
          "check add item, check item, damage, slot, slots5, N/A"
-         >:: add_item_test5;
+         >:: add_item_test4;
          "next empty is NOT a valid number" >:: check_next_empty_valid;
          "next empty is a valid number" >:: check_next_empty_invalid;
          "item is in inventory" >:: check_item_name_valid;
@@ -347,6 +331,80 @@ let utils_test =
          "string w/ newline sequences interspersed w/ other chr"
          >:: convert_str_test4
          (* "utils json load and nested test" >:: get_nested_test; *);
+       ]
+
+(* ---------- BATTLE TESTS ---------- *)
+let valid_weapons_l _ =
+  assert_equal true (Battle.is_valid_weapon "Legendary Sword")
+
+let valid_weapons_i _ = assert_equal true (Battle.is_valid_weapon "Ice Wand")
+let valid_weapon_s _ = assert_equal true (Battle.is_valid_weapon "Stone Sword")
+let valid_weapon_w _ = assert_equal true (Battle.is_valid_weapon "Wooden Sword")
+
+let invalid_weapons _ =
+  assert_equal false (Battle.is_valid_weapon "LMAOZ Sword");
+  assert_equal false (Battle.is_valid_weapon "SUSSER BADUSSER")
+
+let meat_food _ =
+  let inventory = Inventory.create_inventory () in
+  let _ = Inventory.add_item inventory (Inventory.create_item 20 "Meat") in
+  assert_equal
+    (Battle.is_valid_food 1 inventory)
+    { item_type = "food"; name = "Meat"; dmg = 20 }
+
+let dead_chicken_food _ =
+  let inventory = Inventory.create_inventory () in
+  let _ =
+    Inventory.add_item inventory (Inventory.create_item 20 "dead-chicken")
+  in
+  assert_equal
+    (Battle.is_valid_food 1 inventory)
+    { item_type = "food"; name = "dead-chicken"; dmg = 20 }
+
+let golden_egg_food_non_zero _ =
+  let inventory = Inventory.create_inventory () in
+  let _ =
+    Inventory.add_item inventory (Inventory.create_item 20 "golden-egg")
+  in
+  assert_equal
+    (Battle.is_valid_food 1 inventory)
+    { item_type = "special"; name = "golden-egg"; dmg = 0 }
+
+let golden_egg_food_zero _ =
+  let inventory = Inventory.create_inventory () in
+  let _ = Inventory.add_item inventory (Inventory.create_item 0 "golden-egg") in
+  assert_equal
+    (Battle.is_valid_food 1 inventory)
+    { item_type = "special"; name = "golden-egg"; dmg = 0 }
+
+let anything_else_food1 _ =
+  let inventory = Inventory.create_inventory () in
+  let _ = Inventory.add_item inventory (Inventory.create_item 0 "nom-nom") in
+  assert_equal
+    (Battle.is_valid_food 1 inventory)
+    { item_type = "weapon"; name = "fist"; dmg = 5 }
+
+let anything_else_food2 _ =
+  let inventory = Inventory.create_inventory () in
+  let _ = Inventory.add_item inventory (Inventory.create_item 20 "yom-yom") in
+  assert_equal
+    (Battle.is_valid_food 1 inventory)
+    { item_type = "weapon"; name = "fist"; dmg = 5 }
+
+let battle_test =
+  "tests for Battle module"
+  >::: [
+         "Check Legendary Sword" >:: valid_weapons_l;
+         "Check Ice Wand" >:: valid_weapons_i;
+         "Check Stone Sword" >:: valid_weapon_s;
+         "Check Wooden Sword" >:: valid_weapon_w;
+         "these are all test of invalid weapons" >:: invalid_weapons;
+         "meat item" >:: meat_food;
+         "dead_chicken_food" >:: dead_chicken_food;
+         "golden_egg_food" >:: golden_egg_food_non_zero;
+         "golden_egg_food_zero" >:: golden_egg_food_zero;
+         "not food test1" >:: anything_else_food1;
+         "not food test2" >:: anything_else_food2;
        ]
 
 let tests =
