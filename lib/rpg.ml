@@ -217,6 +217,12 @@ let has_visited scene = List.mem scene !visited_scenes
 (* ---------- RANDOMIZED PLAY ---------- *)
 (* After the tutorial, the events are random *)
 
+let s1 = Utils.get_nested "s1" scenarios
+let s2 = Utils.get_nested "s2" scenarios
+let s3 = Utils.get_nested "s3" scenarios
+let s4 = Utils.get_nested "s4" scenarios
+let s5 = Utils.get_nested "s5" scenarios
+
 (** [random_scene] generates a random scene after the tutorial. *)
 let rec random_scenario () =
   let available_scenes =
@@ -242,7 +248,7 @@ and scene_1 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory seaweed_piece);
-      Utils.print_deep_nested_msg "s1" "seaweed_decision" "1" scenarios)
+      Utils.print_nested_msg "seaweed_decision" "1" s1)
   in
 
   let dolphin_friend_choice () =
@@ -254,10 +260,10 @@ and scene_1 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory dolphin_friend);
-      Utils.print_deep_nested_msg "s1" "seaweed_decision" "2" scenarios)
+      Utils.print_nested_msg "seaweed_decision" "2" s1)
   in
   Utils.print_nested_msg "s1" "intro" scenarios;
-  Utils.print_deep_nested_msg "s1" "seaweed_decision" "prompt" scenarios;
+  Utils.print_nested_msg "seaweed_decision" "prompt" s1;
   let rec part () =
     let input = read_line () in
     match input with
@@ -472,7 +478,7 @@ and scene_5 () =
 let rec random_event () =
   let event_num = Random.int 100 in
   match event_num with
-  | n when n < 100 ->
+  | n when n < 33 ->
       (* 33% chance for encounter_battle *)
       encounter_battle ();
       random_event ()

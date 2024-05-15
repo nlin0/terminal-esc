@@ -128,17 +128,30 @@ let enemy_attack enemy inventory =
     enemy.name enemy_atk_dmg new_health;
   if get_health inventory > 0 then print_health inventory
 
-let eat_food food inventory =
-  let heal_amt = random_atk (food.dmg / 2) food.dmg in
-  Inventory.add_health inventory heal_amt;
+let heal_player food inventory actual_heal =
+  Inventory.add_health inventory actual_heal;
   let _ = remove_item inventory food.name in
-  let new_health = get_health inventory in
   Printf.printf
-    "You consume some %s, and feel rejuvinated. You gain %d more hp. You are \
-     now at %d health. \n"
-    food.name heal_amt new_health;
+    "You consume some %s, and feel rejuvenated. You gain %d more HP. You are \
+     now at %d health.\n"
+    food.name actual_heal (get_health inventory);
   print_health inventory;
   pause_cont ()
+
+let eat_food food inventory =
+  let current_health = get_health inventory in
+  let max_health = 100 in
+  let heal_amt = random_atk (food.dmg / 2) food.dmg in
+  let new_health = min (current_health + heal_amt) max_health in
+  let actual_heal = new_health - current_health in
+  if actual_heal > 0 then heal_player food inventory actual_heal
+  else begin
+    Printf.printf
+      "Your health is already at maximum (100). Choose another option.\n";
+    clear_screen ();
+    let _ = player_choice inventory in
+    ()
+  end
 
 let golden_egg inventory enemy =
   print_mob enemy;
@@ -205,6 +218,7 @@ let battle_tutorial_prompt enemy =
 let battle_tutorial inventory =
   let enemy = random_mob () in
   let _ = reset_enemy_health enemy in
+
   battle_tutorial_prompt enemy;
   pause_cont ();
   battle_prompt inventory;
