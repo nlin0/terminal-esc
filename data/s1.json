@@ -1,8 +1,0 @@
-{
-  "intro": "\nAs you journey through the mysterious depths of the sea, everything takes on a surreal blue hue... You find yourself in the kingdom of the sea, teeming with dangerous creatures hungry for a snack. Your mission: to locate the legendary treasure chest, rumored to hold the key to your survival against the treacherous denizens of the deep.",
-  "seaweed_decision": {
-    "prompt": "\nOh no! You've been ensnared by a tangle of seaweed. You struggle to break free, but the grip tightens around you. Will you continue to wriggle in hopes of escaping, or will you wield a weapon to cut yourself loose?\nEnter '1' to persist in your struggle, or press '2' to slice through the netting.",
-    "1": "You resolve to free yourself through sheer determination. A passing sea mermaid takes notice of your efforts and lends you a hand.",
-    "2": "You opt to use your trusty weapon to sever the tangled strands. As you cut yourself loose, a passing sea mermaid takes pity on your plight and offers assistance."
-  }
-}

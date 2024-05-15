@@ -82,7 +82,7 @@ let print_health inventory =
   print_msg "health-bar-bot" health_text
 
 let print_inventory inventory =
-  let max_item_length = 20 in
+  let max_item_length = 29 in
   (* Added padding so there is a maximum length for item names *)
   print_endline "╔════════════════════════════════════════╗";
   print_endline "║                Inventory               ║";

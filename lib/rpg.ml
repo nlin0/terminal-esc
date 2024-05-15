@@ -74,7 +74,7 @@ let print_health_choice () =
   Utils.clear_screen ();
   Inventory.print_inventory inventory;
   Inventory.print_health inventory;
-  Utils.print_msg "Health Bar" item_doc;
+  Utils.print_msg "health-bar" item_doc;
   Utils.print_nested_msg "inventory_tutorial" "conc" tut
 
 let clear_and_print_inventory () =
@@ -91,16 +91,20 @@ let rec inventory_option_tutorial inventory =
     match input with
     | "i 1" -> print_health_choice ()
     | "i 2" ->
-        print_item (get_item_slot inventory 2);
+        print_item (get_item_slot inventory 1);
+        print_endline "\n>> Nice job show off, but try again.\n";
         part ()
     | "i 3" ->
-        print_item (get_item_slot inventory 3);
+        print_item (get_item_slot inventory 2);
+        print_endline "\n>> Nice job show off, but try again.\n";
         part ()
     | "i 4" ->
-        print_item (get_item_slot inventory 4);
+        print_item (get_item_slot inventory 3);
+        print_endline "\n>> Nice job show off, but try again.\n";
         part ()
     | "i 5" ->
-        print_item (get_item_slot inventory 5);
+        print_item (get_item_slot inventory 4);
+        print_endline "\n>> Nice job show off, but try again.\n";
         part ()
     | "h" ->
         Inventory.print_health inventory;
@@ -131,7 +135,8 @@ let rec inventory_tutorial () =
     | _ ->
         Utils.clear_screen ();
         print_endline
-          ">> That's not how you do it silly! It's okay, try again.\n"
+          ">> That's not how you do it silly! It's okay, try again.\n";
+        part ()
   in
   part ()
 
@@ -259,4 +264,4 @@ let start () =
   Utils.print_msg "intro" tut;
   chicken_option ();
   inventory_tutorial ();
-  random_event ();
+  random_event ()
