@@ -161,7 +161,7 @@ let select_item_pos inventory =
     print_endline "Select an item to use (enter item number):";
     try
       let choice = read_int () in
-      if choice < 1 || choice > Array.length inventory then begin
+      if choice < 1 || choice > Array.length inventory - 1 then begin
         print_endline "Invalid choice. Please enter a valid item number.";
         prompt_item ()
       end
