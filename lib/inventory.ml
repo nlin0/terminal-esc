@@ -33,7 +33,7 @@ let create_inventory () =
 let create_item health_dmg item =
   { health_dmg_max = health_dmg; empty = false; item }
 
-(*[create_item health_dmg item] returns the next empty slot in the inventory. It
+(*[get_next_empty inventory] returns the next empty slot in the inventory. It
   would return -1 if there is not empty slot left.*)
 
 let get_next_empty inventory =
