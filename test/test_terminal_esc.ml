@@ -2,6 +2,7 @@ open OUnit2
 open Terminal_esc
 open Inventory
 open Utils
+open Rng
 
 (* ---------- INVENTORY TESTS ---------- *)
 
@@ -10,6 +11,18 @@ let item_slot_test _ =
   assert_equal
     (Inventory.get_item_slot inventory1 0)
     { health_dmg_max = 100; empty = false; item = "health-bar" }
+
+let starting_name _ =
+  let inventory = Inventory.create_inventory () in
+  assert_equal (Inventory.item_slot_name inventory 4) "none"
+
+let starting_dmg _ =
+  let inventory = Inventory.create_inventory () in
+  assert_equal (Inventory.item_slot_dmg inventory 4) 0
+
+let starting_empty _ =
+  let inventory = Inventory.create_inventory () in
+  assert_equal (Inventory.item_slot_empty inventory 4) true
 
 let create_item1 _ =
   let inventory11 = Inventory.create_inventory () in
@@ -169,6 +182,9 @@ let inventory_test =
   "checking the basic properties of our inventory"
   >::: [
          "check first health" >:: item_slot_test;
+         "check starting name" >:: starting_name;
+         "check starting empty" >:: starting_empty;
+         "check starting damage" >:: starting_dmg;
          "creating an item test 1 (neg)" >:: create_item1;
          "creating an item test 2 (pos)" >:: create_item2;
          "check slot, nonhealth" >:: item_slot_test_non_health;
@@ -179,14 +195,99 @@ let inventory_test =
          "check add item, check item, damage, slot, slots4" >:: add_item_test4;
          "check add item, check item, damage, slot, slots5, N/A"
          >:: add_item_test5;
-         "next empty is not a valid number" >:: check_next_empty_valid;
+         "next empty is NOT a valid number" >:: check_next_empty_valid;
          "next empty is a valid number" >:: check_next_empty_invalid;
          "item is in inventory" >:: check_item_name_valid;
-         "item is not in inventory" >:: check_item_name_invalid;
+         "item is NOT in inventory" >:: check_item_name_invalid;
          "there is key in inventory" >:: check_key_valid;
          "there is no key in inventory" >:: check_key_invalid;
          "remove test where item is in inventory" >:: test_remove;
          "remove test where item is NOT in inventory" >:: test_remove_failure;
+       ]
+
+(* ---------- BATTLE-RELATED INVENTORY TESTS ---------- *)
+let get_basic_health _ =
+  let inventory = Inventory.create_inventory () in
+  assert_equal (Inventory.get_health inventory) 100
+
+let health_change_pos _ =
+  let inventory = Inventory.create_inventory () in
+  Inventory.add_health inventory 20;
+  assert_equal (Inventory.get_health inventory) 120
+
+let health_change_neg _ =
+  let inventory = Inventory.create_inventory () in
+  Inventory.add_health inventory (-20);
+  assert_equal (Inventory.get_health inventory) 80
+
+let battle_test =
+  "tests for Battle-Related Inventory"
+  >::: [
+         "get health since start game" >:: get_basic_health;
+         "added health" >:: health_change_pos;
+         "minus health" >:: health_change_neg;
+       ]
+
+(* ---------- RNG MODULE TEST ---------- *)
+
+let random_item_weapon _ =
+  let number = 0.1 in
+  assert_equal (Rng.random_item_helper number) "weapon"
+
+let random_item_meat _ =
+  let number = 0.5 in
+  assert_equal (Rng.random_item_helper number) "Meat"
+
+let random_item_key _ =
+  let number = 0.8 in
+  assert_equal (Rng.random_item_helper number) "key"
+
+let random_item_nothing _ =
+  let number = 0.96 in
+  assert_equal (Rng.random_item_helper number) "nothing"
+
+let random_sword1 _ =
+  let number = 0.05 in
+  assert_equal (Rng.random_weapon_helper number) "Legendary Sword"
+
+let random_sword2 _ =
+  let number = 0.20 in
+  assert_equal (Rng.random_weapon_helper number) "Ice Wand"
+
+let random_sword3 _ =
+  let number = 0.35 in
+  assert_equal (Rng.random_weapon_helper number) "Wooden Sword"
+
+let random_sword4 _ =
+  let number = 0.8 in
+  assert_equal (Rng.random_weapon_helper number) "Stone Sword"
+
+let chest_weapon _ =
+  let number = 0.25 in
+  assert_equal (Rng.chest_helper number) "weapon"
+
+let chest_meat _ =
+  let number = 0.55 in
+  assert_equal (Rng.chest_helper number) "Meat"
+
+let chest_nothing _ =
+  let number = 0.90 in
+  assert_equal (Rng.chest_helper number) "nothing"
+
+let rng_tests =
+  "tests for RNG Module"
+  >::: [
+         "random item is weapon" >:: random_item_weapon;
+         "random item is meat" >:: random_item_meat;
+         "random item is key" >:: random_item_key;
+         "random item is nothing" >:: random_item_nothing;
+         "random weapon is Legendary Sword" >:: random_sword1;
+         "random weapon is Ice Sword" >:: random_sword2;
+         "random weapon is Wooden Sword" >:: random_sword3;
+         "random weapon is Stone Sword" >:: random_sword4;
+         "chest provides weapon" >:: chest_weapon;
+         "chest provides meat" >:: chest_meat;
+         "chest provides nothing" >:: chest_nothing;
        ]
 
 (* ---------- UTILS TESTS ---------- *)
@@ -208,5 +309,7 @@ let utils_test =
          (* "utils json load and nested test" >:: get_nested_test; *)
        ]
 
-let tests = "Tests for Set" >::: [ inventory_test; utils_test ]
+let tests =
+  "Tests for Set" >::: [ inventory_test; battle_test; rng_tests; utils_test ]
+
 let () = run_test_tt_main tests

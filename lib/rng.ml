@@ -22,12 +22,15 @@ let obtain_item inventory hp item_str =
   let obtained = create_item hp item_str in
   print_endline (add_item inventory obtained)
 
+let random_item_helper num =
+  if num < 0.3 then "weapon" (* 30% chance for weapon*)
+  else if num < 0.6 then "Meat" (* 30% chance for food *)
+  else if num < 0.9 then "key" (* 30% chance for key *)
+  else "nothing" (* 10% nothing *)
+
 let random_item () =
   let rand = Random.float 1.0 in
-  if rand < 0.3 then "weapon" (* 30% chance for weapon*)
-  else if rand < 0.6 then "Meat" (* 30% chance for food *)
-  else if rand < 0.9 then "key" (* 30% chance for key *)
-  else "nothing" (* 10% nothing *)
+  random_item_helper rand
 
 let random_int num1 num2 =
   let range = num2 - num1 + 1 in
@@ -35,12 +38,16 @@ let random_int num1 num2 =
   random_number + 10
 
 (* ---------- WEAPON FUNCTIONS ---------- *)
+
+let random_weapon_helper num =
+  if num < 0.1 then "Legendary Sword"
+  else if num < 0.25 then "Ice Wand"
+  else if num < 0.45 then "Wooden Sword"
+  else "Stone Sword"
+
 let random_weapon () =
   let rand = Random.float 1.0 in
-  if rand < 0.1 then "Legendary Sword"
-  else if rand < 0.25 then "Ice Wand"
-  else if rand < 0.45 then "Wooden Sword"
-  else "Stone Sword"
+  random_weapon_helper rand
 
 let obtain_weapon inventory weapon =
   match weapon with
@@ -90,12 +97,15 @@ let random_chest_intro () =
   in
   print_nested_msg "chest_descr" num chest_msgs
 
+let chest_helper num =
+  match num with
+  | num when num < 0.30 -> "weapon"
+  | num when num < 0.60 -> "Meat"
+  | _ -> "nothing"
+
 let random_chest_item () =
   let rand = Random.float 1.0 in
-  match rand with
-  | rand when rand < 0.30 -> "weapon"
-  | rand when rand < 0.60 -> "Meat"
-  | _ -> "nothing"
+  chest_helper rand
 
 (* todo: change functionality after key can be acquired *)
 
