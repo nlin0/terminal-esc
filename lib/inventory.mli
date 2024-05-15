@@ -9,7 +9,7 @@ type inventory_item = {
   mutable empty : bool;
   mutable item : string;
 }
-(** Type representing an inventory item *)
+(** [inventory_item ] is the type representing an inventory item *)
 
 val size : int
 (** [size] is the inventory size *)
