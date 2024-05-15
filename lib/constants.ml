@@ -41,3 +41,6 @@ let smile_whale () =
    ^ " jgs  (/~~````(/~^^`")
 
 let chest () = print_msg "chest" text_art
+let bug () = print_msg "bug" text_art
+let bug () = print_msg "bug" text_art
+

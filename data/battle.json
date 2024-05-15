@@ -1,0 +1,8 @@
+{
+  "battle_weapon": {
+    "legendary": "The enemy seems to have dropped something. \nThere is a flash of bright light, and you think you hear angels singing in the background. Or you might be going crazy. On the ground, you see a brilliant curved blade. \n\n You have gained The Legendary Sword! \n",
+    "wand": "The enemy seems to have dropped something in a pile of white snow. You feel a cold gust of wind as you step closer, sending a chill down your spine. An ice blue stick lies on the floor in a pile of some special kind of unmeltable snow. \n\n You have gained an Ice Wand!\n",
+    "wooden": "The enemy seems to have dropped something. \n It seems to be a wooden sword.  \n\n You have gained a Wooden Sword!\n",
+    "stone": "The enemy seems to have dropped something. \n You spot the solid stone blade lying on the floor. \n\n You have gained a Stone Sword!\n"
+  }
+}
