@@ -4,5 +4,6 @@
     "wand": "The enemy seems to have dropped something in a pile of white snow. You feel a cold gust of wind as you step closer, sending a chill down your spine. An ice blue stick lies on the floor in a pile of some special kind of unmeltable snow. \n\n You have gained an Ice Wand!\n",
     "wooden": "The enemy seems to have dropped something. \n It seems to be a wooden sword.  \n\n You have gained a Wooden Sword!\n",
     "stone": "The enemy seems to have dropped something. \n You spot the solid stone blade lying on the floor. \n\n You have gained a Stone Sword!\n"
-  }
+  },
+  "tutorial": "You have stumbled across your first enemy crawling around in your terminal! You can run, but that hasn’t been implemented. So you’re forced to battle your foe. Sorry!\n\n>> Using any food item will grant you a generous amount of hp (or not.. depends on how lucky you are with your meat). However, you miss an attack turn.\n>> Selecting empty slots, or any non-weapons will either cause you to attack with your fist, or trigger a special event with said item.\n>> Selecting your health bar will just display your health bar. Nothing else happens.\n>> Using any weapon boosts your damage (amount depends on the weapon).\n\n That’s basically it. Good luck!"
 }

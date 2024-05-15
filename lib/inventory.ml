@@ -155,19 +155,37 @@ let check_key inventory = check_item inventory "key"
 
 (* [select_item_pos inventory] returns the position of the item the player
    player selects items for battling*)
-let select_item_pos inventory =
+(* let select_item_pos inventory =
   let rec prompt_item () =
     print_inventory inventory;
     print_endline "Select an item to use (enter item number):";
     try
       let choice = read_int () in
-      if choice < 1 || choice > Array.length inventory - 1 then begin
+      if choice < 1 || choice + 1 > Array.length inventory - 1 then begin
         print_endline "Invalid choice. Please enter a valid item number.";
         prompt_item ()
       end
       else choice
     with Failure _ ->
       print_endline "Invalid input. Please enter a valid item number.";
+      prompt_item ()
+  in
+  prompt_item () *)
+
+
+let select_item_pos inventory =
+  let rec prompt_item () =
+    print_inventory inventory;
+    print_endline "Select an item to use (enter item number):";
+    try
+      let choice = read_int () in
+      if choice < 1 || choice > 5 then begin
+        print_endline "Invalid choice. Please enter a number between 1 and 5.";
+        prompt_item ()
+      end
+      else choice
+    with Failure _ ->
+      print_endline "Invalid input. Please enter a number between 1 and 5.";
       prompt_item ()
   in
   prompt_item ()

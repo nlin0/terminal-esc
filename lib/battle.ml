@@ -4,7 +4,8 @@ open Rng
 open Random
 
 let () = Random.self_init ()
-let constants = load_json (Constants.run_json "constants")
+let text_art = load_json (Constants.run_json "constants")
+let battle_msgs = load_json (Constants.run_json "battle")
 
 type enemy = {
   mutable hp : int;
@@ -17,13 +18,6 @@ type item = {
   name : string;
   dmg : int;
 }
-
-let pause_cont () =
-  print_string "\n>> Press any key to continue...";
-  flush stdout;
-  (* Make sure the message is displayed immediately *)
-  let _ = input_char stdin in
-  print_newline ()
 
 let bug = { hp = 40; atk = 8; name = "bug" }
 let robo_bun = { hp = 80; atk = 10; name = "robo_bun" }
@@ -40,6 +34,12 @@ let reset_enemy_health (enemy : enemy) =
 let random_mob () =
   let rand = Random.float 1.0 in
   if rand < 0.3 then robo_bun else bug
+
+let print_mob (enemy : enemy) =
+  match enemy.name with
+  | "bug" -> Constants.bug ()
+  | "robo_bun" -> Constants.robo_bun ()
+  | _ -> ()
 
 let victory_reward inventory =
   let reward = random_item () in
@@ -70,7 +70,7 @@ let break_weapon_chance weapon inventory =
   if rand < 0.18 then (
     break_weapon weapon inventory;
     pause_cont ())
-  else pause_cont ()
+  else ()
 
 (* then check to see if its food. If not, use fist attack *)
 let is_valid_food item_pos inventory =
@@ -83,13 +83,15 @@ let is_valid_food item_pos inventory =
   | _ -> your_fist
 
 let rec player_choice inventory =
-  let item_pos = select_item_pos inventory in
+  let item_pos = select_item_pos inventory - 1 in
   let item_choice = item_slot_name inventory item_pos in
   let item_dmg = item_slot_dmg inventory item_pos in
   if is_valid_weapon item_choice then
     { item_type = "weapon"; name = item_choice; dmg = item_dmg }
-  else if item_pos = 1 then (
+  else if item_pos = 0 then (
+    print_endline "\nCurrently your health is:";
     print_health inventory;
+    print_endline "Now make your move! \n";
     player_choice inventory)
   else is_valid_food item_pos inventory
 
@@ -108,7 +110,8 @@ let random_atk min_dmg max_dmg = Rng.random_int min_dmg max_dmg
 
 let player_attack inventory weapon enemy =
   (* random damage amount ranging from 1/2 the attack to full attack *)
-  let atk_dmg = random_atk (weapon.dmg - (weapon.dmg / 2)) weapon.dmg in
+  print_mob enemy;
+  let atk_dmg = random_atk (weapon.dmg / 2) weapon.dmg in
   enemy.hp <- enemy.hp - atk_dmg;
   enemy_check enemy atk_dmg;
 
@@ -117,16 +120,16 @@ let player_attack inventory weapon enemy =
   if is_valid_weapon weapon.name then break_weapon_chance weapon inventory
 
 let enemy_attack enemy inventory =
-  let enemy_atk_dmg = random_atk (enemy.atk - (enemy.atk / 2)) enemy.atk in
+  let enemy_atk_dmg = random_atk (enemy.atk / 2) enemy.atk in
   Inventory.deduct_health inventory enemy_atk_dmg;
   let new_health = get_health inventory in
   Printf.printf
     "%s attacks you, dealing %d damage!\n You are now at %d health. \n"
     enemy.name enemy_atk_dmg new_health;
-  print_health inventory
+  if get_health inventory > 0 then print_health inventory
 
 let eat_food food inventory =
-  let heal_amt = random_atk (food.dmg - (food.dmg / 2)) food.dmg in
+  let heal_amt = random_atk (food.dmg / 2) food.dmg in
   Inventory.add_health inventory heal_amt;
   let _ = remove_item inventory food.name in
   let new_health = get_health inventory in
@@ -134,17 +137,19 @@ let eat_food food inventory =
     "You consume some %s, and feel rejuvinated. You gain %d more hp. You are \
      now at %d health. \n"
     food.name heal_amt new_health;
+  print_health inventory;
   pause_cont ()
 
-let golden_egg inventory =
-  let egg = remove_item inventory "Golden Egg" in
-  Printf.printf "You throw the %s. It does 0 damage.\n" egg
+let golden_egg inventory enemy =
+  print_mob enemy;
+  let _ = remove_item inventory "golden-egg" in
+  Printf.printf "You throw the golden egg at %s. It does 0 damage.\n" enemy.name
 
 let item_action usable_item enemy inventory =
   match usable_item.item_type with
   | "weapon" -> player_attack inventory usable_item enemy
   | "food" -> eat_food usable_item inventory
-  | "special" -> golden_egg inventory
+  | "special" -> golden_egg inventory enemy
   | _ ->
       print_endline "You can't use that. Choose something else.";
       clear_screen ();
@@ -182,6 +187,28 @@ let battle_prompt inventory =
   let enemy = random_mob () in
   let _ = reset_enemy_health enemy in
 
+  print_mob enemy;
+  Printf.printf "You encounter a %s! It has %d health." enemy.name enemy.hp;
+  Printf.printf "\n>> Choose something in your inventory to use! \n";
+  battle enemy inventory;
+  pause_cont ()
+
+let battle_tutorial_prompt enemy =
+  clear_screen ();
+  print_mob enemy;
+  Printf.printf "You encounter a %s! It has %d health.\n" enemy.name enemy.hp;
+  pause_cont ();
+  clear_screen ();
+  print_mob enemy;
+  print_msg "tutorial" battle_msgs
+
+let battle_tutorial inventory =
+  let enemy = random_mob () in
+  let _ = reset_enemy_health enemy in
+  battle_tutorial_prompt enemy;
+  pause_cont ();
+  battle_prompt inventory;
+  print_mob enemy;
   Printf.printf "You encounter a %s! It has %d health." enemy.name enemy.hp;
   Printf.printf "\n>> Choose something in your inventory to use! \n";
   battle enemy inventory;

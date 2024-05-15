@@ -10,6 +10,7 @@ val remove_quotes : string -> string
 val clear_screen : unit -> unit
 (** [clear_screen ()] clears the terminal screen. *)
 
+val pause_cont : unit -> unit
 val to_alst : [> `Assoc of 'a list ] -> 'a list
 
 val load_json : string -> (string * json) list

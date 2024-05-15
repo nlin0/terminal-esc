@@ -6,6 +6,13 @@ type json = Yojson.Basic.t
 (** [clear_screen ()] clears the terminal screen. *)
 let clear_screen () = ignore (Sys.command "clear")
 
+let pause_cont () =
+  print_string "\n>> Press any key to continue...";
+  flush stdout;
+  (* Make sure the message is displayed immediately *)
+  let _ = input_char stdin in
+  print_newline ()
+
 let remove_quotes str =
   let len = String.length str in
   if len >= 2 && str.[0] = '"' && str.[len - 1] = '"' then

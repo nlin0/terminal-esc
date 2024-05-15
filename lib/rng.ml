@@ -110,17 +110,22 @@ let random_chest_item () =
 (* todo: change functionality after key can be acquired *)
 
 let open_chest inventory =
+  let _ = remove_item inventory "key" in
   match random_chest_item () with
   | "weapon" ->
       let new_weapon = random_weapon () in
-      obtain_weapon inventory new_weapon
+      obtain_weapon inventory new_weapon;
+      pause_cont ()
   | "Meat" ->
-      let rand_hp = random_int 10 45 in
+      let rand_hp = random_int 20 90 in
       let () = print_msg "chest_meat" chest_msgs in
-      obtain_item inventory rand_hp "Meat"
+      obtain_item inventory rand_hp "Meat";
+      pause_cont ()
   | _ ->
       let () = print_msg "chest_empty" chest_msgs in
-      ()
+      pause_cont ()
+
+let no_key_prompt () = print_msg "chest_fail" chest_msgs
 
 let chest_prompt inventory =
   Utils.clear_screen ();
@@ -133,7 +138,7 @@ let chest_prompt inventory =
     match input with
     | "1" ->
         clear_screen ();
-        open_chest inventory
+        if check_key inventory then open_chest inventory else no_key_prompt ()
     | "2" ->
         clear_screen ();
         print_msg "chest_ignore" chest_msgs

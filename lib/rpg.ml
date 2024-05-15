@@ -92,7 +92,9 @@ let rec inventory_option_tutorial inventory =
   let rec part () =
     let input = read_line () in
     match input with
-    | "i 1" -> print_health_choice ()
+    | "i 1" ->
+        print_health_choice ();
+        Utils.pause_cont ()
     | "i 2" ->
         print_item (get_item_slot inventory 1);
         print_endline "\n>> Nice job show off, but try again.\n";
@@ -470,7 +472,7 @@ and scene_5 () =
 let rec random_event () =
   let event_num = Random.int 100 in
   match event_num with
-  | n when n < 33 ->
+  | n when n < 100 ->
       (* 33% chance for encounter_battle *)
       encounter_battle ();
       random_event ()
@@ -488,4 +490,6 @@ let start () =
   Utils.print_msg "intro" tut;
   chicken_option ();
   inventory_tutorial ();
+  encounter_chest ();
+  Battle.battle_tutorial inventory;
   random_event ()
