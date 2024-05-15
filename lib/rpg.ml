@@ -248,7 +248,7 @@ and scene_1 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory seaweed_piece);
-      Utils.print_nested_msg "seaweed_decision" "1" scenarios)
+      Utils.print_nested_msg "seaweed_decision" "1" s1)
   in
 
   let dolphin_friend_choice () =
@@ -260,10 +260,10 @@ and scene_1 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory dolphin_friend);
-      Utils.print_nested_msg "seaweed_decision" "2" scenarios)
+      Utils.print_nested_msg "seaweed_decision" "2" s1)
   in
   Utils.print_nested_msg "s1" "intro" scenarios;
-  Utils.print_nested_msg "seaweed_decision" "prompt" scenarios;
+  Utils.print_nested_msg "seaweed_decision" "prompt" s1;
   let rec part () =
     let input = read_line () in
     match input with
