@@ -1,4 +1,5 @@
 open OUnit2
+open QCheck
 open Terminal_esc
 open Inventory
 open Utils
@@ -110,6 +111,7 @@ let utils_test =
          "utils quotes test" >:: remove_quotes_test;
          (* "utils json load and nested test" >:: get_nested_test; *)
        ]
+
 
 let tests =
   "Tests for Set"

@@ -46,3 +46,6 @@ let rabbit_rabbit () =
   print_endline "   (  u  u)  "
 
 let chest () = print_msg "chest" text_art
+let bug () = print_msg "bug" text_art
+let bug () = print_msg "bug" text_art
+

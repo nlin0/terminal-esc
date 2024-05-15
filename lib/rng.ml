@@ -14,6 +14,7 @@ let () = Random.self_init ()
 
 (* ---------- JSON TEXT FILES ---------- *)
 let chest_msgs = load_json (Constants.run_json "chest")
+let battle_msgs = load_json (Constants.run_json "battle")
 
 (* ---------- RANDOM ITEMS ---------- *)
 
@@ -24,7 +25,7 @@ let obtain_item inventory hp item_str =
 let random_item () =
   let rand = Random.float 1.0 in
   if rand < 0.3 then "weapon" (* 30% chance for weapon*)
-  else if rand < 0.6 then "meat" (* 30% chance for food *)
+  else if rand < 0.6 then "Meat" (* 30% chance for food *)
   else if rand < 0.9 then "key" (* 30% chance for key *)
   else "nothing" (* 10% nothing *)
 
@@ -45,16 +46,36 @@ let obtain_weapon inventory weapon =
   match weapon with
   | "Legendary Sword" ->
       print_nested_msg "chest_weapon" "legendary" chest_msgs;
-      obtain_item inventory 88 "Legendary Sword"
+      obtain_item inventory 50 "Legendary Sword"
   | "Ice Wand" ->
       print_nested_msg "chest_weapon" "wand" chest_msgs;
-      obtain_item inventory 60 "Ice Wand"
+      obtain_item inventory 35 "Ice Wand"
   | "Stone Sword" ->
       print_nested_msg "chest_weapon" "stone" chest_msgs;
-      obtain_item inventory 40 "Stone Sword"
+      obtain_item inventory 23 "Stone Sword"
   | _ ->
       print_nested_msg "chest_weapon" "wooden" chest_msgs;
+      obtain_item inventory 15 "Wooden Sword"
+
+(* for battle scenarios *)
+let obtain_weapon_drop weapon inventory =
+  match weapon with
+  | "Legendary Sword" ->
+      print_nested_msg "battle_weapon" "legendary" battle_msgs;
+      obtain_item inventory 88 "Legendary Sword"
+  | "Ice Wand" ->
+      print_nested_msg "battle_weapon" "wand" battle_msgs;
+      obtain_item inventory 60 "Ice Wand"
+  | "Stone Sword" ->
+      print_nested_msg "battle_weapon" "stone" battle_msgs;
+      obtain_item inventory 40 "Stone Sword"
+  | _ ->
+      print_nested_msg "battle_weapon" "wooden" battle_msgs;
       obtain_item inventory 25 "Wooden Sword"
+
+let obtain_ran_weapon inventory =
+  let weapon = random_weapon () in
+  obtain_weapon_drop weapon inventory
 
 (* ---------- CHEST FUNCTIONS ---------- *)
 
@@ -73,16 +94,17 @@ let random_chest_item () =
   let rand = Random.float 1.0 in
   match rand with
   | rand when rand < 0.30 -> "weapon"
-  | rand when rand < 0.60 -> "meat"
+  | rand when rand < 0.60 -> "Meat"
   | _ -> "nothing"
 
 (* todo: change functionality after key can be acquired *)
+
 let open_chest inventory =
   match random_chest_item () with
   | "weapon" ->
       let new_weapon = random_weapon () in
       obtain_weapon inventory new_weapon
-  | "meat" ->
+  | "Meat" ->
       let rand_hp = random_int 10 45 in
       let () = print_msg "chest_meat" chest_msgs in
       obtain_item inventory rand_hp "Meat"
