@@ -25,7 +25,7 @@ let create_inventory () =
         { health_dmg_max = 0; empty = true; item = "none" })
   in
   let new_item = { health_dmg_max = 100; empty = false; item = "health-bar" } in
-  let free_key = { health_dmg_max = 0; empty = false; item = "rusty-key" } in
+  let free_key = { health_dmg_max = 0; empty = false; item = "key" } in
   Array.set prev 0 new_item;
   Array.set prev 2 free_key;
   prev

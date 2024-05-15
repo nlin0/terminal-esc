@@ -519,4 +519,6 @@ let start () =
   Utils.print_msg "intro" tut;
   chicken_option ();
   inventory_tutorial ();
+  encounter_chest ();
+  Battle.battle_tutorial inventory;
   random_event ()
