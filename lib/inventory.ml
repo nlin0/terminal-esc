@@ -97,7 +97,7 @@ let add_health inventory num =
   current has.*)
 let deduct_health inventory num =
   let player_item = Array.get inventory 0 in
-  let new_health = player_item.health_dmg_max + num in
+  let new_health = player_item.health_dmg_max - num in
   player_item.health_dmg_max <- new_health
 
 (*[print_health inventory] prints out the current health and the health bar.*)

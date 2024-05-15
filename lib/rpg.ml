@@ -193,13 +193,9 @@ let rec calling_inventory input curr_fun =
 (* after the tutorial, the events are random. Furthermore, scenes are also
    random. The player will play until they encounter the winning scenario. *)
 
-let encounter_chest () =
-  Rng.chest_prompt inventory;
-
-  print_endline "end of chest scenario.."
-
+let encounter_chest () = Rng.chest_prompt inventory
 let encounter_trap () = print_endline "Trap event has not been implemneted"
-let encounter_battle () = print_endline "Battle event has not been implemneted"
+let encounter_battle () = Battle.battle_prompt inventory
 
 (* ---------- SCENARIOS ---------- *)
 (* Scenarios are also further randomized. There is a small chance that the
@@ -474,10 +470,18 @@ and scene_5 () =
 let rec random_event () =
   let event_num = Random.int 100 in
   match event_num with
-  | n when n < 90 -> encounter_chest ()
-  | n when n < 55 -> random_scenario ()
-  | n when n < 70 -> encounter_trap ()
-  | _ -> encounter_battle ()
+  | n when n < 33 ->
+      (* 33% chance for encounter_battle *)
+      encounter_battle ();
+      random_event ()
+  | n when n < 66 ->
+      (* 33% chance for encounter_chest *)
+      encounter_chest ();
+      random_event ()
+  | _ ->
+      (* 34% chance for random_scenario *)
+      random_scenario ();
+      random_event ()
 
 (* ---------- START GAME ---------- *)
 let start () =
