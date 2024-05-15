@@ -38,6 +38,13 @@ let create_item2 _ =
     (Inventory.get_item_slot inventory11 1)
     { health_dmg_max = 20; empty = false; item = "egg" }
 
+let create_item3 _ =
+  let inventory11 = Inventory.create_inventory () in
+  let _ = Inventory.add_item inventory11 (Inventory.create_item 0 "nothing") in
+  assert_equal
+    (Inventory.get_item_slot inventory11 1)
+    { health_dmg_max = 0; empty = false; item = "egg" }
+
 let item_slot_test_non_health _ =
   let inventory10 = Inventory.create_inventory () in
   let _ =
@@ -187,6 +194,7 @@ let inventory_test =
          "check starting damage" >:: starting_dmg;
          "creating an item test 1 (neg)" >:: create_item1;
          "creating an item test 2 (pos)" >:: create_item2;
+         "creating an item test 3 (zero)" >:: create_item3;
          "check slot, nonhealth" >:: item_slot_test_non_health;
          "get just health" >:: get_health_test;
          "check add item, check item, damage, slot, slots1" >:: add_item_test1;
@@ -210,22 +218,34 @@ let get_basic_health _ =
   let inventory = Inventory.create_inventory () in
   assert_equal (Inventory.get_health inventory) 100
 
-let health_change_pos _ =
+let health_add_pos _ =
   let inventory = Inventory.create_inventory () in
   Inventory.add_health inventory 20;
   assert_equal (Inventory.get_health inventory) 120
 
-let health_change_neg _ =
+let health_add_zero _ =
   let inventory = Inventory.create_inventory () in
-  Inventory.add_health inventory (-20);
+  Inventory.add_health inventory 0;
+  assert_equal (Inventory.get_health inventory) 100
+
+let health_deduct_pos _ =
+  let inventory = Inventory.create_inventory () in
+  Inventory.deduct_health inventory 20;
   assert_equal (Inventory.get_health inventory) 80
+
+let health_deduct_zero _ =
+  let inventory = Inventory.create_inventory () in
+  Inventory.add_health inventory 0;
+  assert_equal (Inventory.get_health inventory) 100
 
 let battle_test =
   "tests for Battle-Related Inventory"
   >::: [
          "get health since start game" >:: get_basic_health;
-         "added health" >:: health_change_pos;
-         "minus health" >:: health_change_neg;
+         "added health" >:: health_add_pos;
+         "added health of zero" >:: health_add_zero;
+         "deducted health" >:: health_deduct_pos;
+         "deducted health of zero" >:: health_deduct_zero;
        ]
 
 (* ---------- RNG MODULE TEST ---------- *)
