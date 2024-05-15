@@ -138,7 +138,13 @@ let chest_prompt inventory =
     match input with
     | "1" ->
         clear_screen ();
-        if check_key inventory then open_chest inventory else no_key_prompt ()
+        if check_key inventory then begin
+          open_chest inventory
+        end
+        else begin
+          no_key_prompt ();
+          pause_cont ()
+        end
     | "2" ->
         clear_screen ();
         print_msg "chest_ignore" chest_msgs

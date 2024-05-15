@@ -204,10 +204,11 @@ let battle_prompt inventory =
   Printf.printf "You encounter a %s! It has %d health." enemy.name enemy.hp;
   Printf.printf "\n>> Choose something in your inventory to use! \n";
   battle enemy inventory;
+  let _ = reset_enemy_health enemy in
   pause_cont ()
 
-let battle_tutorial_prompt enemy =
-  clear_screen ();
+
+let battle_tutorial_prompt enemy = 
   print_mob enemy;
   Printf.printf "You encounter a %s! It has %d health.\n" enemy.name enemy.hp;
   pause_cont ();
@@ -215,15 +216,12 @@ let battle_tutorial_prompt enemy =
   print_mob enemy;
   print_msg "tutorial" battle_msgs
 
+
 let battle_tutorial inventory =
   let enemy = random_mob () in
   let _ = reset_enemy_health enemy in
 
   battle_tutorial_prompt enemy;
   pause_cont ();
-  battle_prompt inventory;
-  print_mob enemy;
-  Printf.printf "You encounter a %s! It has %d health." enemy.name enemy.hp;
-  Printf.printf "\n>> Choose something in your inventory to use! \n";
   battle enemy inventory;
   pause_cont ()

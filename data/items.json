@@ -1,5 +1,6 @@
 {
   "health-bar": "This is your health bar. It can be accessed by entering 'h'. If it goes to 0, something bad might happen.\n",
   "golden-egg": "You acquired this at the beginning of your journey after an act of kindness. Who knows when it will come in handy?\n",
-  "dead-chicken": "You acquired this at the beginning of your journey after killing an innocent livestock. Consumable for +15 health.\n"
+  "dead-chicken": "You acquired this at the beginning of your journey after killing an innocent livestock. Consumable for random amount of health.\n",
+  "key": "You don't remember where or how you got this key. I guess you just spawned with it on you. Maybe it will be useful later?\n"
 }

@@ -478,16 +478,16 @@ and scene_5 () =
 let rec random_event () =
   let event_num = Random.int 100 in
   match event_num with
-  | n when n < 33 ->
-      (* 33% chance for encounter_battle *)
+  | n when n < 25 ->
+      (* 25% chance for encounter_battle *)
       encounter_battle ();
       random_event ()
-  | n when n < 66 ->
-      (* 33% chance for encounter_chest *)
+  | n when n < 60 ->
+      (* 35% chance for encounter_chest *)
       encounter_chest ();
       random_event ()
   | _ ->
-      (* 34% chance for random_scenario *)
+      (* 40% chance for random_scenario *)
       random_scenario ();
       random_event ()
 
