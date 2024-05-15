@@ -96,15 +96,15 @@ let rec inventory_option_tutorial inventory =
         part ()
     | "i 3" ->
         print_item (get_item_slot inventory 2);
-        print_endline "\n>> Nice job show off, but try again.\n";
+        print_endline "\n>> Nice try, but not quite. Try again!\n";
         part ()
     | "i 4" ->
         print_item (get_item_slot inventory 3);
-        print_endline "\n>> Nice job show off, but try again.\n";
+        print_endline "\n>> Nice try, but not quite. Try again!\n";
         part ()
     | "i 5" ->
         print_item (get_item_slot inventory 4);
-        print_endline "\n>> Nice job show off, but try again.\n";
+        print_endline "\n>> Nice try, but not quite. Try again!\n";
         part ()
     | "h" ->
         Inventory.print_health inventory;
