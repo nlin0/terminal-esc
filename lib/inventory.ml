@@ -124,14 +124,6 @@ let check_item inventory target =
       in
       check (Array.to_list slot)
 
-let detail_item inventory num =
-  if num = 0 then "health"
-  else if (get_item_slot inventory num).empty = true then
-    "There is nothing here! Maybe revisit what you have just typed!"
-  else if (get_item_slot inventory num).health_dmg_max > 0 then
-    "Seems like at this slot "
-  else "Seems like at this slot "
-
 (* checks to see if key is in inventory *)
 let check_key inventory = check_item inventory "key"
 

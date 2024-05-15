@@ -124,6 +124,30 @@ let check_next_empty_invalid _ =
 
   assert_equal (Inventory.get_next_empty inventory) (-1)
 
+let check_item_name_valid _ =
+  let inventory = Inventory.create_inventory () in
+
+  let _ = Inventory.add_item inventory (Inventory.create_item (-25) "bow") in
+  assert_equal (Inventory.check_item inventory "bow") true
+
+let check_item_name_invalid _ =
+  let inventory = Inventory.create_inventory () in
+
+  let _ = Inventory.add_item inventory (Inventory.create_item (-25) "bow") in
+  assert_equal (Inventory.check_item inventory "egg") false
+
+let check_key_valid _ =
+  let inventory = Inventory.create_inventory () in
+
+  let _ = Inventory.add_item inventory (Inventory.create_item 0 "key") in
+  assert_equal (Inventory.check_key inventory) true
+
+let check_key_invalid _ =
+  let inventory = Inventory.create_inventory () in
+
+  let _ = Inventory.add_item inventory (Inventory.create_item (-25) "bow") in
+  assert_equal (Inventory.check_key inventory) false
+
 let test_remove _ =
   let inventory8 = Inventory.create_inventory () in
   assert_equal
@@ -155,8 +179,12 @@ let inventory_test =
          "check add item, check item, damage, slot, slots4" >:: add_item_test4;
          "check add item, check item, damage, slot, slots5, N/A"
          >:: add_item_test5;
-         "check_next_empty_valid" >:: check_next_empty_valid;
-         "check_next_empty_invalid" >:: check_next_empty_invalid;
+         "next empty is not a valid number" >:: check_next_empty_valid;
+         "next empty is a valid number" >:: check_next_empty_invalid;
+         "item is in inventory" >:: check_item_name_valid;
+         "item is not in inventory" >:: check_item_name_invalid;
+         "there is key in inventory" >:: check_key_valid;
+         "there is no key in inventory" >:: check_key_invalid;
          "remove test where item is in inventory" >:: test_remove;
          "remove test where item is NOT in inventory" >:: test_remove_failure;
        ]
