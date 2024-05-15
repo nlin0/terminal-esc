@@ -104,9 +104,11 @@ let enemy_check enemy atk_dmg =
       atk_dmg;
     Printf.printf "%s still has %d health.\n" enemy.name enemy.hp)
 
+let random_atk min_dmg max_dmg = Rng.random_int min_dmg max_dmg
+
 let player_attack inventory weapon enemy =
   (* random damage amount ranging from 1/2 the attack to full attack *)
-  let atk_dmg = Rng.random_int (weapon.dmg - (weapon.dmg / 2)) weapon.dmg in
+  let atk_dmg = random_atk (weapon.dmg - (weapon.dmg / 2)) weapon.dmg in
   enemy.hp <- enemy.hp - atk_dmg;
   enemy_check enemy atk_dmg;
 
@@ -115,7 +117,7 @@ let player_attack inventory weapon enemy =
   if is_valid_weapon weapon.name then break_weapon_chance weapon inventory
 
 let enemy_attack enemy inventory =
-  let enemy_atk_dmg = Rng.random_int (enemy.atk - (enemy.atk / 2)) enemy.atk in
+  let enemy_atk_dmg = random_atk (enemy.atk - (enemy.atk / 2)) enemy.atk in
   Inventory.deduct_health inventory enemy_atk_dmg;
   let new_health = get_health inventory in
   Printf.printf
@@ -124,7 +126,7 @@ let enemy_attack enemy inventory =
   print_health inventory
 
 let eat_food food inventory =
-  let heal_amt = Rng.random_int (food.dmg - (food.dmg / 2)) food.dmg in
+  let heal_amt = random_atk (food.dmg - (food.dmg / 2)) food.dmg in
   Inventory.add_health inventory heal_amt;
   let _ = remove_item inventory food.name in
   let new_health = get_health inventory in
@@ -136,7 +138,7 @@ let eat_food food inventory =
 
 let golden_egg inventory =
   let egg = remove_item inventory "Golden Egg" in
-  Printf.printf "You throw the %s. It does 0 damage." egg
+  Printf.printf "You throw the %s. It does 0 damage.\n" egg
 
 let item_action usable_item enemy inventory =
   match usable_item.item_type with
