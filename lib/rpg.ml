@@ -84,9 +84,9 @@ let clear_and_print_inventory () =
   Utils.clear_screen ();
   Inventory.print_inventory inventory
 
-(* [inventory_option_tutorial] is run only once after players complete
-   [inventory_tutorial] to teach players how to select and learn more about
-   specific items. *)
+(** [inventory_option_tutorial] is run only once after players complete
+    [inventory_tutorial] to teach players how to select and learn more about
+    specific items. *)
 let rec inventory_option_tutorial inventory =
   Utils.print_nested_msg "inventory_tutorial" "i" tut;
   let rec part () =
@@ -123,8 +123,8 @@ let rec inventory_option_tutorial inventory =
   in
   part ()
 
-(* [inventory_tutorial] is only run once after room1 (chicken_option) to teach
-   players how to open their inventory. *)
+(** [inventory_tutorial] is only run once after room1 (chicken_option) to teach
+    players how to open their inventory. *)
 let rec inventory_tutorial () =
   Utils.print_nested_msg "inventory_tutorial" "prompt" tut;
   let rec part () =
@@ -145,7 +145,7 @@ let rec inventory_tutorial () =
   in
   part ()
 
-(* [selecting_inventory] is the function for selecting to use a specific item *)
+(** [selecting_inventory] is the function for selecting to use a specific item *)
 let rec selecting_inventory item curr_fun =
   let rec part () =
     let input = read_line () in
@@ -160,7 +160,7 @@ let rec selecting_inventory item curr_fun =
   in
   part ()
 
-(* [calling_inventory] is the function for calling specific inventory items. *)
+(**[calling_inventory] is the function for calling specific inventory items. *)
 let rec calling_inventory input curr_fun =
   let rec part () =
     match input with
@@ -205,13 +205,13 @@ let encounter_battle () = Battle.battle_prompt inventory
    player encounters more scenarios, the chances of encountering the winning
    scenario will increase. *)
 
-(** List to keep track of visited scenes *)
+(** [visited_scenes] is a list of scenes to keep track of visited scenes *)
 let visited_scenes = ref []
 
-(** [visit_scene scene] adds [scene] to the list of visited scenes *)
+(** [visit_scene] adds [scene_id] to the list of visited scenes *)
 let visit_scene scene_id = visited_scenes := scene_id :: !visited_scenes
 
-(** [has_visited scene] checks if [scene] has already been visited *)
+(** [has_visited] checks if [scene_id] has already been visited *)
 let has_visited scene_id = List.mem scene_id !visited_scenes
 
 (* ---------- RANDOMIZED PLAY ---------- *)
@@ -471,8 +471,8 @@ let scene_5 () =
   in
   part ()
 
-(** [random_scene] generates a random scene after the tutorial, or prints "win"
-    if there are no more available scenes. *)
+(** [random_scene] generates a random scene after the tutorial, or prints a
+    winning message if there are no more available scenes. *)
 let rec random_scenario () =
   let scene_functions =
     [
@@ -487,7 +487,9 @@ let rec random_scenario () =
     scene_functions |> List.filter (fun (_, id) -> not (has_visited id))
   in
   match available_scenes with
-  | [] -> print_endline "win" (* No more available scenes *)
+  | [] ->
+      print_endline
+        "No more scenes, you escaped!" (* No more available scenes *)
   | _ ->
       let scene_num = Random.int (List.length available_scenes) in
       let scene, id = List.nth available_scenes scene_num in
