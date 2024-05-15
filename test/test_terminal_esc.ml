@@ -1,4 +1,5 @@
 open OUnit2
+open QCheck
 open Terminal_esc
 open Inventory
 open Utils

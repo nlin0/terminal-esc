@@ -26,7 +26,6 @@ let dead_chicken () =
   print_endline ("   \\\\ \n" ^ "   (x>\n" ^ "\\_//)\n" ^ " \\_/_)\n" ^ "  _|_")
 
 (* scene 1 *)
-
 let dolphin () =
   print_endline "                   __) \\_  ";
   print_endline "       ( \\ _ . - '       o ` - .";
@@ -41,4 +40,13 @@ let smile_whale () =
     ("           __)\\_  \n" ^ "      (\\_.-'    a`-.\n"
    ^ " jgs  (/~~````(/~^^`")
 
+(* scene 2 *)
+let rabbit_rabbit () =
+  print_endline "    () ()    ";
+  print_endline "  =( o - o)=  ";
+  print_endline "   (  u  u)  "
+
 let chest () = print_msg "chest" text_art
+let bug () = print_msg "bug" text_art
+let bug () = print_msg "bug" text_art
+

@@ -67,7 +67,18 @@ let remove_item inventory item_name =
   in
   find_and_remove 0
 
+(* ---- battling ---- *)
 let get_health inventory = (Array.get inventory 0).health_dmg_max
+
+let add_health inventory num =
+  let player_item = Array.get inventory 0 in
+  let new_health = player_item.health_dmg_max + num in
+  player_item.health_dmg_max <- new_health
+
+let deduct_health inventory num =
+  let player_item = Array.get inventory 0 in
+  let new_health = player_item.health_dmg_max + num in
+  player_item.health_dmg_max <- new_health
 
 let print_health inventory =
   let health_text = get_nested "health-bar" constants in
@@ -82,7 +93,7 @@ let print_health inventory =
   print_msg "health-bar-bot" health_text
 
 let print_inventory inventory =
-  let max_item_length = 20 in
+  let max_item_length = 29 in
   (* Added padding so there is a maximum length for item names *)
   print_endline "╔════════════════════════════════════════╗";
   print_endline "║                Inventory               ║";
@@ -123,3 +134,21 @@ let detail_item inventory num =
 
 (* checks to see if key is in inventory *)
 let check_key inventory = check_item inventory "key"
+
+(* player selects items for battling, returns position of item *)
+let select_item_pos inventory =
+  let rec prompt_item () =
+    print_inventory inventory;
+    print_endline "Select an item to use (enter item number):";
+    try
+      let choice = read_int () in
+      if choice < 1 || choice > Array.length inventory then begin
+        print_endline "Invalid choice. Please enter a valid item number.";
+        prompt_item ()
+      end
+      else choice
+    with Failure _ ->
+      print_endline "Invalid input. Please enter a valid item number.";
+      prompt_item ()
+  in
+  prompt_item ()

@@ -60,4 +60,11 @@ let print_nested_msg parent_key child_key alst =
   let child_json = get_nested parent_key alst in
   print_msg child_key child_json
 
+let get_deep_nested key1 key2 key3 alst =
+  let first_level = get_nested key1 alst in
+  let second_level = get_nested key2 first_level in
+  get_nested key3 second_level
 
+let print_deep_nested_msg key1 key2 key3 alst =
+  let deeply_nested_json = get_deep_nested key1 key2 key3 alst in
+  print_msg key3 deeply_nested_json
