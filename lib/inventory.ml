@@ -25,7 +25,7 @@ let create_inventory () =
         { health_dmg_max = 0; empty = true; item = "none" })
   in
   let new_item = { health_dmg_max = 100; empty = false; item = "health-bar" } in
-  let free_key = { health_dmg_max = 0; empty = false; item = "key" } in
+  let free_key = { health_dmg_max = 0; empty = false; item = "rusty-key" } in
   Array.set prev 0 new_item;
   Array.set prev 2 free_key;
   prev
@@ -155,23 +155,13 @@ let check_key inventory = check_item inventory "key"
 
 (* [select_item_pos inventory] returns the position of the item the player
    player selects items for battling*)
-(* let select_item_pos inventory =
-  let rec prompt_item () =
-    print_inventory inventory;
-    print_endline "Select an item to use (enter item number):";
-    try
-      let choice = read_int () in
-      if choice < 1 || choice + 1 > Array.length inventory - 1 then begin
-        print_endline "Invalid choice. Please enter a valid item number.";
-        prompt_item ()
-      end
-      else choice
-    with Failure _ ->
-      print_endline "Invalid input. Please enter a valid item number.";
-      prompt_item ()
-  in
-  prompt_item () *)
-
+(* let select_item_pos inventory = let rec prompt_item () = print_inventory
+   inventory; print_endline "Select an item to use (enter item number):"; try
+   let choice = read_int () in if choice < 1 || choice + 1 > Array.length
+   inventory - 1 then begin print_endline "Invalid choice. Please enter a valid
+   item number."; prompt_item () end else choice with Failure _ -> print_endline
+   "Invalid input. Please enter a valid item number."; prompt_item () in
+   prompt_item () *)
 
 let select_item_pos inventory =
   let rec prompt_item () =

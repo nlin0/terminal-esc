@@ -101,7 +101,7 @@ let rec inventory_option_tutorial inventory =
         part ()
     | "i 3" ->
         print_item (get_item_slot inventory 2);
-        print_endline "\n>> Nice try, but not quite. Try again!\n";
+        print_endline "\n>> Ooh, interesting... but try again!\n";
         part ()
     | "i 4" ->
         print_item (get_item_slot inventory 3);
@@ -201,18 +201,18 @@ let encounter_battle () = Battle.battle_prompt inventory
 
 (* ---------- SCENARIOS ---------- *)
 (* Scenarios are also further randomized. There is a small chance that the
-   player will encounter the winnign scenario, but the chance is small. As the
-   player encounters more scenarios, the chances up encountering the winning
+   player will encounter the winning scenario, but the chance is small. As the
+   player encounters more scenarios, the chances of encountering the winning
    scenario will increase. *)
 
 (** List to keep track of visited scenes *)
 let visited_scenes = ref []
 
 (** [visit_scene scene] adds [scene] to the list of visited scenes *)
-let visit_scene scene = visited_scenes := scene :: !visited_scenes
+let visit_scene scene_id = visited_scenes := scene_id :: !visited_scenes
 
 (** [has_visited scene] checks if [scene] has already been visited *)
-let has_visited scene = List.mem scene !visited_scenes
+let has_visited scene_id = List.mem scene_id !visited_scenes
 
 (* ---------- RANDOMIZED PLAY ---------- *)
 (* After the tutorial, the events are random *)
@@ -223,24 +223,12 @@ let s3 = Utils.get_nested "s3" scenarios
 let s4 = Utils.get_nested "s4" scenarios
 let s5 = Utils.get_nested "s5" scenarios
 
-(** [random_scene] generates a random scene after the tutorial. *)
-let rec random_scenario () =
-  let available_scenes =
-    [ scene_1; scene_2; scene_3; scene_4; scene_5 ]
-    |> List.filter (fun s -> not (has_visited s))
-  in
-  match available_scenes with
-  | [] -> print_endline "win" (* No more available scenes *)
-  | _ ->
-      let scene_num = Random.int (List.length available_scenes) in
-      let scene = List.nth available_scenes scene_num in
-      scene ()
-
-and scene_1 () =
+let scene_1 () =
   Utils.clear_screen ();
-  visit_scene scene_1;
+  Utils.print_msg "intro" s1;
+  Utils.print_nested_msg "seaweed_decision" "prompt" s1;
+
   let seaweed_choice () =
-    Utils.clear_screen ();
     let seaweed_piece =
       { health_dmg_max = 0; empty = false; item = "seaweed-piece" }
     in
@@ -252,7 +240,6 @@ and scene_1 () =
   in
 
   let dolphin_friend_choice () =
-    Utils.clear_screen ();
     let dolphin_friend =
       { health_dmg_max = 0; empty = false; item = "dolphin-friend" }
     in
@@ -262,13 +249,16 @@ and scene_1 () =
       ignore (Inventory.add_item inventory dolphin_friend);
       Utils.print_nested_msg "seaweed_decision" "2" s1)
   in
-  Utils.print_nested_msg "s1" "intro" scenarios;
-  Utils.print_nested_msg "seaweed_decision" "prompt" s1;
+
   let rec part () =
     let input = read_line () in
     match input with
-    | "1" -> seaweed_choice ()
-    | "2" -> dolphin_friend_choice ()
+    | "1" ->
+        seaweed_choice ();
+        "scene_1"
+    | "2" ->
+        dolphin_friend_choice ();
+        "scene_1"
     | "i" ->
         print_inventory_choice ();
         (* defined outside in tutorial *)
@@ -279,15 +269,16 @@ and scene_1 () =
     | _ ->
         invalid_choice1 ();
         (* defined outside in tutorial *)
-        scene_1 ()
+        part ()
   in
   part ()
 
-and scene_2 () =
+let scene_2 () =
   Utils.clear_screen ();
-  visit_scene scene_2;
+  Utils.print_msg "intro" s2;
+  Utils.print_nested_msg "carrot_patch_decision" "prompt" s2;
+
   let trusty_map_choice () =
-    Utils.clear_screen ();
     let trusty_map =
       { health_dmg_max = 0; empty = false; item = "trusty-map" }
     in
@@ -295,11 +286,10 @@ and scene_2 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory trusty_map);
-      Utils.print_deep_nested_msg "s2" "carrot_patch_decision" "1" scenarios)
+      Utils.print_nested_msg "carrot_patch_decision" "1" s2)
   in
 
   let untrustworthy_map_choice () =
-    Utils.clear_screen ();
     let untrustworthy_map =
       { health_dmg_max = 0; empty = false; item = "untrustworthy-map" }
     in
@@ -307,15 +297,18 @@ and scene_2 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory untrustworthy_map);
-      Utils.print_deep_nested_msg "s2" "carrot_patch_decision" "2" scenarios)
+      Utils.print_nested_msg "carrot_patch_decision" "2" s2)
   in
-  Utils.print_nested_msg "s2" "intro" scenarios;
-  Utils.print_deep_nested_msg "s2" "carrot_patch_decision" "prompt" scenarios;
+
   let rec part () =
     let input = read_line () in
     match input with
-    | "1" -> trusty_map_choice ()
-    | "2" -> untrustworthy_map_choice ()
+    | "1" ->
+        trusty_map_choice ();
+        "scene_2"
+    | "2" ->
+        untrustworthy_map_choice ();
+        "scene_2"
     | "i" ->
         print_inventory_choice ();
         (* defined outside in tutorial *)
@@ -326,15 +319,16 @@ and scene_2 () =
     | _ ->
         invalid_choice1 ();
         (* defined outside in tutorial *)
-        scene_2 ()
+        part ()
   in
   part ()
 
-and scene_3 () =
+let scene_3 () =
   Utils.clear_screen ();
-  visit_scene scene_3;
+  Utils.print_msg "intro" s3;
+  Utils.print_nested_msg "lava_bridge_decision" "prompt" s3;
+
   let your_skeleton_choice () =
-    Utils.clear_screen ();
     let your_skeleton =
       { health_dmg_max = 0; empty = false; item = "your-skeleton" }
     in
@@ -342,11 +336,10 @@ and scene_3 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory your_skeleton);
-      Utils.print_deep_nested_msg "s3" "lava_bridge_decision" "1" scenarios)
+      Utils.print_nested_msg "lava_bridge_decision" "1" s3)
   in
 
   let shiny_crystal_choice () =
-    Utils.clear_screen ();
     let shiny_crystal =
       { health_dmg_max = 0; empty = false; item = "shiny-crystal" }
     in
@@ -354,17 +347,18 @@ and scene_3 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory shiny_crystal);
-      Utils.print_deep_nested_msg "s3" "lava_bridge_decision" "2" scenarios)
+      Utils.print_nested_msg "lava_bridge_decision" "2" s3)
   in
-  Utils.print_nested_msg "s3" "intro" scenarios;
-  Utils.print_deep_nested_msg "s3" "lava_bridge_decision" "prompt" scenarios;
+
   let rec part () =
     let input = read_line () in
     match input with
     | "1" ->
         your_skeleton_choice ();
         exit 0
-    | "2" -> shiny_crystal_choice ()
+    | "2" ->
+        shiny_crystal_choice ();
+        "scene_3"
     | "i" ->
         print_inventory_choice ();
         (* defined outside in tutorial *)
@@ -375,15 +369,16 @@ and scene_3 () =
     | _ ->
         invalid_choice1 ();
         (* defined outside in tutorial *)
-        scene_3 ()
+        part ()
   in
   part ()
 
-and scene_4 () =
+let scene_4 () =
   Utils.clear_screen ();
-  visit_scene scene_4;
+  Utils.print_msg "intro" s4;
+  Utils.print_nested_msg "sandstorm_survival" "prompt" s4;
+
   let food_scrap_choice () =
-    Utils.clear_screen ();
     let food_scrap =
       { health_dmg_max = 0; empty = false; item = "food-scrap" }
     in
@@ -391,11 +386,10 @@ and scene_4 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory food_scrap);
-      Utils.print_deep_nested_msg "s4" "sandstorm_survival" "1" scenarios)
+      Utils.print_nested_msg "sandstorm_survival" "1" s4)
   in
 
   let ancient_crown_choice () =
-    Utils.clear_screen ();
     let ancient_crown =
       { health_dmg_max = 0; empty = false; item = "ancient-crown" }
     in
@@ -403,15 +397,18 @@ and scene_4 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory ancient_crown);
-      Utils.print_deep_nested_msg "s4" "sandstorm_survival" "2" scenarios)
+      Utils.print_nested_msg "sandstorm_survival" "2" s4)
   in
-  Utils.print_nested_msg "s4" "intro" scenarios;
-  Utils.print_deep_nested_msg "s4" "sandstorm_survival" "prompt" scenarios;
+
   let rec part () =
     let input = read_line () in
     match input with
-    | "1" -> food_scrap_choice ()
-    | "2" -> ancient_crown_choice ()
+    | "1" ->
+        food_scrap_choice ();
+        "scene_4"
+    | "2" ->
+        ancient_crown_choice ();
+        "scene_4"
     | "i" ->
         print_inventory_choice ();
         (* defined outside in tutorial *)
@@ -422,25 +419,25 @@ and scene_4 () =
     | _ ->
         invalid_choice1 ();
         (* defined outside in tutorial *)
-        scene_4 ()
+        part ()
   in
   part ()
 
-and scene_5 () =
+let scene_5 () =
   Utils.clear_screen ();
-  visit_scene scene_5;
+  Utils.print_msg "intro" s5;
+  Utils.print_nested_msg "echo_chamber_decision" "prompt" s5;
+
   let night_orb_choice () =
-    Utils.clear_screen ();
     let night_orb = { health_dmg_max = 0; empty = false; item = "night-orb" } in
     if Inventory.get_next_empty inventory = -1 then
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory night_orb);
-      Utils.print_deep_nested_msg "s5" "echo_chamber_decision" "1" scenarios)
+      Utils.print_nested_msg "echo_chamber_decision" "1" s5)
   in
 
   let your_skeleton_choice () =
-    Utils.clear_screen ();
     let your_skeleton =
       { health_dmg_max = 0; empty = false; item = "your-skeleton" }
     in
@@ -448,14 +445,15 @@ and scene_5 () =
       print_endline "Unsuccessful, seems like your inventory is full!"
     else (
       ignore (Inventory.add_item inventory your_skeleton);
-      Utils.print_deep_nested_msg "s5" "echo_chamber_decision" "2" scenarios)
+      Utils.print_nested_msg "echo_chamber_decision" "2" s5)
   in
-  Utils.print_nested_msg "s5" "intro" scenarios;
-  Utils.print_deep_nested_msg "s5" "echo_chamber_decision" "prompt" scenarios;
+
   let rec part () =
     let input = read_line () in
     match input with
-    | "1" -> night_orb_choice ()
+    | "1" ->
+        night_orb_choice ();
+        "scene_5"
     | "2" ->
         your_skeleton_choice ();
         exit 0
@@ -469,11 +467,35 @@ and scene_5 () =
     | _ ->
         invalid_choice1 ();
         (* defined outside in tutorial *)
-        scene_1 ()
+        part ()
   in
   part ()
 
-(* ---------- RANDODMIZED PLAY ---------- *)
+(** [random_scene] generates a random scene after the tutorial, or prints "win"
+    if there are no more available scenes. *)
+let rec random_scenario () =
+  let scene_functions =
+    [
+      (scene_1, "scene_1");
+      (scene_2, "scene_2");
+      (scene_3, "scene_3");
+      (scene_4, "scene_4");
+      (scene_5, "scene_5");
+    ]
+  in
+  let available_scenes =
+    scene_functions |> List.filter (fun (_, id) -> not (has_visited id))
+  in
+  match available_scenes with
+  | [] -> print_endline "win" (* No more available scenes *)
+  | _ ->
+      let scene_num = Random.int (List.length available_scenes) in
+      let scene, id = List.nth available_scenes scene_num in
+      let scene_id = scene () in
+      (* Execute the scene and get its ID *)
+      visit_scene scene_id (* Mark it as visited after execution *)
+
+(* ---------- RANDOMIZED PLAY ---------- *)
 
 let rec random_event () =
   let event_num = Random.int 100 in
@@ -489,6 +511,7 @@ let rec random_event () =
   | _ ->
       (* 40% chance for random_scenario *)
       random_scenario ();
+      Utils.pause_cont ();
       random_event ()
 
 (* ---------- START GAME ---------- *)
@@ -496,6 +519,4 @@ let start () =
   Utils.print_msg "intro" tut;
   chicken_option ();
   inventory_tutorial ();
-  encounter_chest ();
-  Battle.battle_tutorial inventory;
   random_event ()

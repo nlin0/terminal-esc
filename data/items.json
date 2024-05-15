@@ -2,5 +2,14 @@
   "health-bar": "This is your health bar. It can be accessed by entering 'h'. If it goes to 0, something bad might happen.\n",
   "golden-egg": "You acquired this at the beginning of your journey after an act of kindness. Who knows when it will come in handy?\n",
   "dead-chicken": "You acquired this at the beginning of your journey after killing an innocent livestock. Consumable for random amount of health.\n",
-  "key": "You don't remember where or how you got this key. I guess you just spawned with it on you. Maybe it will be useful later?\n"
+  "key": "You don't remember where or how you got this key. I guess you just spawned with it on you. Maybe it will be useful later?\n",
+  "seaweed-piece": "A piece of seaweed you found along your journey. It doesn't look very appetizing, but it might have some other use.\n",
+  "dolphin-friend": "A friendly dolphin you befriended on your adventure. Its companionship might prove invaluable.\n",
+  "trusty-map": "A reliable map that shows detailed paths and landmarks. It seems to guide you towards your goal.\n",
+  "untrustworthy-map": "A dubious map with questionable directions. It might lead you astray or to something unexpected.\n",
+  "your-skeleton": "A strange skeletal figure that eerily resembles you. It's a reminder of your own mortality.\n",
+  "shiny-crystal": "A beautiful crystal that sparkles in the light. It feels like it holds some sort of power or secret.\n",
+  "food-scrap": "Some leftover food scraps. They don't look very appetizing, but could be useful in a pinch. Consumable for a random amount of health.\n",
+  "ancient-crown": "An old, worn crown that seems to radiate a faint glow. It speaks of a long-forgotten royalty.\n",
+  "night-orb": "A mysterious orb that absorbs light and emits a soft glow in darkness. It feels warm to the touch.\n"
 }
