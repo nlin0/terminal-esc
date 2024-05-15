@@ -333,7 +333,7 @@ let scene_3 () =
       { health_dmg_max = 0; empty = false; item = "your-skeleton" }
     in
     if Inventory.get_next_empty inventory = -1 then
-      print_endline "Unsuccessful, seems like your inventory is full!"
+      Utils.print_nested_msg "lava_bridge_decision" "1" s3
     else (
       ignore (Inventory.add_item inventory your_skeleton);
       Utils.print_nested_msg "lava_bridge_decision" "1" s3)
@@ -442,7 +442,7 @@ let scene_5 () =
       { health_dmg_max = 0; empty = false; item = "your-skeleton" }
     in
     if Inventory.get_next_empty inventory = -1 then
-      print_endline "Unsuccessful, seems like your inventory is full!"
+      Utils.print_nested_msg "echo_chamber_decision" "2" s5
     else (
       ignore (Inventory.add_item inventory your_skeleton);
       Utils.print_nested_msg "echo_chamber_decision" "2" s5)
