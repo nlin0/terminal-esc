@@ -37,3 +37,7 @@ val print_deep_nested_msg :
   string -> string -> string -> (string * json) list -> unit
 (** [print_deep_nested_msg key1 key2 key3 alst] prints a message from a deeply
     nested JSON structure using three keys. *)
+
+val convert_str : string -> string
+(** [convert_str str] removes quotes and replaces "\n" sequences with newline
+    characters in [str]. *)

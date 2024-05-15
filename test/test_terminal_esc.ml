@@ -292,11 +292,23 @@ let rng_tests =
 
 (* ---------- UTILS TESTS ---------- *)
 
-let remove_quotes_test _ =
-  assert_equal "hello" (remove_quotes "\"hello\"");
-  assert_equal "\"hello" (remove_quotes "\"hello");
-  assert_equal "hello\"" (remove_quotes "hello\"")
+let remove_quotes_test1 _ = assert_equal "\"hello" (remove_quotes "\"hello")
+let remove_quotes_test2 _ = assert_equal "hello" (remove_quotes "\"hello\"")
+let remove_quotes_test3 _ = assert_equal "hello\"" (remove_quotes "hello\"")
 
+let convert_str_test1 _ =
+  assert_equal (Utils.convert_str "Hello\\nworld") "Hello\nworld"
+
+let convert_str_test2 _ =
+  assert_equal
+    (Utils.convert_str "Line 1\\nLine 2\\nLine 3")
+    "Line 1\nLine 2\nLine 3"
+
+let convert_str_test3 _ =
+  assert_equal (Utils.convert_str "No newlines here") "No newlines here"
+
+let convert_str_test4 _ =
+  assert_equal (Utils.convert_str "One\\ntwo\\nthree") "One\ntwo\nthree"
 (* let test_json = load_json "test_json" let test2_json = load_json "test2_json"
 
    let get_nested_test _ = let nested = get_nested "test2" test_json in
@@ -305,8 +317,16 @@ let remove_quotes_test _ =
 let utils_test =
   "tests for Utils module"
   >::: [
-         "utils quotes test" >:: remove_quotes_test;
-         (* "utils json load and nested test" >:: get_nested_test; *)
+         "utils quotes test removes surrounding quotes" >:: remove_quotes_test1;
+         "utils quotes test: handling of only opening quote present"
+         >:: remove_quotes_test2;
+         "utils quotes test: only closing quote present" >:: remove_quotes_test3;
+         "string with a single newline sequence" >:: convert_str_test1;
+         "string with multiple newline sequences" >:: convert_str_test2;
+         "string without any newline sequences" >:: convert_str_test3;
+         "string w/ newline sequences interspersed w/ other chr"
+         >:: convert_str_test4
+         (* "utils json load and nested test" >:: get_nested_test; *);
        ]
 
 let tests =
