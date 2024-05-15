@@ -7,7 +7,7 @@ type art = Yojson.Basic.t
 let run_json file_name =
   (* for running dune exec. Uncomment to use dune exec *)
   "data/" ^ file_name ^ ".json"
-  (* "/Users/jollyzheng/Desktop/terminal-esc/data/" ^ file_name ^ ".json" *)
+(* "/Users/jollyzheng/Desktop/terminal-esc/data/" ^ file_name ^ ".json" *)
 
 (* for testing, uncomment to test *)
 (* "../data/" ^ file_name ^ ".json" *)
@@ -26,25 +26,17 @@ let dead_chicken () =
   print_endline ("   \\\\ \n" ^ "   (x>\n" ^ "\\_//)\n" ^ " \\_/_)\n" ^ "  _|_")
 
 (* scene 1 *)
-let dolphin () =
-  print_endline "                   __) \\_  ";
-  print_endline "       ( \\ _ . - '       o ` - .";
-  print_endline "       ( / ~ ~ ` ` ` `( / ~^^`"
+(*let dolphin () = print_endline " __) \\_ "; print_endline " ( \\ _ . - ' o ` -
+  ."; print_endline " ( / ~ ~ ` ` ` `( / ~^^`"
 
-let waves () =
-  print_endline "    ._      ._      ._      ._";
-  print_endline "_.-._)`\\_.-._)`\\_.-._)`\\_.-._)`\\_.-_"
+  let waves () = print_endline " ._ ._ ._ ._"; print_endline
+  "_.-._)`\\_.-._)`\\_.-._)`\\_.-._)`\\_.-_"
 
-let smile_whale () =
-  print_endline
-    ("           __)\\_  \n" ^ "      (\\_.-'    a`-.\n"
-   ^ " jgs  (/~~````(/~^^`")
+  let smile_whale () = print_endline (" __)\\_ \n" ^ " (\\_.-' a`-.\n" ^ " jgs
+  (/~~````(/~^^`")
 
-(* scene 2 *)
-let rabbit_rabbit () =
-  print_endline "    () ()    ";
-  print_endline "  =( o - o)=  ";
-  print_endline "   (  u  u)  "
+  (* scene 2 *) let rabbit_rabbit () = print_endline " () () "; print_endline "
+  =( o - o)= "; print_endline " ( u u) "*)
 
 let chest () = print_msg "chest" text_art
 let bug () = print_endline "\(\")/\n-( )-\n/(_)\\"
