@@ -4,8 +4,6 @@ open Yojson.Basic
 
 (*val constants : (string * Yojson.Basic.json) list*)
 
-(** Load constants from JSON file *)
-
 type inventory_item = {
   mutable health_dmg_max : int;
   mutable empty : bool;
