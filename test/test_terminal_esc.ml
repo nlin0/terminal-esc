@@ -5,11 +5,35 @@ open Utils
 
 (* ---------- INVENTORY TESTS ---------- *)
 
-let first_health_test _ =
+let item_slot_test _ =
   let inventory1 = Inventory.create_inventory () in
   assert_equal
     (Inventory.get_item_slot inventory1 0)
     { health_dmg_max = 100; empty = false; item = "health-bar" }
+
+let create_item1 _ =
+  let inventory11 = Inventory.create_inventory () in
+  let _ = Inventory.add_item inventory11 (Inventory.create_item (-25) "bow") in
+  assert_equal
+    (Inventory.get_item_slot inventory11 1)
+    { health_dmg_max = -25; empty = false; item = "bow" }
+
+let create_item2 _ =
+  let inventory11 = Inventory.create_inventory () in
+  let _ = Inventory.add_item inventory11 (Inventory.create_item 20 "egg") in
+  assert_equal
+    (Inventory.get_item_slot inventory11 1)
+    { health_dmg_max = 20; empty = false; item = "egg" }
+
+let item_slot_test_non_health _ =
+  let inventory10 = Inventory.create_inventory () in
+  let _ =
+    Inventory.add_item inventory10
+      { health_dmg_max = -25; empty = false; item = "bow" }
+  in
+  assert_equal
+    (Inventory.get_item_slot inventory10 1)
+    { health_dmg_max = -25; empty = false; item = "bow" }
 
 let get_health_test _ =
   let inventory2 = Inventory.create_inventory () in
@@ -30,12 +54,7 @@ let add_item_test1 _ =
 let add_item_test2 _ =
   let inventory4 = Inventory.create_inventory () in
 
-  let _ =
-    Inventory.add_item inventory4
-      { health_dmg_max = -25; empty = false; item = "bow" }
-  in
-
-  (*added something into slot 2*)
+  let _ = Inventory.add_item inventory4 (Inventory.create_item (-25) "bow") in
   assert_equal
     (Inventory.add_item inventory4
        { health_dmg_max = -28; empty = false; item = "sword" })
@@ -48,15 +67,8 @@ let add_item_test2 _ =
 let add_item_test3 _ =
   let inventory5 = Inventory.create_inventory () in
 
-  let _ =
-    Inventory.add_item inventory5
-      { health_dmg_max = -25; empty = false; item = "bow" }
-  in
-  let _ =
-    Inventory.add_item inventory5
-      { health_dmg_max = -28; empty = false; item = "sword" }
-  in
-  (*added something into slot 3*)
+  let _ = Inventory.add_item inventory5 (Inventory.create_item (-25) "bow") in
+  let _ = Inventory.add_item inventory5 (Inventory.create_item (-28) "sword") in
   assert_equal
     (Inventory.add_item inventory5
        { health_dmg_max = -10; empty = false; item = "knife" })
@@ -69,20 +81,9 @@ let add_item_test3 _ =
 let add_item_test4 _ =
   let inventory6 = Inventory.create_inventory () in
 
-  let _ =
-    Inventory.add_item inventory6
-      { health_dmg_max = -25; empty = false; item = "bow" }
-  in
-  let _ =
-    Inventory.add_item inventory6
-      { health_dmg_max = -28; empty = false; item = "sword" }
-  in
-  let _ =
-    Inventory.add_item inventory6
-      { health_dmg_max = -10; empty = false; item = "knife" }
-  in
-
-  (*added something into slot 4*)
+  let _ = Inventory.add_item inventory6 (Inventory.create_item (-25) "bow") in
+  let _ = Inventory.add_item inventory6 (Inventory.create_item (-28) "sword") in
+  let _ = Inventory.add_item inventory6 (Inventory.create_item (-10) "knife") in
   assert_equal
     (Inventory.add_item inventory6
        { health_dmg_max = -90; empty = false; item = "gun" })
@@ -95,29 +96,33 @@ let add_item_test4 _ =
 let add_item_test5 _ =
   let inventory7 = Inventory.create_inventory () in
 
-  let _ =
-    Inventory.add_item inventory7
-      { health_dmg_max = -25; empty = false; item = "bow" }
-  in
-  let _ =
-    Inventory.add_item inventory7
-      { health_dmg_max = -28; empty = false; item = "sword" }
-  in
-  let _ =
-    Inventory.add_item inventory7
-      { health_dmg_max = -10; empty = false; item = "knife" }
-  in
-  let _ =
-    Inventory.add_item inventory7
-      { health_dmg_max = -90; empty = false; item = "gun" }
-  in
-
-  (*added something into slot 4*)
-  (*failed to add something because filled*)
+  let _ = Inventory.add_item inventory7 (Inventory.create_item (-25) "bow") in
+  let _ = Inventory.add_item inventory7 (Inventory.create_item (-28) "sword") in
+  let _ = Inventory.add_item inventory7 (Inventory.create_item (-10) "knife") in
+  let _ = Inventory.add_item inventory7 (Inventory.create_item (-90) "gun") in
   assert_equal
     (Inventory.add_item inventory7
        { health_dmg_max = 80; empty = false; item = "machine" })
     "Your Inventory is Full."
+
+let check_next_empty_valid _ =
+  let inventory = Inventory.create_inventory () in
+
+  let _ = Inventory.add_item inventory (Inventory.create_item (-25) "bow") in
+  let _ = Inventory.add_item inventory (Inventory.create_item (-28) "sword") in
+  let _ = Inventory.add_item inventory (Inventory.create_item (-10) "knife") in
+
+  assert_equal (Inventory.get_next_empty inventory) 4
+
+let check_next_empty_invalid _ =
+  let inventory = Inventory.create_inventory () in
+
+  let _ = Inventory.add_item inventory (Inventory.create_item (-25) "bow") in
+  let _ = Inventory.add_item inventory (Inventory.create_item (-28) "sword") in
+  let _ = Inventory.add_item inventory (Inventory.create_item (-10) "knife") in
+  let _ = Inventory.add_item inventory (Inventory.create_item (-90) "gun") in
+
+  assert_equal (Inventory.get_next_empty inventory) (-1)
 
 let test_remove _ =
   let inventory8 = Inventory.create_inventory () in
@@ -139,13 +144,19 @@ let test_remove_failure _ =
 let inventory_test =
   "checking the basic properties of our inventory"
   >::: [
-         "check first health" >:: first_health_test;
+         "check first health" >:: item_slot_test;
+         "creating an item test 1 (neg)" >:: create_item1;
+         "creating an item test 2 (pos)" >:: create_item2;
+         "check slot, nonhealth" >:: item_slot_test_non_health;
          "get just health" >:: get_health_test;
-         "check add item, slots1" >:: add_item_test1;
-         "check add item, slots2" >:: add_item_test2;
-         "check add item, slots3" >:: add_item_test3;
-         "check add item, slots4" >:: add_item_test4;
-         "check add item, slots5, N/A" >:: add_item_test5;
+         "check add item, check item, damage, slot, slots1" >:: add_item_test1;
+         "check add item, check item, damage, slot, slots2" >:: add_item_test2;
+         "check add item, check item, damage, slot, slots3" >:: add_item_test3;
+         "check add item, check item, damage, slot, slots4" >:: add_item_test4;
+         "check add item, check item, damage, slot, slots5, N/A"
+         >:: add_item_test5;
+         "check_next_empty_valid" >:: check_next_empty_valid;
+         "check_next_empty_invalid" >:: check_next_empty_invalid;
          "remove test where item is in inventory" >:: test_remove;
          "remove test where item is NOT in inventory" >:: test_remove_failure;
        ]
