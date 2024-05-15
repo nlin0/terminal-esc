@@ -97,6 +97,18 @@ let random_chest_intro () =
   in
   print_nested_msg "chest_descr" num chest_msgs
 
+let random_battle_intro () =
+  clear_screen ();
+  let rand = Random.float 1.0 in
+  let num =
+    match rand with
+    | _ when rand < 0.25 -> "1"
+    | _ when rand < 0.5 -> "2"
+    | _ when rand < 0.75 -> "3"
+    | _ -> "4"
+  in
+  print_nested_msg "prompts" num battle_msgs
+
 let chest_helper num =
   match num with
   | num when num < 0.30 -> "weapon"

@@ -7,9 +7,9 @@
   },
   "tutorial": "You have stumbled across your first enemy crawling around in your terminal! You can run, but that hasn’t been implemented. So you’re forced to battle your foe. Sorry!\n\n>> Using any food item will grant you a generous amount of hp (or not.. depends on how lucky you are with your meat). However, you miss an attack turn.\n>> Selecting empty slots, or any non-weapons will either cause you to attack with your fist, or trigger a special event with said item.\n>> Selecting your health bar will just display your health bar. Nothing else happens.\n>> Using any weapon boosts your damage (amount depends on the weapon).\n\n That’s basically it. Good luck!",
   "prompts": {
-    "1": "An error message suddenly appears, and you realize it’s not just a bug—it’s a hostile code entity trying to corrupt your files.",
-    "2": "You were just walking when you see something flicker out of the corner of your eye. A string of binary code begins to rearrange itself into the shape of a monstrous creature, its eyes glowing menacingly.",
-    "3": "As you walk through a dimly lit alley, a shadowy figure steps out from the darkness, blocking your path with a menacing grin",
-    "4": "While hiking through a dense forest, you suddenly feel watched. Turning around, you see a figure partially hidden among the trees, their intentions unclear, but definitely not good.."
+    "1": "An error message suddenly appears, and you realize it’s not just a bug—it’s a hostile code entity trying to corrupt your files... \n",
+    "2": "You were just walking when you see something flicker out of the corner of your eye. A string of binary code begins to rearrange itself into the shape of a monstrous creature, its eyes glowing menacingly... \n",
+    "3": "As you walk through a dimly lit alley, a shadowy figure steps out from the darkness, blocking your path with a menacing grin...\n",
+    "4": "While hiking through a dense forest, you suddenly feel watched. Turning around, you see a figure partially hidden among the trees, their intentions unclear, but definitely not good... \n"
   }
 }

@@ -30,7 +30,7 @@ val random_weapon : unit -> string
 (*[obtain_weapon inventory weapon] gets weapon and adds it to inventory*)
 val obtain_weapon : Inventory.inventory_item array -> string -> unit
 
-(*[obtain_weapon_drop weapon inventory] obtain a weapon drop after battle and
+(** [obtain_weapon_drop weapon inventory] obtain a weapon drop after battle and
   add to inventory*)
 val obtain_weapon_drop : string -> Inventory.inventory_item array -> unit
 
@@ -40,6 +40,7 @@ val obtain_ran_weapon : Inventory.inventory_item array -> unit
 
 (*[random_chest_intro () generate a random introduction message for a chest] *)
 val random_chest_intro : unit -> unit
+val random_battle_intro : unit -> unit
 
 (*[chest_helper num] returns the item of chest*)
 val chest_helper : float -> string
