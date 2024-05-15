@@ -16,9 +16,6 @@ val happy_chicken : unit -> unit
 val dead_chicken : unit -> unit
 (** [dead_chicken ()] prints a dead chicken text art *)
 
-val smile_whale : unit -> unit
-(** [smile_whale ()] prints a smile whale text art *)
-
 val chest : unit -> unit
 val bug : unit -> unit
 val robo_bun : unit -> unit
