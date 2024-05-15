@@ -7,50 +7,82 @@ open Utils
 let inventory = Inventory.create_inventory ()
 
 let first_health_test _ =
+  let inventory1 = Inventory.create_inventory () in
   assert_equal
-    (Inventory.get_item_slot inventory 0)
+    (Inventory.get_item_slot inventory1 0)
     { health_dmg_max = 100; empty = false; item = "health-bar" }
 
 let add_slot_test _ =
+  let inventory2 = Inventory.create_inventory () in
   assert_equal
-    (Inventory.add_item inventory
+    (Inventory.add_item inventory2
        { health_dmg_max = 50; empty = false; item = "bow" })
     "Item has been added to Inventory!";
-  assert_equal (Inventory.get_next_empty inventory) 2;
-  assert_equal false (Inventory.item_slot_empty inventory 1);
-  assert_equal (Inventory.item_slot_name inventory 1) "bow";
-  assert_equal (Inventory.item_slot_dmg inventory 1) 50
+  assert_equal (Inventory.get_next_empty inventory2) 2;
+  assert_equal false (Inventory.item_slot_empty inventory2 1);
+  assert_equal (Inventory.item_slot_name inventory2 1) "bow";
+  assert_equal (Inventory.item_slot_dmg inventory2 1) 50
 
 let get_health_test _ = assert_equal (Inventory.get_health inventory) 100
 
 let add_item_test _ =
+  let inventory3 = Inventory.create_inventory () in
+
   assert_equal
-    (Inventory.add_item inventory
-       { health_dmg_max = 50; empty = false; item = "sword" })
+    (Inventory.add_item inventory3
+       { health_dmg_max = -25; empty = false; item = "bow" })
     "Item has been added to Inventory!";
-  assert_equal (Inventory.get_next_empty inventory) 3;
+  assert_equal (Inventory.get_next_empty inventory3) 2;
+  assert_equal false (Inventory.item_slot_empty inventory3 1);
+  assert_equal (Inventory.item_slot_name inventory3 1) "bow";
+  assert_equal (Inventory.item_slot_dmg inventory3 1) (-25);
+
+  (*added something into slot 2*)
   assert_equal
-    (Inventory.add_item inventory
-       { health_dmg_max = 50; empty = false; item = "knife" })
+    (Inventory.add_item inventory3
+       { health_dmg_max = -28; empty = false; item = "sword" })
     "Item has been added to Inventory!";
-  assert_equal (Inventory.get_next_empty inventory) 4;
+  assert_equal (Inventory.get_next_empty inventory3) 3;
+  assert_equal false (Inventory.item_slot_empty inventory3 2);
+  assert_equal (Inventory.item_slot_name inventory3 2) "sword";
+  assert_equal (Inventory.item_slot_dmg inventory3 2) (-28);
+
+  (*added something into slot 3*)
   assert_equal
-    (Inventory.add_item inventory
-       { health_dmg_max = 50; empty = false; item = "gun" })
+    (Inventory.add_item inventory3
+       { health_dmg_max = -10; empty = false; item = "knife" })
     "Item has been added to Inventory!";
-  assert_equal (Inventory.get_next_empty inventory) (-1);
+  assert_equal (Inventory.get_next_empty inventory3) 4;
+  assert_equal false (Inventory.item_slot_empty inventory3 3);
+  assert_equal (Inventory.item_slot_name inventory3 3) "knife";
+  assert_equal (Inventory.item_slot_dmg inventory3 3) (-10);
+
+  (*added something into slot 4*)
   assert_equal
-    (Inventory.add_item inventory
-       { health_dmg_max = 50; empty = false; item = "bow" })
-    "You're Inventory is Full."
+    (Inventory.add_item inventory3
+       { health_dmg_max = -90; empty = false; item = "gun" })
+    "Item has been added to Inventory!";
+  assert_equal (Inventory.get_next_empty inventory3) (-1);
+  assert_equal false (Inventory.item_slot_empty inventory3 4);
+  assert_equal (Inventory.item_slot_name inventory3 4) "gun";
+  assert_equal (Inventory.item_slot_dmg inventory3 4) (-90);
+
+  (*failed to add something because filled*)
+  assert_equal
+    (Inventory.add_item inventory3
+       { health_dmg_max = 80; empty = false; item = "machine" })
+    "Your Inventory is Full."
 
 let test_remove _ =
+  let inventory4 = Inventory.create_inventory () in
   assert_equal
-    (Inventory.add_item inventory
+    (Inventory.add_item inventory4
        { health_dmg_max = 50; empty = false; item = "bow" })
     "Item has been added to Inventory!";
-  assert_equal (Inventory.remove_item inventory "bow") "Successful";
-  assert_equal (Inventory.check_item inventory "bow") false
+  assert_equal (Inventory.check_item inventory4 "bow") true;
+  assert_equal (Inventory.get_next_empty inventory4) 2;
+  assert_equal (Inventory.remove_item inventory4 "bow") "Successful";
+  assert_equal (Inventory.check_item inventory4 "bow") false
 
 let test_remove_failure _ =
   assert_equal
@@ -60,7 +92,6 @@ let test_remove_failure _ =
 let inventory_test =
   "checking the basic properties of our inventory"
   >::: [
-         ("a trivial test to test suite" >:: fun _ -> assert_equal 8 8);
          "check first health" >:: first_health_test;
          "check slot added okay" >:: add_slot_test;
          "get just health" >:: get_health_test;
@@ -111,12 +142,5 @@ let utils_test =
          (* "utils json load and nested test" >:: get_nested_test; *)
        ]
 
-let tests =
-  "Tests for Set"
-  >::: [
-         inventory_test;
-         utils_test;
-         ("a trivial test" >:: fun _ -> assert_equal 8 8);
-       ]
-
+let tests = "Tests for Set" >::: [ inventory_test; utils_test ]
 let () = run_test_tt_main tests
