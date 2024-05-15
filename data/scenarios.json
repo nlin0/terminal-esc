@@ -1,10 +1,42 @@
 {
   "s1": {
-    "intro": "\nAs you journey through the mysterious depths of the sea, everything takes on a surreal blue hue... You find yourself in the kingdom of the sea, teeming with dangerous creatures hungry for a snack. Your mission: to locate the legendary treasure chest, rumored to hold the key to your survival against the treacherous denizens of the deep.",
+    "intro": "\nAs you journey through the mysterious depths of the sea, everything takes on a surreal blue hue...\nYou find yourself in the kingdom of the sea, teeming with dangerous creatures hungry for a snack.\nYour mission: to locate the legendary treasure chest, rumored to hold the key to your survival against the treacherous denizens of the deep.\n",
     "seaweed_decision": {
-      "prompt": "\nOh no! You've been ensnared by a tangle of seaweed. You struggle to break free, but the grip tightens around you. Will you continue to wriggle in hopes of escaping, or will you wield a weapon to cut yourself loose?\nEnter '1' to persist in your struggle, or press '2' to slice through the netting.",
-      "1": "You resolve to free yourself through sheer determination. A passing sea mermaid takes notice of your efforts and lends you a hand.",
-      "2": "You opt to use your trusty weapon to sever the tangled strands. As you cut yourself loose, a passing sea mermaid takes pity on your plight and offers assistance."
+      "prompt": "\nOh no! You've been ensnared by a tangle of seaweed.\nYou struggle to break free, but the grip tightens around you.\nWill you continue to wriggle in hopes of escaping, or will you wield a weapon to cut yourself loose?\n\n>> Enter '1' to persist in your struggle, or press '2' to slice through the netting.\n",
+      "1": "You resolve to free yourself through sheer determination.\nA passing dolphin takes notice of your efforts and lends you a hand.\nYou're safe for now, swimming away with only a piece of your anguish.\n\n> You've gained 1 seaweed-piece!\n",
+      "2": "You opt to use your trusty weapon to sever the tangled strands.\nAs you cut yourself loose, a passing dolphin takes admires your effort and offers assistance.\n\n> You gained 1 dolphin-friend!\n"
+    }
+  },
+  "s2": {
+    "intro": "\nAs you hop into the vibrant expanse of Bunny Land, the air fills with the sweet scent of carrots and fresh grass.\nThe land is alive with cheerful bunnies bustling about, but beware—mischievous foxes lurk, waiting to cause trouble.\nYour quest is to gather the sacred Golden Carrot, which grants the wisdom to lead Bunny Land to a prosperous era.\n",
+    "carrot_patch_decision": {
+      "prompt": "\nUh oh! You've stumbled into a tricky carrot patch maze. The paths are convoluted, and the exits seem to shift with magical whimsy.\nWill you use your keen sense of smell to trace the scent of the freshest carrots to find your way, or will you climb to the top of a tall carrot top to survey the maze from above?\n\n>> Enter '1' to sniff your way through, or press '2' to climb for a better view.\n",
+      "1": "Trusting your nose, you navigate the twists and turns, guided by the earthy scent of fresh carrots.\nAlong the way, a wise old bunny, intrigued by your determination, offers you guidance.\n\n> You've gained 1 trusty-map!\n",
+      "2": "Deciding to take a higher perspective, you climb a giant carrot top.\nFrom your lofty vantage point, you realize your eye-sight isn't really that good.\nA fellow adventurous bunny sees you and offers you questionable directions.\n\n> You've gained 1 untrustworthy-map.\n"
+    }
+  },
+  "s3": {
+    "intro": "\nYou arrive at the base of a smoldering volcano where the ground trembles with the mountain's might.\nThe legend tells of a crystal hidden within the lava streams that can control elemental forces.\n",
+    "lava_bridge_decision": {
+      "prompt": "\nA narrow bridge crosses a river of lava.\nWill you carefully navigate across or use a spell to freeze the lava temporarily?\n\n>> Enter '1' for navigating the bridge, or press '2' to cast a freezing spell.\n",
+      "1": "You carefully balance your way across the bridge, avoiding the intense heat.\nYour bravery pays off as you--\n\n\nlose balance and die.\n\n> You've gained 1 your-skeleton! The end.\n",
+      "2": "You cast a freezing spell, solidifying the lava. Who knew you were a wizard?\nAs you walk across, you find the crystal sparkling brightly, waiting for you.\n\n> You've gained 1 shiny-crystal!\n"
+    }
+  },
+  "s4": {
+    "intro": "\nAmidst the vast desert, you discover the ruins of a once-thriving city buried by sand.\nAncient artifacts and the promise of forgotten knowledge await those who dare to explore its depths.\n",
+    "sandstorm_survival": {
+      "prompt": "\nA sudden sandstorm sweeps through, reducing visibility to near zero.\nWill you seek shelter in a nearby ruin, or use magic to clear a safe path?\n\n>> Enter '1' to find shelter, or press '2' to use magic.\n",
+      "1": "You rush to a nearby ruin for shelter.\nInside, you discover some food scraps to satiate your hunger.\n\n> You've gained 1 food-scrap!\n",
+      "2": "Using your magic, you create a bubble of clear air around you.\nYou safely navigate through the storm and uncover a sealed tomb filled with artifacts.\nYou uncover an ancient crown, it's quite peculiar.\n\n> You've gained 1 ancient-crown!\n"
+    }
+  },
+  "s5": {
+    "intro": "\nDeep beneath the earth, the Mystic Caverns stretch endlessly.\nRumored to be the resting place of the Orb of Night, these caverns are guarded by creatures that have never seen the sun.\n This may be your hardest challenge yet.\n",
+    "echo_chamber_decision": {
+      "prompt": "\nYou enter a chamber where every sound echoes loudly.\nA sleeping dragon lies ahead. Will you tiptoe silently or try to distract it with a thrown object?\n\n>> Enter '1' to move silently, or press '2' to distract the dragon.\n",
+      "1": "You move with utmost caution, silently advancing past the dragon.\nYou continue on, revealing the Orb of Night gleaming in the darkness.\n\n> You've gained 1 night-orb!\n",
+      "2": "You throw a rock into a distant corner of the chamber.\nThe dragon awakens and smells you out! You run in a panic, tripping and--\n\n\n*munch* *cronch*.\n\n> You've gained 1 your-skeleton! The end.\n"
     }
   }
 }

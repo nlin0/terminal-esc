@@ -27,3 +27,13 @@ val get_nested : string -> (string * json) list -> (string * json) list
 val print_nested_msg : string -> string -> (string * json) list -> unit
 (** [print_nested_msg parent_key child_key alst] prints out the [child_key] of
     the child association list at [parent_key] in [alst]. *)
+
+val get_deep_nested :
+  string -> string -> string -> (string * json) list -> (string * json) list
+(** [get_deep_nested key1 key2 key3 alst] retrieves a deeply nested association
+    list from [alst] using three nested keys. *)
+
+val print_deep_nested_msg :
+  string -> string -> string -> (string * json) list -> unit
+(** [print_deep_nested_msg key1 key2 key3 alst] prints a message from a deeply
+    nested JSON structure using three keys. *)
