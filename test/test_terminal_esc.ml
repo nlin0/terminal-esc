@@ -169,7 +169,7 @@ let test_remove_failure _ =
     (Inventory.remove_item inventory9 "HEHEAHWHW")
     "Item not found, unsuccessful"
 
-let inventory_test =
+let inventory_test () =
   "checking the basic properties of our inventory"
   >::: [
          "check first health" >:: item_slot_test;
@@ -221,7 +221,7 @@ let health_deduct_zero _ =
   Inventory.add_health inventory 0;
   assert_equal (Inventory.get_health inventory) 100
 
-let battle_test =
+let battle_test () =
   "tests for Battle-Related Inventory"
   >::: [
          "get health since start game" >:: get_basic_health;
@@ -317,7 +317,7 @@ let convert_str_test4 _ =
    let get_nested_test _ = let nested = get_nested "test2" test_json in
    assert_equal nested test2_json *)
 
-let utils_test =
+let utils_test () =
   "tests for Utils module"
   >::: [
          "utils quotes test removes surrounding quotes" >:: remove_quotes_test1;
@@ -390,7 +390,7 @@ let anything_else_food2 _ =
     (Battle.is_valid_food 1 inventory)
     { item_type = "weapon"; name = "fist"; dmg = 5 }
 
-let battle_test =
+let battle_test_suite () =
   "tests for Battle module"
   >::: [
          "Check Legendary Sword" >:: valid_weapons_l;
@@ -407,6 +407,13 @@ let battle_test =
        ]
 
 let tests =
-  "Tests for Set" >::: [ inventory_test; battle_test; rng_tests; utils_test ]
+  "Tests for Set"
+  >::: [
+         inventory_test ();
+         battle_test ();
+         battle_test_suite ();
+         rng_tests;
+         utils_test ();
+       ]
 
 let () = run_test_tt_main tests

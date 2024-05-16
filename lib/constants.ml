@@ -6,11 +6,11 @@ type art = Yojson.Basic.t
 (* json path for running dune exec or testing. change accordingly *)
 let run_json file_name =
   (* for running dune exec. Uncomment to use dune exec *)
-  (* "data/" ^ file_name ^ ".json" *)
+  "data/" ^ file_name ^ ".json"
 
 (* for testing, uncomment to test. You may have to replace with full file path
    to data/ first *)
-"../data/" ^ file_name ^ ".json"
+(* "../data/" ^ file_name ^ ".json" *)
 
 let text_art = load_json (run_json "constants")
 let logo () = print_msg "logo" text_art
@@ -25,19 +25,6 @@ let happy_chicken () =
 let dead_chicken () =
   print_endline ("   \\\\ \n" ^ "   (x>\n" ^ "\\_//)\n" ^ " \\_/_)\n" ^ "  _|_")
 
-(* scene 1 *)
-(*let dolphin () = print_endline " __) \\_ "; print_endline " ( \\ _ . - ' o ` -
-  ."; print_endline " ( / ~ ~ ` ` ` `( / ~^^`"
-
-  let waves () = print_endline " ._ ._ ._ ._"; print_endline
-  "_.-._)`\\_.-._)`\\_.-._)`\\_.-._)`\\_.-_"
-
-  let smile_whale () = print_endline (" __)\\_ \n" ^ " (\\_.-' a`-.\n" ^ " jgs
-  (/~~````(/~^^`")
-
-  (* scene 2 *) let rabbit_rabbit () = print_endline " () () "; print_endline "
-  =( o - o)= "; print_endline " ( u u) "*)
-
 let chest () = print_msg "chest" text_art
-let bug () = print_endline "\(\")/\n-( )-\n/(_)\\"
+let bug () = print_endline "\\(\")/\n-( )-\n/(_)\\ "
 let robo_bun () = print_endline "\n   (\\____/)\n    (_oo_)\n = (        )=\n"
