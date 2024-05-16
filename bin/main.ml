@@ -1,3 +1,4 @@
+(* @author Nicole Lin (njl55), Analeah Real (ar979), Jolly Zheng (jz767) *)
 open Terminal_esc
 open Utils
 
