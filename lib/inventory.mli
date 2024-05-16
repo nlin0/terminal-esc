@@ -9,29 +9,29 @@ type inventory_item = {
   mutable empty : bool;
   mutable item : string;
 }
-(** [inventory_item ] is the type representing an inventory item *)
+(** [inventory_item] is the type representing an inventory item *)
 
 val size : int
 (** [size] is the inventory size *)
 
-(*[get_item_slot inventory num] get the item at a specific slot in the
-  inventory*)
 val get_item_slot : inventory_item array -> int -> inventory_item
+(** [get_item_slot inventory num] get the item at a specific slot in the
+    inventory*)
 
 val create_inventory : unit -> inventory_item array
 (** [create_inventory] is an empty inventory with 5 slots*)
 
-(*[create_item health_dmg item] returns an item with the inputted health_damage
-  and inputted item name*)
 val create_item : int -> string -> inventory_item
+(** [create_item health_dmg item] returns an item with the inputted
+    health_damage and inputted item name*)
 
-(*[get_next_empty inventory] returns the next empty slot in the inventory. It
-  would return -1 if there is not empty slot left.*)
 val get_next_empty : inventory_item array -> int
+(** [get_next_empty inventory] returns the next empty slot in the inventory. It
+    would return -1 if there is not empty slot left.*)
 
-(*[item_slot_name inventory num] returns the name of the item at the specified
-  location*)
 val item_slot_name : inventory_item array -> int -> string
+(** [item_slot_name inventory num] returns the name of the item at the specified
+    location*)
 
 (*[item_slot_dmg inventory num] returns the damage of the item at the specified
   location*)

@@ -17,5 +17,10 @@ val dead_chicken : unit -> unit
 (** [dead_chicken ()] prints a dead chicken text art *)
 
 val chest : unit -> unit
+(** [chest ()] prints a chest text art *)
+
 val bug : unit -> unit
+(** [bug ()] prints a bug text art *)
+
 val robo_bun : unit -> unit
+(** [robo_bun ()] prints a robot bunny text art *)

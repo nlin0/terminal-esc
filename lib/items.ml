@@ -1,5 +1,3 @@
-(** Items is the module that stores all the qualities of the items *)
-
 open Utils
 open Inventory
 
