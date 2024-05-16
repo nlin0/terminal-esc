@@ -1,8 +1,6 @@
 (** Battle module is responsible for handling enemy and player interactions
     during battles *)
 
-(** {2 Types} *)
-
 type enemy = {
   mutable hp : int;
   mutable atk : int;
