@@ -145,52 +145,6 @@ let rec inventory_tutorial () =
   in
   part ()
 
-(** [selecting_inventory] is the function for selecting to use a specific item *)
-let rec selecting_inventory item curr_fun =
-  let rec part () =
-    let input = read_line () in
-    match input with
-    | "y" -> failwith "TODO" (* use item... *)
-    | "n" -> curr_fun ()
-    (* reprompts the current scene*)
-    | _ ->
-        Utils.clear_screen ();
-        print_endline
-          ">> That's not an option silly! Why don't you try again.\n"
-  in
-  part ()
-
-(**[calling_inventory] is the function for calling specific inventory items. *)
-let rec calling_inventory input curr_fun =
-  let rec part () =
-    match input with
-    | "i 1" -> Inventory.print_health inventory
-    | "i 2" ->
-        print_item (get_item_slot inventory 1);
-        print_endline "\n>> Would you like to use this item? (y/n)\n";
-        selecting_inventory (get_item_slot inventory 2) curr_fun
-    | "i 3" ->
-        print_item (get_item_slot inventory 2);
-        print_endline "\n>> Would you like to use this item? (y/n)\n";
-        selecting_inventory (get_item_slot inventory 3) curr_fun
-    | "i 4" ->
-        print_item (get_item_slot inventory 3);
-        print_endline "\n>> Would you like to use this item? (y/n)\n";
-        selecting_inventory (get_item_slot inventory 4) curr_fun
-    | "i 5" ->
-        print_item (get_item_slot inventory 4);
-        print_endline "\n>> Would you like to use this item? (y/n)\n";
-        selecting_inventory (get_item_slot inventory 5) curr_fun
-    | "h" ->
-        Inventory.print_health inventory;
-        part ()
-    | _ ->
-        Utils.clear_screen ();
-        print_endline
-          ">> That's not how you do it silly! It's okay, try again.\n"
-  in
-  part ()
-
 (* ---------- EVENTS ---------- *)
 (* after the tutorial, the events are random. Furthermore, scenes are also
    random. The player will play until they encounter the winning scenario. *)
