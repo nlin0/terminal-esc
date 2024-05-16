@@ -444,7 +444,7 @@ let random_scenario () =
         "No more scenes, you escaped!" (* No more available scenes *)
   | _ ->
       let scene_num = Random.int (List.length available_scenes) in
-      let scene, id = List.nth available_scenes scene_num in
+      let scene, _ = List.nth available_scenes scene_num in
       let scene_id = scene () in
       (* Execute the scene and get its ID *)
       visit_scene scene_id (* Mark it as visited after execution *)
