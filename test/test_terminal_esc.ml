@@ -2,7 +2,6 @@ open OUnit2
 open Terminal_esc
 open Inventory
 open Utils
-open Rng
 open Battle
 
 (* ---------- INVENTORY TESTS ---------- *)

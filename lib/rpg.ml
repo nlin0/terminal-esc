@@ -1,7 +1,5 @@
-open Constants
 open Inventory
 open Items
-open Rng
 
 (* NOTE: DELETE THE DUNE FILE IN THE ROOT AFTER WE ARE DONE TESTING *)
 (* ---------- JSON AND INVENTORY ---------- *)

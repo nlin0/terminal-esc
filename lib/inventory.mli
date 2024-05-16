@@ -1,5 +1,3 @@
-open Yojson.Basic
-
 (** Inventory is the module that has all the inventory functionalities *)
 
 (*val constants : (string * Yojson.Basic.json) list*)
