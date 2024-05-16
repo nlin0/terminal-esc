@@ -85,7 +85,7 @@ let clear_and_print_inventory () =
 (** [inventory_option_tutorial] is run only once after players complete
     [inventory_tutorial] to teach players how to select and learn more about
     specific items. *)
-let rec inventory_option_tutorial inventory =
+let inventory_option_tutorial inventory =
   Utils.print_nested_msg "inventory_tutorial" "i" tut;
   let rec part () =
     let input = read_line () in
@@ -123,7 +123,7 @@ let rec inventory_option_tutorial inventory =
 
 (** [inventory_tutorial] is only run once after room1 (chicken_option) to teach
     players how to open their inventory. *)
-let rec inventory_tutorial () =
+let inventory_tutorial () =
   Utils.print_nested_msg "inventory_tutorial" "prompt" tut;
   let rec part () =
     let input = read_line () in
@@ -425,7 +425,7 @@ let scene_5 () =
 
 (** [random_scene] generates a random scene after the tutorial, or prints a
     winning message if there are no more available scenes. *)
-let rec random_scenario () =
+let random_scenario () =
   let scene_functions =
     [
       (scene_1, "scene_1");
