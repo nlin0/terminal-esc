@@ -158,7 +158,8 @@ let chest_prompt inventory =
         end
     | "2" ->
         clear_screen ();
-        print_msg "chest_ignore" chest_msgs
+        print_msg "chest_ignore" chest_msgs;
+        pause_cont ()
     | _ ->
         Utils.clear_screen ();
         print_endline
