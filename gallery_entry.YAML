@@ -12,12 +12,12 @@ pm:
 publish: true
 title: "Terminal Escape"
 git-repo: "https://github.com/nlin0/terminal-esc.git"
-demo-video-url: ""
 desc: >
   Our project is an RPG text-based escape game within the terminal. The player
   will be taken through a text adventure, encountering events and being offered
   decisions.
 
   Such decisions will affect the course of the story, with events including:
-  encountering enemies in turn based combat system; encountering chests and
-  items; encountering NPCs; ecnountering random events with narrative text.
+  encountering enemies (that drop loot) in turn based combat system; 
+  encountering chests (which need a key to open); and ecnountering random events 
+  with somewhat randomized narrative text.
