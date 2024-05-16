@@ -1,4 +1,3 @@
-open Utils
 open Inventory
 
 let item_doc = Utils.load_json "data/items.json"

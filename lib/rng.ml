@@ -142,7 +142,7 @@ let no_key_prompt () =
 let chest_prompt inventory =
   Utils.clear_screen ();
   random_chest_intro ();
-  let rec prompt_choice () =
+  let prompt_choice () =
     Constants.chest ();
     print_msg "chest_prompt" chest_msgs;
 

@@ -1,7 +1,6 @@
 open Utils
 open Inventory
 open Rng
-open Random
 
 let () = Random.self_init ()
 let text_art = load_json (Constants.run_json "constants")
