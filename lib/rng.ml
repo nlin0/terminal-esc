@@ -119,8 +119,6 @@ let random_chest_item () =
   let rand = Random.float 1.0 in
   chest_helper rand
 
-(* todo: change functionality after key can be acquired *)
-
 let open_chest inventory =
   let _ = remove_item inventory "key" in
   match random_chest_item () with
@@ -137,7 +135,9 @@ let open_chest inventory =
       let () = print_msg "chest_empty" chest_msgs in
       pause_cont ()
 
-let no_key_prompt () = print_msg "chest_fail" chest_msgs
+let no_key_prompt () =
+  print_msg "chest_fail" chest_msgs;
+  pause_cont ()
 
 let chest_prompt inventory =
   Utils.clear_screen ();
@@ -154,8 +154,7 @@ let chest_prompt inventory =
           open_chest inventory
         end
         else begin
-          no_key_prompt ();
-          pause_cont ()
+          no_key_prompt ()
         end
     | "2" ->
         clear_screen ();
@@ -168,9 +167,3 @@ let chest_prompt inventory =
            okay, we all make mistakes. Try again."
   in
   prompt_choice ()
-
-(* ---------- RANDOMIZED EVENTS ---------- *)
-(* let random_event inventory = let rand = Random.float 1.0 in if rand < 0.9
-   then chest_prompt inventory (* all % chest for now *) else if rand < 0.1 then
-   print_endline "you got trap... not implemented yet" (* 10% trap *) else if
-   rand < 0.05 then print_endline "you got scenario, not implemented yet" *)
