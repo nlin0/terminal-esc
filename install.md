@@ -8,6 +8,12 @@ Inside the parent directory of everything (it should look something like **\_** 
 
 - opam install yojson
 
+## BEFORE YOU START YOUR ESCAPE
+
+Please read the REDAME.md file. There is an error with our file paths! But we were told that if we included this in our README we will be okay.
+
+## Ok... now that you have read the README.md
+
 To start your escapade, type in the following into the terminal:
 "dune exec ./bin/main.exe".
 
