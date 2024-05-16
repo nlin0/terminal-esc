@@ -3,7 +3,6 @@ open Inventory
 open Rng
 
 let () = Random.self_init ()
-let text_art = load_json (Constants.run_json "constants")
 let battle_msgs = load_json (Constants.run_json "battle")
 
 type enemy = {
