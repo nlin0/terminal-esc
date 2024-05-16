@@ -8,9 +8,9 @@ let run_json file_name =
   (* for running dune exec. Uncomment to use dune exec *)
   "data/" ^ file_name ^ ".json"
 
-  (* for testing, uncomment to test. You may have to replace with full file path
-     to data/ first *)
-  (* "../data/" ^ file_name ^ ".json" *)
+(* for testing, uncomment to test. You may have to replace with full file path
+   to data/ first *)
+(* "../data/" ^ file_name ^ ".json" *)
 
 let art_text = load_json (run_json "constants")
 let logo () = print_msg "logo" art_text

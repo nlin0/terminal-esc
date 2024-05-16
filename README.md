@@ -30,7 +30,7 @@ The game is currently very difficult to beat, but it is possible if you are luck
 
 There is an error with file paths that we could not fix with debugging or OH.
 
-To run the game, make sure that in ``lib/constants.ml``, in the the very first function, we have that
+To run the game, make sure that in `lib/constants.ml`, in the the very first function, we have that
 
 ```ocaml
 "data/" ^ file_name ^ ".json"
@@ -49,7 +49,7 @@ let run_json file_name =
 
 ```
 
-If the function looks like the above. Then you can run the game with ``dune exec bin/main.exe``.
+If the function looks like the above. Then you can run the game with `dune exec bin/main.exe`.
 
 ## testing the game
 
@@ -77,7 +77,7 @@ However, you likely have to replace "../data/" with the full path to /data. So i
 "/Users/username/cs3110/terminal_esc/data" ^ file_name ^ ".json"
 ```
 
-From there, you can run ``dune test``. There will be the "Fatal Error" warning, but the tests will still run.. It will look something like this:
+From there, you can run `dune test`. There will be the "Fatal Error" warning, but the tests will still run.. It will look something like this:
 
 ```
 File "lib/dune", line 1, characters 0-162:
@@ -100,7 +100,7 @@ Ran: 50 tests in: 0.11 seconds.
 OK
 ```
 
-Please note, to run the game after you test. You HAVE to change modify the function back to it's original form:
+In case of failure to display test has passed, please dune clear and then dune test again. Please note, to run the game after you test. You HAVE to change modify the function back to it's original form:
 
 ```ocaml
 let run_json file_name =
